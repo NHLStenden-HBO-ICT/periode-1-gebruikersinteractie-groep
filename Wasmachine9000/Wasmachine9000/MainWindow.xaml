@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wasmachine9000"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1080" Width="1920
+        ">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="142*" />
+            <RowDefinition Height="124*" />
+            <RowDefinition Height="133*" />
+            <RowDefinition Height="133*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*" />
+            <ColumnDefinition Width="547*" />
+            <ColumnDefinition Width="250*" />
 
+        </Grid.ColumnDefinitions>
+        <Button Margin="48,66,229,82">
+            <TextBlock FontSize="30">Instellingen</TextBlock>
+        </Button>
+        <Rectangle Fill="#FFFFFCC7" Grid.Column="1" Grid.Row="0" MaxHeight="200px" MaxWidth="950px"/>
+        <Button Grid.Column="1" Grid.Row="1" MaxHeight="200px" MaxWidth="950px" >
+            <TextBlock FontSize="100">Start</TextBlock>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" MaxHeight="200px" Width="475px" HorizontalAlignment="Left">
+            <TextBlock FontSize="80">Winkel</TextBlock>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" MaxHeight="200px" Width="457px" HorizontalAlignment="Right">
+            <TextBlock FontSize="80">Oudermenu</TextBlock>
+        </Button>
+        
     </Grid>
+
+
 </Window>
