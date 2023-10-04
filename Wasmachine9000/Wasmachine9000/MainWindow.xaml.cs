@@ -24,5 +24,25 @@ namespace Wasmachine9000
         {
             InitializeComponent();
         }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Winkel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Oudermenu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

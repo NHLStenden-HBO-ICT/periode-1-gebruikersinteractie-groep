@@ -20,17 +20,17 @@
             <ColumnDefinition Width="250*" />
 
         </Grid.ColumnDefinitions>
-        <Button Margin="48,66,229,82">
+        <Button Margin="48,66,229,82" x:Name="Settings" Click="Settings_Click">
             <TextBlock FontSize="30">Instellingen</TextBlock>
         </Button>
         <Rectangle Fill="#FFFFFCC7" Grid.Column="1" Grid.Row="0" MaxHeight="200px" MaxWidth="950px"/>
-        <Button Grid.Column="1" Grid.Row="1" MaxHeight="200px" MaxWidth="950px" >
+        <Button Grid.Column="1" Grid.Row="1" MaxHeight="200px" MaxWidth="950px" x:Name="Start" Click="Start_Click">
             <TextBlock FontSize="100">Start</TextBlock>
         </Button>
-        <Button Grid.Column="1" Grid.Row="2" MaxHeight="200px" Width="475px" HorizontalAlignment="Left">
+        <Button Grid.Column="1" Grid.Row="2" MaxHeight="200px" Width="475px" HorizontalAlignment="Left" x:Name="Winkel" Click="Winkel_Click">
             <TextBlock FontSize="80">Winkel</TextBlock>
         </Button>
-        <Button Grid.Column="1" Grid.Row="2" MaxHeight="200px" Width="457px" HorizontalAlignment="Right">
+        <Button Grid.Column="1" Grid.Row="2" MaxHeight="200px" Width="457px" HorizontalAlignment="Right" x:Name="Oudermenu" Click="Oudermenu_Click">
             <TextBlock FontSize="80">Oudermenu</TextBlock>
         </Button>
         
