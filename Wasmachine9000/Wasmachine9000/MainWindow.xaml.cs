@@ -23,11 +23,17 @@ namespace Wasmachine9000
         public MainWindow()
         {
             InitializeComponent();
+
+            // sets WPS height and width to the same height and width as the primary display
+            this.Height = SystemParameters.FullPrimaryScreenHeight;
+            this.Width = SystemParameters.FullPrimaryScreenWidth;
+
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-
+            Instellingen window = new Instellingen();
+            window.Show();
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
