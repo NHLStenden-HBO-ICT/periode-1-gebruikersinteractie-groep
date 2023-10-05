@@ -10,29 +10,46 @@
         Title="MainWindow" Height="540" Width="960">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/background.png"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="71*" />
             <RowDefinition Height="62*" />
             <RowDefinition Height="66.5*" />
             <RowDefinition Height="66.5*" />
+            <RowDefinition Height="65*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="125*" />
-            <ColumnDefinition Width="273.5*" />
+            <ColumnDefinition Width="500px" />
             <ColumnDefinition Width="125*" />
         </Grid.ColumnDefinitions>
         <Button Margin="24,33,114.5,41" x:Name="Settings" Click="Settings_Click">
             <TextBlock FontSize="15">Instellingen</TextBlock>
         </Button>
-        <Rectangle Fill="#FFFFFCC7" Grid.Column="1" Grid.Row="0" MaxHeight="100px" MaxWidth="475px"/>
-        <Button Grid.Column="1" Grid.Row="1" MaxHeight="100px" MaxWidth="475px" x:Name="Start" Click="Start_Click">
-            <TextBlock FontSize="50">Start</TextBlock>
-        </Button>
-        <Button Grid.Column="1" Grid.Row="2" MaxHeight="100px" Width="237.5px" HorizontalAlignment="Left" x:Name="Winkel" Click="Winkel_Click">
-            <TextBlock FontSize="40">Winkel</TextBlock>
-        </Button>
-        <Button Grid.Column="1" Grid.Row="2" MaxHeight="100px" Width="228.5px" HorizontalAlignment="Right" x:Name="Oudermenu" Click="Oudermenu_Click">
-            <TextBlock FontSize="40">Oudermenu</TextBlock>
-        </Button>
+
+        <TextBlock Grid.Row="1" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="96" Grid.ColumnSpan="3" >
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="2" ShadowDepth="4"/>
+            </TextBlock.Effect>Wasmachine 9000</TextBlock>
+
+        <Border Grid.Column="1" Grid.Row="2" MaxHeight="100" MaxWidth="475" Background="#FF00C0FF" CornerRadius="15" >
+            <Button x:Name="Start" Click="Start_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                <TextBlock FontSize="72" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" Height="99" >Start</TextBlock>
+
+            </Button>
+        </Border>
+        <!--Shop button-->
+        <Border CornerRadius="15" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="100px" Width="237.5px" HorizontalAlignment="Left" >
+            <Button Grid.Column="1" Grid.Row="3" MaxHeight="100px" Width="237.5px" HorizontalAlignment="Left" x:Name="Winkel" Click="Winkel_Click" Background="{x:Null}" BorderBrush="{x:Null}" >
+                <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White">Winkel</TextBlock>
+            </Button>
+        </Border>
+        <Border CornerRadius="15" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="100px" Width="237.5px" HorizontalAlignment="Right" >
+            <Button Grid.Column="1" Grid.Row="3" MaxHeight="100px" Width="228.5px" HorizontalAlignment="Right" x:Name="Oudermenu" Click="Oudermenu_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White">Shop</TextBlock>
+            </Button>
+        </Border>
     </Grid>
 </Window>

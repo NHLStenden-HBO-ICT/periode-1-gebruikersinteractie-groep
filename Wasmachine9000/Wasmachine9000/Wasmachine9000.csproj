@@ -7,4 +7,26 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\background.png" />
+    <None Remove="Assets\Font\BalooBhai2-Bold.ttf" />
+    <None Remove="Assets\Font\BalooBhai2-ExtraBold.ttf" />
+    <None Remove="Assets\Font\BalooBhai2-Medium.ttf" />
+    <None Remove="Assets\Font\BalooBhai2-Regular.ttf" />
+    <None Remove="Assets\Font\BalooBhai2-SemiBold.ttf" />
+    <None Remove="background.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Font\BalooBhai2-Bold.ttf" />
+    <Resource Include="Assets\Font\BalooBhai2-ExtraBold.ttf" />
+    <Resource Include="Assets\Font\BalooBhai2-Medium.ttf" />
+    <Resource Include="Assets\Font\BalooBhai2-Regular.ttf" />
+    <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
+    <Resource Include="background.png" />
+  </ItemGroup>
+
 </Project>

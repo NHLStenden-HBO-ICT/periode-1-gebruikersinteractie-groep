@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Wasmachine9000"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="BalooBhai2-Regular">pack://application:,,,/Assets/Font/#BalooBhai2-Regular</FontFamily>
     </Application.Resources>
 </Application>
