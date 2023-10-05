@@ -32,7 +32,8 @@ namespace Wasmachine9000
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-
+            Instellingen window = new Instellingen();
+            window.Show();
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
