@@ -14,19 +14,27 @@
     <None Remove="Assets\Font\BalooBhai2-Medium.ttf" />
     <None Remove="Assets\Font\BalooBhai2-Regular.ttf" />
     <None Remove="Assets\Font\BalooBhai2-SemiBold.ttf" />
+    <None Remove="Assets\Instellingen.png" />
     <None Remove="background.png" />
+    <None Remove="Instellingen.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Instellingen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\background.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Font\BalooBhai2-Bold.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-ExtraBold.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-Medium.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-Regular.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
-    <Resource Include="background.png" />
+    <Resource Include="Instellingen.png" />
   </ItemGroup>
 
 </Project>

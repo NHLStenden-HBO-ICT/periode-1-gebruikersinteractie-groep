@@ -7,26 +7,34 @@
         WindowState="Maximized"
         xmlns:local="clr-namespace:Wasmachine9000"
         mc:Ignorable="d"
-        Title="MainWindow" Height="540" Width="960">
-
-    <Grid>
+        Title="MainWindow" Height="1080" Width="1920">
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+          
+            <ColumnDefinition Width="100*" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/background.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="71*" />
-            <RowDefinition Height="62*" />
-            <RowDefinition Height="66.5*" />
-            <RowDefinition Height="66.5*" />
-            <RowDefinition Height="65*"/>
+            <RowDefinition Height="108px" />
+            <RowDefinition Height="108px" />
+            <RowDefinition Height="108px" />
+            <RowDefinition Height="108px" />
+            <RowDefinition Height="108px"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="125*" />
+            <ColumnDefinition Width="280px" />
             <ColumnDefinition Width="500px" />
-            <ColumnDefinition Width="125*" />
+            <ColumnDefinition Width="280px" />
         </Grid.ColumnDefinitions>
-        <Button Margin="24,33,114.5,41" x:Name="Settings" Click="Settings_Click">
-            <TextBlock FontSize="15">Instellingen</TextBlock>
+        <Button Margin="10,10,183,28" x:Name="Settings" Click="Settings_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/Instellingen.png"/>
+            </Button.Background>
+            
         </Button>
 
         <TextBlock Grid.Row="1" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="96" Grid.ColumnSpan="3" >
@@ -41,15 +49,16 @@
             </Button>
         </Border>
         <!--Shop button-->
-        <Border CornerRadius="15" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="100px" Width="237.5px" HorizontalAlignment="Left" >
-            <Button Grid.Column="1" Grid.Row="3" MaxHeight="100px" Width="237.5px" HorizontalAlignment="Left" x:Name="Winkel" Click="Winkel_Click" Background="{x:Null}" BorderBrush="{x:Null}" >
+        <Border CornerRadius="15" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="80px" Width="237.5px" HorizontalAlignment="Left" >
+            <Button Grid.Column="1" Grid.Row="3"  Width="237.5px" HorizontalAlignment="Left" x:Name="Winkel" Click="Winkel_Click" Background="{x:Null}" BorderBrush="{x:Null}" >
                 <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White">Winkel</TextBlock>
             </Button>
         </Border>
-        <Border CornerRadius="15" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="100px" Width="237.5px" HorizontalAlignment="Right" >
-            <Button Grid.Column="1" Grid.Row="3" MaxHeight="100px" Width="228.5px" HorizontalAlignment="Right" x:Name="Oudermenu" Click="Oudermenu_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Border CornerRadius="15" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="80px" Width="237.5px" HorizontalAlignment="Right" >
+            <Button Grid.Column="1" Grid.Row="3"  Width="228.5px" HorizontalAlignment="Right" x:Name="Oudermenu" Click="Oudermenu_Click" Background="{x:Null}" BorderBrush="{x:Null}">
                 <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White">Shop</TextBlock>
             </Button>
         </Border>
+    </Grid>
     </Grid>
 </Window>
