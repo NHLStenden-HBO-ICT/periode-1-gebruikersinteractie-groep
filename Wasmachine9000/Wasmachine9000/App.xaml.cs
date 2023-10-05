@@ -5,13 +5,19 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Wasmachine9000.Game;
 
 namespace Wasmachine9000
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public GameState GameState;
+
+        public App()
+        {
+            this.GameState = GameState.LoadGameState();
+            
+
+        }
     }
 }
