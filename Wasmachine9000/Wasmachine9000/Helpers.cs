@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,33 +13,22 @@ namespace Wasmachine9000
     {
         public static void OpenWindow (Window targetWindow)
         {
-
-            //switch windows
-            targetWindow.Show();
-            App.GameState.CurrentWindow.Close();
-
-            //store current and previous windows to variables
-            Window previousWindow = App.GameState.PreviousWindow;
+            // Store currently open window in variable
             Window currentWindow = App.GameState.CurrentWindow;
-
-            //change GameState Windows
-            App.GameState.CurrentWindow = previousWindow;
+            
+            // Show new window and set it as current window in GameState
+            targetWindow.Show();
+            App.GameState.CurrentWindow = targetWindow;
+            
+            // Set previous window in GameState to previously closed window and close window
+            currentWindow.Hide();
             App.GameState.PreviousWindow = currentWindow;
+
 
         }
         public static void OpenPreviousWindow()
         {
-            //switch windows
-            App.GameState.PreviousWindow.Show();
-            App.GameState.CurrentWindow.Close();
-
-            //store current and previous windows to variables
-            Window previousWindow = App.GameState.PreviousWindow;
-            Window currentWindow = App.GameState.CurrentWindow;
-
-            //change GameState Windows
-            App.GameState.CurrentWindow = previousWindow;
-            App.GameState.PreviousWindow = currentWindow;
+            OpenWindow(App.GameState.PreviousWindow);
         }
     }
 }

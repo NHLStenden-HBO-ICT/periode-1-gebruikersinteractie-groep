@@ -16,7 +16,11 @@ namespace Wasmachine9000
         public App()
         {
             GameState = GameState.LoadGameState();
-            
+
+            // Start menu screen and set GameState to it
+            Window menuScreen = new MainWindow();
+            GameState.CurrentWindow = menuScreen;
+            menuScreen.Show();
 
         }
     }
