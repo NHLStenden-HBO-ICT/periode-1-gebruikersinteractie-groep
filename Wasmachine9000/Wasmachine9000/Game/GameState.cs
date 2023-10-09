@@ -88,9 +88,7 @@ public class GameState
         {
             // Open gamestate file
             using (StreamReader gameStateReader = new StreamReader(GetGameStateFilePath()))
-        {
-            
-           
+            {
                 // Read gamestate file
                 string gameStateData = gameStateReader.ReadToEnd();
                 foreach (string gameStateFileLine in gameStateData.Split("\n"))
@@ -113,17 +111,15 @@ public class GameState
                             break;
                     }
                 }
-
             }
-           
-
+            
             return gameState;
         }
-        
+
         else
         {
             FileStream creategamestate = File.Create(GetGameStateFilePath());
-            LoadGameState();
+            return LoadGameState();
         }
 
         return gameState;
