@@ -11,11 +11,11 @@ namespace Wasmachine9000
 {
     public partial class App : Application
     {
-        public GameState GameState;
+        public static GameState GameState = new GameState();
 
         public App()
         {
-            this.GameState = GameState.LoadGameState();
+            GameState = GameState.LoadGameState();
             
 
         }

@@ -30,14 +30,18 @@ namespace Wasmachine9000
 
         }
 
+
+        #region Event handlers
+
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            Instellingen window = new Instellingen();
-            window.Show();
+            Helpers.OpenWindow(new Instellingen());
         }
-
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            //GameWindow gameWindow= new GameWindow();
+            //this.Close();
+            //gameWindow.Show();
             
         }
 
@@ -45,14 +49,18 @@ namespace Wasmachine9000
         {
             //open a new Winkel window and close the current window
             Winkel WinkelWindow = new Winkel();
-            this.Close();
+            
 
             WinkelWindow.Show();
+            this.Close();
         }
 
         private void Oudermenu_Click(object sender, RoutedEventArgs e)
         {
-
+            ParentPin parentPinWindow = new ParentPin();
+          
+            parentPinWindow.Show();
+            this.Close();
         }
 
         private void Start_MouseLeave(object sender, MouseEventArgs e)
@@ -63,6 +71,12 @@ namespace Wasmachine9000
         private void Start_MouseEnter(object sender, MouseEventArgs e)
         {
 
+        }
+        #endregion
+        
+        public void OpenWindow(Window window)
+        { 
+        
         }
     }
 }

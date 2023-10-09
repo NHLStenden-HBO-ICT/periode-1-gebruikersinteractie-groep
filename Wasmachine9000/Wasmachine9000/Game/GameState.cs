@@ -8,8 +8,8 @@ namespace Wasmachine9000.Game;
 public class GameState
 {
     // Keep track of navigation
-    private Window CurrentWindow;
-    private Window PreviousWindow;
+    public Window CurrentWindow;
+    public Window PreviousWindow;
 
     // User stats (coins, highscore)
     private int Coins;

@@ -59,7 +59,7 @@
 
             <Border CornerRadius="22.5" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="120px" Width="356.25px" HorizontalAlignment="Right" >
                 <Button Grid.Column="1" Grid.Row="3"  Width="357" HorizontalAlignment="Center" x:Name="Oudermenu" Click="Oudermenu_Click" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White">Shop</TextBlock>
+                    <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White">Ouder</TextBlock>
                 </Button>
             </Border>
         </Grid>
