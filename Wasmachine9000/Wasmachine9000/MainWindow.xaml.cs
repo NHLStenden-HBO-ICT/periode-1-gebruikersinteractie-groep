@@ -43,7 +43,11 @@ namespace Wasmachine9000
 
         private void Winkel_Click(object sender, RoutedEventArgs e)
         {
+            //open a new Winkel window and close the current window
+            Winkel WinkelWindow = new Winkel();
+            this.Close();
 
+            WinkelWindow.Show();
         }
 
         private void Oudermenu_Click(object sender, RoutedEventArgs e)
