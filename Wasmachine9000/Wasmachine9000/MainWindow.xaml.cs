@@ -23,7 +23,7 @@ namespace Wasmachine9000
         public MainWindow()
         {
             InitializeComponent();
-
+           
             // sets WPS height and width to the same height and width as the primary display
             this.Height = SystemParameters.FullPrimaryScreenHeight;
             this.Width = SystemParameters.FullPrimaryScreenWidth;
@@ -38,7 +38,7 @@ namespace Wasmachine9000
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void Winkel_Click(object sender, RoutedEventArgs e)
@@ -47,6 +47,16 @@ namespace Wasmachine9000
         }
 
         private void Oudermenu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Start_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Start_MouseEnter(object sender, MouseEventArgs e)
         {
 
         }

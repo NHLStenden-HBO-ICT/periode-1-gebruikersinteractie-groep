@@ -83,32 +83,47 @@ public class GameState
     public static GameState LoadGameState()
     {
         GameState gameState = new GameState();
-
-        // Open gamestate file
-        using (StreamReader gameStateReader = new StreamReader(GetGameStateFilePath()))
+        //check if gamestate file exists
+        if (File.Exists(GetGameStateFilePath()))
         {
-            // Read gamestate file
-            string gameStateData = gameStateReader.ReadToEnd();
-            foreach (string gameStateFileLine in gameStateData.Split("\n"))
-            {
-                string[] gameStateEntry = gameStateFileLine.Split(":");
-
-                switch (gameStateEntry[0])
+            // Open gamestate file
+            using (StreamReader gameStateReader = new StreamReader(GetGameStateFilePath()))
+        {
+            
+           
+                // Read gamestate file
+                string gameStateData = gameStateReader.ReadToEnd();
+                foreach (string gameStateFileLine in gameStateData.Split("\n"))
                 {
-                    case "Coins":
-                        gameState.SetCoins(int.Parse(gameStateEntry[1]));
-                        break;
-                    case "Highscore":
-                        gameState.SetHighscore(int.Parse(gameStateEntry[1]));
-                        break;
-                    case "Username":
-                        gameState.SetUsername(gameStateEntry[1]);
-                        break;
-                    case "Pincode":
-                        gameState.SetPincode(int.Parse(gameStateEntry[1]));
-                        break;
+                    string[] gameStateEntry = gameStateFileLine.Split(":");
+
+                    switch (gameStateEntry[0])
+                    {
+                        case "Coins":
+                            gameState.SetCoins(int.Parse(gameStateEntry[1]));
+                            break;
+                        case "Highscore":
+                            gameState.SetHighscore(int.Parse(gameStateEntry[1]));
+                            break;
+                        case "Username":
+                            gameState.SetUsername(gameStateEntry[1]);
+                            break;
+                        case "Pincode":
+                            gameState.SetPincode(int.Parse(gameStateEntry[1]));
+                            break;
+                    }
                 }
+
             }
+           
+
+            return gameState;
+        }
+        
+        else
+        {
+            FileStream creategamestate = File.Create(GetGameStateFilePath());
+            LoadGameState();
         }
 
         return gameState;
