@@ -11,9 +11,9 @@ public partial class GameWindow : Window
 {
     // Player and movement control/variables
     private int _playerUpVelocity = 0;
-    private int _velocityCap = 2000;
-    private int _playerAcceleration = 170;
-    private int _gravity = 80;
+    private int _velocityCap = 1200;
+    private int _playerAcceleration = 150;
+    private int _gravity = 70;
     private bool _playerRising;
 
     // Player style
