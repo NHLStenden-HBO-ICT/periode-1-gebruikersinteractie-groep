@@ -60,7 +60,7 @@ public partial class GameWindow : Window
             }
         }
         
-        // Predict of the player is going to hit the ceiling, acts as ceiling collision
+        // Predict if the player is going to hit the ceiling, acts as ceiling collision
         if (_playerUpVelocity > 0)
         {
             int currentPosition = (int)Canvas.GetBottom(Player) + (int) Player.Height;
