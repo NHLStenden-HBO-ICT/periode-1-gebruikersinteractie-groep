@@ -2,16 +2,22 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Wasmachine9000.Windows;
 
 public partial class GameWindow : Window
 {
+    // Player and movement control/variables
     private int _playerUpVelocity = 0;
-    private int _playerAcceleration = 80;
-    private int _gravity = 20;
-
+    private int _velocityCap = 2000;
+    private int _playerAcceleration = 170;
+    private int _gravity = 60;
     private bool _playerRising;
+
+    // Player style
+    private ImageBrush playerSkin = new ImageBrush();
 
     public GameWindow()
     {
@@ -22,8 +28,18 @@ public partial class GameWindow : Window
         // Register the canvas listener to the global game timer.
         App.GameTimer.AddListener("canvasListener", CanvasTick);
 
-        Canvas.SetLeft(Player, 100);
+        Canvas.SetLeft(Player, Math.Round(SystemParameters.FullPrimaryScreenWidth / 10) * 2);
         Canvas.SetBottom(Player, 1);
+
+        // Load playerskin into player rectangle
+        playerSkin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/wasmachine.png"));
+        Player.Width = playerSkin.ImageSource.Width;
+        Player.Height = playerSkin.ImageSource.Height;
+
+        Console.WriteLine(Player.Width);
+        Console.WriteLine(Player.Height);
+
+        Player.Fill = playerSkin;
     }
 
     public void CanvasTick(object? sender, EventArgs e)
@@ -31,8 +47,9 @@ public partial class GameWindow : Window
         if (_playerRising) _playerUpVelocity += _playerAcceleration;
 
         // Ensure player cannot go faster 
-        if (_playerUpVelocity > 1000) _playerUpVelocity = 1000;
+        if (_playerUpVelocity > _velocityCap) _playerUpVelocity = _velocityCap;
 
+        // Apply gravity to user when not on/under the ground
         if (Canvas.GetBottom(Player) > 0) _playerUpVelocity -= _gravity;
 
         // Collion detection for the bottom of the screen
@@ -43,12 +60,13 @@ public partial class GameWindow : Window
         }
 
         // Collision detection for the top of the screen
-        if (Canvas.GetBottom(Player) > SystemParameters.FullPrimaryScreenHeight)
+        if (Canvas.GetBottom(Player) > SystemParameters.FullPrimaryScreenHeight - Player.Height)
         {
             _playerUpVelocity = 0;
-            Canvas.SetBottom(Player, SystemParameters.FullPrimaryScreenHeight);
+            Canvas.SetBottom(Player, SystemParameters.FullPrimaryScreenHeight - Player.Height);
         }
 
+        // Apply velocity to player rectangle
         Canvas.SetBottom(Player, Canvas.GetBottom(Player) + (_playerUpVelocity * App.GameTimer.DeltaTime));
     }
 

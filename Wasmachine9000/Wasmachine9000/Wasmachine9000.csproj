@@ -35,6 +35,7 @@
     <Resource Include="Assets\Font\BalooBhai2-Regular.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
     <Resource Include="Instellingen.png" />
+    <Resource Include="Assets\wasmachine.png"/>
   </ItemGroup>
 
   <ItemGroup>
