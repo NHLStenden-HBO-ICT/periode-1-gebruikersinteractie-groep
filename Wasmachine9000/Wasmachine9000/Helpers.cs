@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
 
 namespace Wasmachine9000
 {
@@ -35,5 +37,7 @@ namespace Wasmachine9000
             App.GameState.PreviousWindow = currentWindow;
             App.GameState.CurrentWindow = targetWindow;
         }
+
+      
     }
 }
