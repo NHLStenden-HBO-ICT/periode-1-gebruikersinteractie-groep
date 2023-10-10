@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace Wasmachine9000
+namespace Wasmachine9000.Windows
 {
     /// <summary>
     /// Interaction logic for Winkel.xaml
