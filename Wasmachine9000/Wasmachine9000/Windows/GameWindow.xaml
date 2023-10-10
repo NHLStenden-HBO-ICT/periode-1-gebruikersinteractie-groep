@@ -7,5 +7,7 @@
         WindowState="Maximized"
         mc:Ignorable="d"
         Title="GameWindow" Height="1080" Width="1920">
-    <Canvas Name="GameCanvas" Background="Black" Focusable="True" KeyDown="CanvasKeyDown" />
+    <Canvas x:Name="GameCanvas" Background="Black" Focusable="True" KeyDown="CanvasKeyDown" KeyUp="CanvasKeyUp" >
+        <Rectangle x:Name="Player" Width="60" Height="60" Fill="White" />
+    </Canvas>
 </Window>

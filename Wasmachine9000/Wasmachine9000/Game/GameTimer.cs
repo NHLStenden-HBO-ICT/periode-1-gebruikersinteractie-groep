@@ -6,18 +6,20 @@ namespace Wasmachine9000.Game;
 
 public class GameTimer
 {
-    private Dictionary<String, Action<object?, EventArgs>> _callbacks =
-        new Dictionary<String, Action<object?, EventArgs>>();
+    private Dictionary<String, Action<object?, EventArgs>> _callbacks = new();
 
     private DispatcherTimer _gameTimer = new DispatcherTimer();
 
-    public int DeltaTime;
+    public double DeltaTime;
+    private long _lastTimestampMs;
 
     public GameTimer()
     {
-        _gameTimer.Interval = TimeSpan.FromMilliseconds(10);
+        _gameTimer.Interval = TimeSpan.FromMilliseconds(1);
         _gameTimer.Tick += GameTick;
         _gameTimer.Start();
+        this._lastTimestampMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        this.DeltaTime = 0;
     }
 
     public void AddListener(string name, Action<object?, EventArgs> callback)
@@ -42,9 +44,13 @@ public class GameTimer
 
     public void GameTick(object? sender, EventArgs e)
     {
+        this.DeltaTime = ((double)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - (double)this._lastTimestampMs) /
+                         1000; // devide by 1000 to get seconds.
         foreach (KeyValuePair<string, Action<object?, EventArgs>> callback in _callbacks)
         {
             callback.Value(sender, e);
         }
+
+        this._lastTimestampMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
     }
 }
