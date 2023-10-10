@@ -48,21 +48,32 @@ public partial class GameWindow : Window
         // Apply gravity to user when not on/under the ground
         if (Canvas.GetBottom(Player) > 0) _playerUpVelocity -= _gravity;
 
-        // Collion detection for the bottom of the screen
-        if (Canvas.GetBottom(Player) < 0)
+        // Predict if the player is going to hit the ground, acts as ground collision detection
+        if (_playerUpVelocity < 0)
         {
-            _playerUpVelocity = 0;
-            Canvas.SetBottom(Player, 0);
+            int currentPosition = (int)Canvas.GetBottom(Player);
+            double predictedDownPosition = currentPosition - (-_playerUpVelocity * App.GameTimer.DeltaTime);
+            if (predictedDownPosition < 0)
+            {
+                _playerUpVelocity = 0;
+                Canvas.SetBottom(Player, 0);
+            }
+        }
+        
+        // Predict of the player is going to hit the ceiling, acts as ceiling collision
+        if (_playerUpVelocity > 0)
+        {
+            int currentPosition = (int)Canvas.GetBottom(Player) + (int) Player.Height;
+            double predictedUpPosition = currentPosition + (_playerUpVelocity * App.GameTimer.DeltaTime);
+            Console.WriteLine("Current: " + currentPosition + "\n\rPredicted: " + predictedUpPosition + "\n\rVelocity: " + _playerUpVelocity + "\n\r");
+            if (predictedUpPosition > CanvasContainer.ActualHeight)
+            {
+                _playerUpVelocity = 0;
+                Canvas.SetBottom(Player, CanvasContainer.ActualHeight - Player.Height);
+            }
         }
 
-        // Collision detection for the top of the screen
-        if (Canvas.GetBottom(Player) > CanvasContainer.ActualHeight - Player.Height)
-        {
-            _playerUpVelocity = 0;
-            Canvas.SetBottom(Player, CanvasContainer.ActualHeight - Player.Height);
-        }
-
-        // Apply velocity to player rectangle
+        // Apply velocity to player
         Canvas.SetBottom(Player, Canvas.GetBottom(Player) + (_playerUpVelocity * App.GameTimer.DeltaTime));
     }
 
