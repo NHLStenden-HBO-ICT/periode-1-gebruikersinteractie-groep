@@ -17,7 +17,7 @@ namespace Wasmachine9000
             targetWindow.Show();
             App.GameState.CurrentWindow = targetWindow;
 
-            changemusic(targetWindow, App.GameState.PreviousWindow);
+            ChangeMusic(targetWindow, App.GameState.PreviousWindow);
             // Set previous window in GameState to previously closed window and close window
             currentWindow.Hide();
             if (App.GameState.PreviousWindow != null)
@@ -26,14 +26,13 @@ namespace Wasmachine9000
             }
 
             App.GameState.PreviousWindow = currentWindow;
+        }
 
-          
-        }    
         public static void OpenPreviousWindow()
         {
             Window targetWindow = App.GameState.PreviousWindow;
             Window currentWindow = App.GameState.CurrentWindow;
-            changemusic(targetWindow, App.GameState.CurrentWindow);
+            ChangeMusic(targetWindow, App.GameState.CurrentWindow);
 
             targetWindow.Show();
             currentWindow.Hide();
@@ -41,30 +40,19 @@ namespace Wasmachine9000
             App.GameState.PreviousWindow = currentWindow;
             App.GameState.CurrentWindow = targetWindow;
         }
-        public static void changemusic(Window targetWindow, Window previouswindow)
+
+        public static void ChangeMusic(Window targetWindow, Window previousWindow)
         {
+            switch (targetWindow)
+            {
+                case MainWindow:
+                    if (previousWindow is GameWindow) App.AudioPlayer.LoadAndPlayAudio("Menu theme.wav");
+                    break;
 
-            
-                switch (targetWindow)
-                {
-
-                    case MainWindow:
-                    if(previouswindow is GameWindow)
-                    {
-                        App.audioPlayer.LoadAndPlayAudio("Menu theme.wav");
-                    }
-                        
-                        break;
-
-                    case GameWindow:
-                        App.audioPlayer.LoadAndPlayAudio("Ingame.wav");
-                        break;
-
-                }
-           
-
+                case GameWindow:
+                    App.AudioPlayer.LoadAndPlayAudio("Ingame.wav");
+                    break;
+            }
         }
-
-      
     }
 }

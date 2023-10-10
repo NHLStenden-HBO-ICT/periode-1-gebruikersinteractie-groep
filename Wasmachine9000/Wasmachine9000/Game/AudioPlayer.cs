@@ -13,13 +13,14 @@ namespace Wasmachine9000.Game
 {
     public class AudioPlayer
     {
-        private static readonly Lazy<AudioPlayer> lazy = new Lazy<AudioPlayer>(() => new AudioPlayer());
+        private SoundPlayer _player;
 
-        public static AudioPlayer Instance => lazy.Value;
+        public AudioPlayer()
+        {
+            
+        }
 
-        private SoundPlayer player;
-
-        private AudioPlayer()
+        public void Start()
         {
             // Load and play the default audio file during initialization
             LoadAndPlayAudio("Menu theme.wav");
@@ -32,20 +33,20 @@ namespace Wasmachine9000.Game
 
             // Create a new SoundPlayer instance with the specified audio file
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
-            player = new SoundPlayer(filePath);
+            _player = new SoundPlayer(filePath);
 
             // Load and play the new audio file
-            player.Load();
-            player.PlayLooping();
+            _player.Load();
+            _player.PlayLooping();
         }
 
         public void Stop()
         {
-            if (player != null)
+            if (_player != null)
             {
-                player.Stop();
-                player.Dispose();
-                player = null;
+                _player.Stop();
+                _player.Dispose();
+                _player = null;
             }
         }
 
@@ -57,9 +58,9 @@ namespace Wasmachine9000.Game
         public void Unmute()
         {
             // Play the loaded audio file if it exists
-            if (player != null)
+            if (_player != null)
             {
-                player.PlayLooping();
+                _player.PlayLooping();
             }
         }
     }
