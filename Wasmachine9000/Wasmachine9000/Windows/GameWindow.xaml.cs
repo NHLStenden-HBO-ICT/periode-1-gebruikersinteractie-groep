@@ -65,7 +65,6 @@ public partial class GameWindow : Window
         {
             int currentPosition = (int)Canvas.GetBottom(Player) + (int) Player.Height;
             double predictedUpPosition = currentPosition + (_playerUpVelocity * App.GameTimer.DeltaTime);
-            Console.WriteLine("Current: " + currentPosition + "\n\rPredicted: " + predictedUpPosition + "\n\rVelocity: " + _playerUpVelocity + "\n\r");
             if (predictedUpPosition > CanvasContainer.ActualHeight)
             {
                 _playerUpVelocity = 0;
