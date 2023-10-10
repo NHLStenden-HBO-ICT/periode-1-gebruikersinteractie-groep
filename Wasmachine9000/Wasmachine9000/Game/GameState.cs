@@ -19,6 +19,8 @@ public class GameState
     private string Username;
     private int Pincode;
 
+   
+
     public GameState()
     {
         
