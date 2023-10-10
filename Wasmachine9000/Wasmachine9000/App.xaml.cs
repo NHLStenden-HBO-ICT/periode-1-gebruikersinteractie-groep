@@ -7,7 +7,7 @@ namespace Wasmachine9000
     {
         public static GameState GameState = new GameState();
         public static Scoreboard Scoreboard = new Scoreboard();
-        private AudioPlayer audioPlayer;
+        public static AudioPlayer audioPlayer;
         public static GameTimer GameTimer = new GameTimer();
 
         public App()
