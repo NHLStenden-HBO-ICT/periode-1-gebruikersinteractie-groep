@@ -71,5 +71,24 @@ namespace Wasmachine9000
         { 
         
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            #region close application + messagebox
+            // Check if the "Escape" key is pressed (Key.Escape)
+            if (e.Key == Key.Escape)
+            {
+                // Display a confirmation dialog
+                MessageBoxResult result = MessageBox.Show("Weet je zeker dat je de game wilt sluiten?", "Bevestig Afsluiten", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                // If the user clicks "Yes," close the application
+                if (result == MessageBoxResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+            #endregion
+
+        }
     }
 }
