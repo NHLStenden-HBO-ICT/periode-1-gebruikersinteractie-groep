@@ -29,9 +29,12 @@ namespace Wasmachine9000
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            this.Close();   
-            mainWindow.Show();
+            Helpers.OpenWindow(new MainWindow());
+        }
+
+        private void Doorgaan_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

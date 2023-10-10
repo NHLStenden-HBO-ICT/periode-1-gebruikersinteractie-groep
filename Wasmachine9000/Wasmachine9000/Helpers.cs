@@ -20,9 +20,16 @@ namespace Wasmachine9000
             targetWindow.Show();
             App.GameState.CurrentWindow = targetWindow;
             
+
             // Set previous window in GameState to previously closed window and close window
             currentWindow.Hide();
+            if(App.GameState.PreviousWindow!= null)
+            {
+                App.GameState.PreviousWindow.Close();
+            }
+      
             App.GameState.PreviousWindow = currentWindow;
+
 
 
         }

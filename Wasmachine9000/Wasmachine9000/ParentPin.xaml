@@ -35,6 +35,7 @@
             <TextBlock Grid.Column="1" FontSize="64" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" Height="148.5" HorizontalAlignment="Center" Margin="0,50,0,0" >Voer uw pincode in</TextBlock>
 
             <!--navigation buttons-->
+            <!-- Back button -->
             <Button Grid.Column="1" Grid.Row="3" Width="250" HorizontalAlignment="Left" Margin="100,0,0,0" x:Name="Back" Click="Back_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -43,13 +44,45 @@
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
 
-            <Border CornerRadius="22.5" Background="#00FF0F" Grid.Column="1" Grid.Row="3" MaxHeight="120px" Width="250px" HorizontalAlignment="Right" Margin="0,0,100,0" >
-               
-                    <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">Doorgaan</TextBlock>
-               
-            </Border>
+            <!-- Doorgaan button -->
+            <Button Grid.Column="1" Grid.Row="3" Width="250" HorizontalAlignment="Right" Margin="0,0,100,0" x:Name="Doorgaan" Click="Doorgaan_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#00FF0F" MaxHeight="120">
+                            <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">Doorgaan</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
 
         </Grid>
     </Grid>

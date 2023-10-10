@@ -10,58 +10,126 @@
         Title="MainWindow" Height="1080" Width="1920">
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
-
             <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.Background>
-                <ImageBrush ImageSource="/Assets/background.png"/>
+                <ImageBrush ImageSource="/Assets/background.png" />
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="162px" />
                 <RowDefinition Height="162px" />
                 <RowDefinition Height="162px" />
                 <RowDefinition Height="162px" />
-                <RowDefinition Height="162px"/>
+                <RowDefinition Height="162px" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400px" />
                 <ColumnDefinition Width="750px" />
                 <ColumnDefinition Width="400px" />
             </Grid.ColumnDefinitions>
-            <Button Margin="15,10,245,42" x:Name="Settings" Click="Settings_Click" BorderBrush="{x:Null}">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Instellingen.png"/>
-                </Button.Background>
+            <Button Margin="15,10,245,42" x:Name="Settings" Click="Settings_Click" BorderBrush="{x:Null}" Background="Transparent">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Image Source="/Instellingen.png" />
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
 
-            <TextBlock Grid.Row="1" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="150" Grid.ColumnSpan="3" >
+            <TextBlock Grid.Row="1" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="150" Grid.ColumnSpan="3">
                 <TextBlock.Effect>
-                    <DropShadowEffect BlurRadius="3" ShadowDepth="6"/>
+                    <DropShadowEffect BlurRadius="3" ShadowDepth="6" />
                 </TextBlock.Effect>Wasmachine 9000</TextBlock>
 
-            <Border Grid.Column="1" Grid.Row="2" MaxHeight="150" MaxWidth="712.5" Background="#FF00C0FF" CornerRadius="22.5" MouseLeftButtonDown="Start_Click" MouseEnter="Start_MouseEnter" MouseLeave="Start_MouseLeave">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="5" BlurRadius="10" Color="Black" Direction="305"/>
-                </Border.Effect>
+            <Button Grid.Column="1" Grid.Row="2" Width="712.5" MaxHeight="150" HorizontalAlignment="Center" Margin="0" x:Name="Start" Click="Start_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#FF00C0FF" MaxHeight="150" MaxWidth="712.5">
+                            <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Start</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF00FFFF"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-                <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" Height="148.5" HorizontalAlignment="Center" VerticalAlignment="Center">Start</TextBlock>
-              
-            </Border>
+
 
             <!-- Shop button -->
-            <Border CornerRadius="22.5" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="120px" Width="356.25px" HorizontalAlignment="Left" >
-                <Button Grid.Column="1" Grid.Row="3"  Width="356.25px" HorizontalAlignment="Left" x:Name="Winkel" Click="Winkel_Click" Background="{x:Null}" BorderBrush="{x:Null}" >
-                    <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White">Winkel</TextBlock>
-                </Button>
-            </Border>
+            <Button Grid.Column="1" Grid.Row="3" Width="356.25" HorizontalAlignment="Left" x:Name="Winkel" Click="Winkel_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#FF8B00FF" MaxHeight="120">
+                            <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Winkel</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-            <Border CornerRadius="22.5" Background="#FF8B00FF" Grid.Column="1" Grid.Row="3" MaxHeight="120px" Width="356.25px" HorizontalAlignment="Right" >
-                <Button Grid.Column="1" Grid.Row="3"  Width="357" HorizontalAlignment="Center" x:Name="Oudermenu" Click="Oudermenu_Click" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White">Ouder</TextBlock>
-                </Button>
-            </Border>
+            <Button Grid.Column="1" Grid.Row="3" Width="357" HorizontalAlignment="Right" x:Name="Oudermenu" Click="Oudermenu_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#FF8B00FF" MaxHeight="120">
+                            <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Ouder</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
         </Grid>
     </Grid>
 </Window>
