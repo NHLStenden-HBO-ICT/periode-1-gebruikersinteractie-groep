@@ -36,5 +36,13 @@ namespace Wasmachine9000
         {
 
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Escape)
+            {
+                Helpers.OpenPreviousWindow();
+            }
+        }
     }
 }
