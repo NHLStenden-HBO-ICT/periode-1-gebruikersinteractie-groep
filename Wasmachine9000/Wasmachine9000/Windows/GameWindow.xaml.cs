@@ -74,19 +74,24 @@ public partial class GameWindow : Window
             }
         }
 
-        // Calculate the interpolated position
+        // Calculate the interpolated position using cubic interpolation
         double previousPosition = Canvas.GetBottom(Player);
         double newPosition = previousPosition + (_playerUpVelocity * deltaTime);
-        double interpolatedPosition = Lerp(previousPosition, newPosition, deltaTime / (1.0 / 60.0)); // 60 FPS
+        double interpolatedPosition = CubicInterpolate(previousPosition, newPosition, 0.0, 0.0, deltaTime); // The third and fourth arguments are 0.0
 
         // Apply interpolated position to player
         Canvas.SetBottom(Player, interpolatedPosition);
     }
 
-    private double Lerp(double a, double b, double t)
+    private double CubicInterpolate(double p0, double p1, double v0, double v1, double t)
     {
-        // Linear interpolation between 'a' and 'b' using 't'
-        return a + (b - a) * t;
+        // Cubic interpolation formula
+        double t2 = t * t;
+        double a = -0.5 * p0 + 1.5 * p1 - 1.5 * v0 + 0.5 * v1;
+        double b = p0 - 2.5 * p1 + 2.0 * v0 - 0.5 * v1;
+        double c = -0.5 * v0;
+        double d = p1;
+        return a * t * t2 + b * t2 + c * t + d;
     }
 
 
