@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Threading;
 
 namespace Wasmachine9000.Game;
@@ -53,5 +54,6 @@ public class GameTimer
         }
 
         this._lastTimestampMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        Debug .WriteLine(this.DeltaTime.ToString());
     }
 }
