@@ -6,7 +6,9 @@
         WindowStyle="None"
         WindowState="Maximized"
          mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
+        Title="MainWindow" Height="1080" Width="1920"
+        KeyDown="Window_KeyDown"
+        >
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
 
