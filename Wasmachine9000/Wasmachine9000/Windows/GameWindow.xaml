@@ -7,11 +7,12 @@
         WindowState="Maximized"
         mc:Ignorable="d"
         Title="GameWindow" Height="1080" Width="1920"
-         RenderOptions.BitmapScalingMode="HighQuality"
+         RenderOptions.BitmapScalingMode="NearestNeighbor"
          UseLayoutRounding="True"
         SnapsToDevicePixels="True"
         >
-    
+
+
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
 
