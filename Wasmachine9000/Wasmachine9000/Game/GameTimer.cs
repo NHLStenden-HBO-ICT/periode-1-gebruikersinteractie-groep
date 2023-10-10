@@ -46,7 +46,7 @@ public class GameTimer
     {
         // Calculate the time between the previous and current frame. Used to ensure all objects move/act at the same rate
         // even when the clock is running slower. Mostly used for player and enemy movement.
-        this.DeltaTime = ((double)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - (double)this._lastTimestampMs) / 1000;
+        this.DeltaTime = (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - (double)this._lastTimestampMs) / 1000;
         foreach (KeyValuePair<string, Action<object?, EventArgs>> callback in _callbacks)
         {
             callback.Value(sender, e);
