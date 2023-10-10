@@ -35,10 +35,6 @@ public partial class GameWindow : Window
         playerSkin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/wasmachine.png"));
         Player.Width = playerSkin.ImageSource.Width;
         Player.Height = playerSkin.ImageSource.Height;
-
-        Console.WriteLine(Player.Width);
-        Console.WriteLine(Player.Height);
-
         Player.Fill = playerSkin;
     }
 
