@@ -13,7 +13,7 @@ public partial class GameWindow : Window
     private int _playerUpVelocity = 0;
     private int _velocityCap = 2000;
     private int _playerAcceleration = 170;
-    private int _gravity = 60;
+    private int _gravity = 80;
     private bool _playerRising;
 
     // Player style
@@ -56,10 +56,10 @@ public partial class GameWindow : Window
         }
 
         // Collision detection for the top of the screen
-        if (Canvas.GetBottom(Player) > SystemParameters.FullPrimaryScreenHeight - Player.Height)
+        if (Canvas.GetBottom(Player) > CanvasContainer.ActualHeight - Player.Height)
         {
             _playerUpVelocity = 0;
-            Canvas.SetBottom(Player, SystemParameters.FullPrimaryScreenHeight - Player.Height);
+            Canvas.SetBottom(Player, CanvasContainer.ActualHeight - Player.Height);
         }
 
         // Apply velocity to player rectangle

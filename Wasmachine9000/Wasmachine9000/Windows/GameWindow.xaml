@@ -7,10 +7,33 @@
         WindowState="Maximized"
         mc:Ignorable="d"
         Title="GameWindow" Height="1080" Width="1920">
-    <Canvas x:Name="GameCanvas" Focusable="True" KeyDown="CanvasKeyDown" KeyUp="CanvasKeyUp" >
-        <Rectangle x:Name="Player" Width="60" Height="60" Fill="White" />
-    </Canvas>
-    <Window.Background>
-        <ImageBrush ImageSource="/Assets/background.png" />
-    </Window.Background>
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="100*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="CanvasContainer" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/background.png"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="162px" />
+                <RowDefinition Height="162px" />
+                <RowDefinition Height="162px" />
+                <RowDefinition Height="162px" />
+                <RowDefinition Height="162px"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400px" />
+                <ColumnDefinition Width="750px" />
+                <ColumnDefinition Width="400px" />
+            </Grid.ColumnDefinitions>
+            <Canvas Grid.RowSpan="5" Grid.ColumnSpan="4" x:Name="GameCanvas" Focusable="True" KeyDown="CanvasKeyDown" KeyUp="CanvasKeyUp" >
+                <Rectangle x:Name="Player" Width="60" Height="60" Fill="White" />
+            </Canvas>
+
+            
+        </Grid>
+    </Grid>
 </Window>
