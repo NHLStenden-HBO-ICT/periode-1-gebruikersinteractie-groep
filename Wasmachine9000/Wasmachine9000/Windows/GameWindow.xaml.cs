@@ -10,7 +10,7 @@ public partial class GameWindow : Window
     private int _playerUpVelocity = 0;
     private int _playerSideVelocity = 0;
     private int _playerAcceleration = 40;
-    private int _resistance = 10;
+    private int _resistance = 1;
     private int _gravity = 20;
     private bool _playerMoveLeft;
     private bool _playerMoveRight;
@@ -51,23 +51,25 @@ public partial class GameWindow : Window
         if (_playerSideVelocity > 0) _playerSideVelocity -= _resistance;
         if (_playerSideVelocity < 0) _playerSideVelocity += _resistance;
 
+        // Collion detection for the bottom of the screen
         if (Canvas.GetBottom(Player) < 0)
         {
             _playerIsFalling = false;
-            _playerUpVelocity = 0;
+            _playerUpVelocity -= (int)Math.Round(_playerUpVelocity * 1.8f);
             Canvas.SetBottom(Player, 0);
         }
 
         if (Canvas.GetLeft(Player) < 0)
         {
             Canvas.SetLeft(Player, 0);
-            _playerSideVelocity = 0;
+            _playerSideVelocity -= (int)Math.Round(_playerSideVelocity * 1.8f);
         }
 
         if (Canvas.GetLeft(Player) > SystemParameters.FullPrimaryScreenWidth - Player.Width)
         {
             Canvas.SetLeft(Player, SystemParameters.FullPrimaryScreenWidth - Player.Width);
-            _playerSideVelocity = 0;
+            _playerSideVelocity -= (int)Math.Round(_playerSideVelocity * 1.8f);
+            ;
         }
 
         Console.WriteLine(_playerSideVelocity);
@@ -90,9 +92,9 @@ public partial class GameWindow : Window
 
         if (e.Key == Key.Space)
         {
-            if (_playerIsFalling) return;
+            // if (_playerIsFalling) return;
             _playerIsFalling = true;
-            _playerUpVelocity = 1000;
+            _playerUpVelocity = 500;
         }
 
         if (e.Key == Key.Escape)
