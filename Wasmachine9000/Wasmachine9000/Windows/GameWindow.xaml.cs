@@ -21,8 +21,8 @@ public partial class GameWindow : Window
 
     private int _playerScore = 0;
 
-    private int _gameSpeed = 0;
-    private int _maxGameSpeed = 10;
+    private int _gameSpeed = 400;
+    private int _maxGameSpeed = 100000;
 
     // Player style
     private ImageBrush playerSkin = new ImageBrush();
@@ -57,9 +57,12 @@ public partial class GameWindow : Window
         Player.Height = playerSkin.ImageSource.Height;
         Player.Fill = playerSkin;
 
+
+        Canvas.SetLeft(Background, 0);
+
         // Load background into Bakcground rectangle
-        BackgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/background.png"));
-        CanvasContainer.Loaded += (sender, args) => Background.Width = CanvasContainer.ActualWidth;
+        BackgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/scrolling_background.jpg"));
+        CanvasContainer.Loaded += (sender, args) => Background.Width = CanvasContainer.ActualWidth * 3;
         CanvasContainer.Loaded += (sender, args) => Background.Height = CanvasContainer.ActualHeight;
         Background.Fill = BackgroundImage;
 
@@ -122,6 +125,12 @@ public partial class GameWindow : Window
     private void BackgroundTick(object? sender, EventArgs e)
     {
 
+        if (Canvas.GetLeft(Background) < -(Background.Width / 3))
+        {
+            Canvas.SetLeft(Background, 0);
+        }
+
+        Canvas.SetLeft(Background, Canvas.GetLeft(Background) - (_gameSpeed * App.GameTimer.DeltaTime));
     }
 
     private void CanvasKeyDown(object sender, KeyEventArgs e)
@@ -132,6 +141,7 @@ public partial class GameWindow : Window
         {
             App.GameTimer.RemoveListener("canvasListener");
             App.GameTimer.RemoveListener("highscoreListener");
+            App.GameTimer.RemoveListener("backgroundListener");
             Helpers.OpenPreviousWindow();
         }
     }

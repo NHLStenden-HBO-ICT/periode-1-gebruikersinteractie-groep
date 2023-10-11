@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\scrolling_background.jpg"/>
     <Resource Include="Assets\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
