@@ -36,6 +36,9 @@
     <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
     <Resource Include="Instellingen.png" />
     <Resource Include="Assets\wasmachine.png"/>
+    <Resource Include="Assets\Icons\clock.svg"/>
+    <Resource Include="Assets\Icons\coins.svg"/>
+    <Resource Include="Assets\Icons\person-walking.svg"/>
   </ItemGroup>
 
   <ItemGroup>

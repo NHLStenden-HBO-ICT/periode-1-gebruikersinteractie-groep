@@ -75,7 +75,7 @@
                                 <Setter Property="Background" Value="#FF00FFFF"/>
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF" Direction="305"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -101,7 +101,7 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305" />
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF" Direction="305" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -124,7 +124,7 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305" />
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF" Direction="305" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
