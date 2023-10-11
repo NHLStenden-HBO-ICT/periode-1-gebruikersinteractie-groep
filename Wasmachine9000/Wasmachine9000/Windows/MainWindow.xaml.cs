@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using Wasmachine9000.Game;
 using Wasmachine9000.Windows;
 
 namespace Wasmachine9000
@@ -9,6 +13,8 @@ namespace Wasmachine9000
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<ScoreboardItem> _scoreboard = new();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -16,6 +22,42 @@ namespace Wasmachine9000
             // sets WPS height and width to the same height and width as the primary display
             this.Height = SystemParameters.FullPrimaryScreenHeight;
             this.Width = SystemParameters.FullPrimaryScreenWidth;
+
+            _scoreboard = App.Scoreboard.GetScoreboard().GetAwaiter().GetResult();
+            UpdateScoreboard(_scoreboard);
+        }
+
+        private void UpdateScoreboard(List<ScoreboardItem> scoreboard)
+        {
+            int scoreIndex = 1;
+
+            // Clear all items on the grid except the title text
+            foreach (UIElement child in ScoreboardContainer.Children)
+            {
+                if (child is not Border) ScoreboardContainer.Children.Remove(child);
+            }
+
+            foreach (ScoreboardItem item in scoreboard)
+            {
+                // <TextBlock Width="290" FontSize="30" Grid.Column="0" Grid.Row="1" FontFamily="Baloo Bhai 2 SemiBold" TextAlignment="Left" Padding="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                TextBlock scoreboardBlock = new TextBlock
+                {
+                    Text = scoreIndex + ". " + item.username + ": " + item.score,
+                    Width = 290,
+                    FontSize = 30,
+                    TextAlignment = TextAlignment.Left,
+                    Padding = new Thickness(5, 0, 0, 0),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    FontFamily = new FontFamily("Baloo Bhai 2 SemiBold")
+                };
+
+                Grid.SetColumn(scoreboardBlock, 0);
+                Grid.SetRow(scoreboardBlock, scoreIndex);
+
+                // scoreboardBlock.FontFamily = "Baloo Bhai 2 SemiBold";
+                ScoreboardContainer.Children.Add(scoreboardBlock);
+                scoreIndex++;
+            }
         }
 
 
