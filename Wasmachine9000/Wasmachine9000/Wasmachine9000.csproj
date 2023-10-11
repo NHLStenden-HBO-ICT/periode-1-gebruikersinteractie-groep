@@ -39,6 +39,7 @@
     <Resource Include="Assets\Icons\clock.svg"/>
     <Resource Include="Assets\Icons\coins.svg"/>
     <Resource Include="Assets\Icons\person-walking.svg"/>
+    
   </ItemGroup>
 
   <ItemGroup>
