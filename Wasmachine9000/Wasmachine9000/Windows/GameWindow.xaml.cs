@@ -54,7 +54,6 @@ public partial class GameWindow : Window
     private void HighscoreTick(object? sender, EventArgs e)
     {
         _playerScoreTracker += App.GameTimer.DeltaTime;
-        Console.WriteLine(_playerScoreTracker);
 
         // Check if one second has elapsed
         if (_playerScoreTracker > 0.5)
