@@ -31,30 +31,29 @@ public class Scoreboard
     {
     }
 
-    public async Task<List<ScoreboardItem>> GetScoreboard()
+    public List<ScoreboardItem> GetScoreboard()
     {
         string apiUrl = "api/collections/scoreboard/records?perPage=6&sort=-score&fields=username,score";
 
         using (HttpClient client = new HttpClient())
         {
-            var response = await client.GetAsync(this._pocketbaseUrl + apiUrl);
-            string jsonContent = await response.Content.ReadAsStringAsync();
+            var response = client.GetAsync(this._pocketbaseUrl + apiUrl).GetAwaiter().GetResult();
+            string jsonContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             ScoreboardResult? scoreboardResult = JsonSerializer.Deserialize<ScoreboardResult>(jsonContent);
 
             return scoreboardResult?.items;
         }
     }
 
-    public async void PostScore(string username, int score)
+    public void PostScore(string username, int score)
     {
         var jsonContent = new
         {
             username = username,
             score = score,
-            password = "wasmachine9000"
+            password = "9000wasmachines"
         };
-        string response = await PostRequest("api/collections/scoreboard/records", jsonContent);
-        Console.WriteLine(response);
+        PostRequest("api/collections/scoreboard/records", jsonContent);
     }
 
     private async Task<string> PostRequest(string url, Object data)

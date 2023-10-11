@@ -23,7 +23,7 @@ namespace Wasmachine9000
             this.Height = SystemParameters.FullPrimaryScreenHeight;
             this.Width = SystemParameters.FullPrimaryScreenWidth;
 
-            _scoreboard = App.Scoreboard.GetScoreboard().GetAwaiter().GetResult();
+            _scoreboard = App.Scoreboard.GetScoreboard();
             UpdateScoreboard(_scoreboard);
         }
 
