@@ -31,9 +31,13 @@
                 <ColumnDefinition Width="750px" />
                 <ColumnDefinition Width="400px" />
             </Grid.ColumnDefinitions>
-           
+            <Border Grid.Row="0" Grid.Column="1" CornerRadius="22.5" Background="#FF00C0FF" MaxHeight="130" MaxWidth="712.5" Margin="0,15,0,0" >
+                <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="WinkelText" FontWeight="600" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Winkel"/></TextBlock>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1" CornerRadius="22.5" Background="#74777E" MaxHeight="130" Width="712.5" Margin="0,15,0,0" HorizontalAlignment="Left" >
+                <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="CoinsText" FontWeight="600" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"><Run Text="9001"/></TextBlock>
+            </Border>
 
-            
         </Grid>
     </Grid>
 </Window>
