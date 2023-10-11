@@ -21,8 +21,14 @@ public partial class GameWindow : Window
 
     private int _playerScore = 0;
 
+    private int _gameSpeed = 0;
+    private int _maxGameSpeed = 10;
+
     // Player style
     private ImageBrush playerSkin = new ImageBrush();
+
+    // Background Image
+    private ImageBrush BackgroundImage = new ImageBrush();
 
     public GameWindow()
     {
@@ -38,6 +44,9 @@ public partial class GameWindow : Window
         App.GameTimer.AddListener("canvasListener", CanvasTick);
         App.GameTimer.AddListener("highscoreListener", HighscoreTick);
 
+        // Register background listener to global game timer
+        App.GameTimer.AddListener("backgroundListener", BackgroundTick);
+
         // Set player position
         Canvas.SetLeft(Player, Math.Round(SystemParameters.FullPrimaryScreenWidth / 10) * 2);
         Canvas.SetBottom(Player, _bottomLevel);
@@ -47,6 +56,13 @@ public partial class GameWindow : Window
         Player.Width = playerSkin.ImageSource.Width;
         Player.Height = playerSkin.ImageSource.Height;
         Player.Fill = playerSkin;
+
+        // Load background into Bakcground rectangle
+        BackgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/background.png"));
+        CanvasContainer.Loaded += (sender, args) => Background.Width = CanvasContainer.ActualWidth;
+        CanvasContainer.Loaded += (sender, args) => Background.Height = CanvasContainer.ActualHeight;
+        Background.Fill = BackgroundImage;
+
     }
 
     private double _playerScoreTracker = 0;
@@ -101,6 +117,11 @@ public partial class GameWindow : Window
 
         // Apply velocity to player
         Canvas.SetBottom(Player, Canvas.GetBottom(Player) + (_playerUpVelocity * App.GameTimer.DeltaTime));
+    }
+
+    private void BackgroundTick(object? sender, EventArgs e)
+    {
+
     }
 
     private void CanvasKeyDown(object sender, KeyEventArgs e)

@@ -11,6 +11,7 @@
         UseLayoutRounding="True"
         SnapsToDevicePixels="True">
 
+
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
 
@@ -18,9 +19,10 @@
         </Grid.ColumnDefinitions>
 
         <Grid x:Name="CanvasContainer" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.Background>
-                <ImageBrush ImageSource="/Assets/background.png" />
-            </Grid.Background>
+            <!-- <Grid.Background> -->
+            <!--     <ImageBrush ImageSource="/Assets/background.png" /> -->
+            <!-- </Grid.Background> -->
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="162px" />
                 <RowDefinition Height="162px" />
@@ -35,6 +37,7 @@
             </Grid.ColumnDefinitions>
             <Canvas Grid.RowSpan="5" Grid.ColumnSpan="4" x:Name="GameCanvas" Focusable="True" KeyDown="CanvasKeyDown"
                     KeyUp="CanvasKeyUp">
+                <Rectangle x:Name="Background" Width="60" Height="60" Fill="Blue" ></Rectangle>
                 <Rectangle x:Name="Player" Width="60" Height="60" Fill="White" />
             </Canvas>
 
