@@ -66,6 +66,7 @@ public partial class GameWindow : Window
         App.PlayerRectangle = Player;
 
         // CanvasEntities.AddEntity(new DirtyClothes(1200, 60));
+        CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
     }
 
     private double _playerScoreTracker = 0;
@@ -75,7 +76,7 @@ public partial class GameWindow : Window
         _playerScoreTracker += App.GameTimer.DeltaTime;
 
         // Check if one second has elapsed
-        if (_playerScoreTracker > 0.5)
+        if (_playerScoreTracker > 0.6)
         {
             _playerScoreTracker = 0;
             _playerScore++;
@@ -128,13 +129,17 @@ public partial class GameWindow : Window
     {
         foreach (CanvasEntity entity in CanvasEntities.GetCanvasEntities().ToArray())
         {
-            entity.EntityTick();
-
-            if (Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
+            if (entity.GetX() < 0)
             {
                 CanvasEntities.RemoveEntity(entity);
-                Console.WriteLine("NO!");
+                return;
             }
+
+            entity.EntityTick();
+
+
+            // Destroy entity when collided with player
+            if (Helpers.CollidesWithPlayer(entity.GetEntityRectangle())) CanvasEntities.RemoveEntity(entity);
         }
     }
 
@@ -158,12 +163,13 @@ public partial class GameWindow : Window
 
     private CanvasLane GetRandomCanvasLane()
     {
+        // Dont need to randomize when theres only one lane
         if (_canvasLanes.Count == 1) return _canvasLanes[0];
 
         Random random = new Random();
 
+        // Choose random canvas lane
         int num = random.Next(0, _canvasLanes.Count);
-        Console.WriteLine(num + ":" + _canvasLanes.Count);
         CanvasLane randomLane = _canvasLanes[random.Next(0, _canvasLanes.Count)];
 
         // Recurse function until another random lane has been found

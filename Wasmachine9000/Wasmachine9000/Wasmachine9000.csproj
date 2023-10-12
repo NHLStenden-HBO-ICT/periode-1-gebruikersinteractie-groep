@@ -39,7 +39,9 @@
     <Resource Include="Assets\Icons\clock.svg"/>
     <Resource Include="Assets\Icons\coins.svg"/>
     <Resource Include="Assets\Icons\person-walking.svg"/>
-    <Resource Include="Assets\Sprites\Entities\wasmachine.png"/>
+    <Resource Include="Assets\Sprites\Entities\tshirt-blue.png"/>
+    <Resource Include="Assets\Sprites\Entities\tshirt-green.png"/>
+    <Resource Include="Assets\Sprites\Entities\tshirt-yellow.png"/>
 
 
   </ItemGroup>

@@ -9,7 +9,9 @@ public class DirtyClothes : CanvasEntity
 {
     private static readonly string[] Sprites =
     {
-        "wasmachine.png",
+        "tshirt-blue.png",
+        "tshirt-green.png",
+        "tshirt-yellow.png",
     };
 
 
@@ -25,7 +27,7 @@ public class DirtyClothes : CanvasEntity
 
     public override void EntityTick()
     {
-        Canvas.SetLeft(EntityRectangle, Canvas.GetLeft(EntityRectangle) - 1500 * App.GameTimer.DeltaTime);
+        Canvas.SetLeft(EntityRectangle, Canvas.GetLeft(EntityRectangle) - 900 * App.GameTimer.DeltaTime);
 
 
         if (Helpers.CollidesWithPlayer(EntityRectangle))

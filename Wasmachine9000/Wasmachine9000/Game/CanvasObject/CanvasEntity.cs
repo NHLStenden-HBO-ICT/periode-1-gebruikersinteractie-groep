@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Wasmachine9000.Game.CanvasObject;
@@ -22,12 +23,12 @@ public class CanvasEntity
 
     public int GetX()
     {
-        return EntityX;
+        return (int)Canvas.GetLeft(EntityRectangle);
     }
 
     public int GetY()
     {
-        return EntityY;
+        return (int)Canvas.GetBottom(EntityRectangle);
     }
 
     public virtual void Create()
