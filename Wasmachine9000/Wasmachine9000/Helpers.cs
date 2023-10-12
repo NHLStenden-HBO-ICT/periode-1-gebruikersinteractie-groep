@@ -54,6 +54,11 @@ namespace Wasmachine9000
             }
         }
 
+        public static string GetSpriteResource(string filename)
+        {
+            return "pack://application:,,,/Assets/Sprites/Entities/" + filename;
+        }
+
         public static bool CollidesWith(Rectangle source, Rectangle target)
         {
             Rect sourceRect = new Rect(Canvas.GetLeft(source), Canvas.GetBottom(source), source.Width, source.Height);
@@ -64,7 +69,7 @@ namespace Wasmachine9000
 
         public static bool CollidesWithPlayer(Rectangle source)
         {
-            return CollidesWith(source, App.PlayerRectangle);
+            return CollidesWith(source, App.GameInfo.Player.GetEntityRectangle());
         }
     }
 }
