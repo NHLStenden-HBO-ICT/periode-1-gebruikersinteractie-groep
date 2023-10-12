@@ -82,7 +82,7 @@
                             <ColumnDefinition Width="145" />
                             <ColumnDefinition Width="30" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
+                        <TextBlock Grid.Column="0" Text="111" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
                                    Foreground="White" HorizontalAlignment="Left" Margin="6" VerticalAlignment="Center" />
                         <Image Grid.Column="1" Margin="6">
                             <Image.Source>

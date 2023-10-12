@@ -89,4 +89,8 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="13.7.0" />
+  </ItemGroup>
+
 </Project>

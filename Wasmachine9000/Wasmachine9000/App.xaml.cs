@@ -19,7 +19,9 @@ namespace Wasmachine9000
             GameState = GameState.LoadGameState();
 
             // Start the music player
-            AudioPlayer.Start();
+           
+            
+            AudioPlayer.StartMusic();
 
             // Start menu screen and set GameState to it
             Window menuScreen = new MainWindow();
