@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Resource Include="Assets\scrolling_background.jpg"/>
+    <Resource Include="Assets\Background\background1.png" />
     <Resource Include="Assets\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -85,5 +86,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+
 
 </Project>

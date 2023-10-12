@@ -28,7 +28,11 @@ public partial class GameWindow : Window
     private ImageBrush playerSkin = new ImageBrush();
 
     // Background Image
-    private ImageBrush BackgroundImage = new ImageBrush();
+    // private ImageBrush BackgroundImage = new ImageBrush();
+
+    // Background one and two images
+    private ImageBrush BackgroundImageOne = new ImageBrush();
+    private ImageBrush BackgroundImageTwo = new ImageBrush();
 
     public GameWindow()
     {
@@ -37,7 +41,7 @@ public partial class GameWindow : Window
         GameCanvas.Focus(); // Makes keyboard event work
 
         // Set bottom and ceiling level
-        this._bottomLevel = 60;
+        this._bottomLevel = 49;
         CanvasContainer.Loaded += (sender, args) => _ceilingLevel = CanvasContainer.ActualHeight;
 
         // Register the canvas listener to the global game timer.
@@ -58,13 +62,27 @@ public partial class GameWindow : Window
         Player.Fill = playerSkin;
 
 
-        Canvas.SetLeft(Background, 0);
+        // Canvas.SetLeft(Background, 0);
+        //
+        // // Load background into Bakcground rectangle
+        // BackgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/scrolling_background.jpg"));
+        // CanvasContainer.Loaded += (sender, args) => Background.Width = CanvasContainer.ActualWidth * 3;
+        // CanvasContainer.Loaded += (sender, args) => Background.Height = CanvasContainer.ActualHeight;
+        // Background.Fill = BackgroundImage;
 
-        // Load background into Bakcground rectangle
-        BackgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/scrolling_background.jpg"));
-        CanvasContainer.Loaded += (sender, args) => Background.Width = CanvasContainer.ActualWidth * 3;
-        CanvasContainer.Loaded += (sender, args) => Background.Height = CanvasContainer.ActualHeight;
-        Background.Fill = BackgroundImage;
+        // Load background one into rectangle
+        Canvas.SetLeft(BackgroundOne, 0);
+        BackgroundImageOne.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets\\Background\\background1.png"));
+        CanvasContainer.Loaded += (sender, args) => BackgroundOne.Width = BackgroundImageOne.ImageSource.Width;
+        CanvasContainer.Loaded += (sender, args) => BackgroundOne.Height = CanvasContainer.ActualHeight;
+        BackgroundOne.Fill = BackgroundImageOne;
+
+        // Load background Two into rectangle
+        Canvas.SetLeft(BackgroundTwo, 0);
+        BackgroundImageTwo.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets\\Background\\background1.png"));
+        CanvasContainer.Loaded += (sender, args) => BackgroundTwo.Width = BackgroundImageTwo.ImageSource.Width;
+        CanvasContainer.Loaded += (sender, args) => BackgroundTwo.Height = CanvasContainer.ActualHeight;
+        BackgroundTwo.Fill = BackgroundImageTwo;
 
     }
 
@@ -127,25 +145,33 @@ public partial class GameWindow : Window
     private void BackgroundTick(object? sender, EventArgs e)
     {
 
-        if (Canvas.GetLeft(Background) < -(Background.Width / 3))
+        // loop background for infinite runner
+        if ((BackgroundOne.Width - -Canvas.GetLeft(BackgroundOne)) < CanvasContainer.ActualWidth)
         {
-            Canvas.SetLeft(Background, 0);
+            Canvas.SetLeft(BackgroundTwo, Canvas.GetLeft(BackgroundOne) + BackgroundOne.ActualWidth);
+        }
+        if ((BackgroundTwo.Width - -Canvas.GetLeft(BackgroundTwo)) < CanvasContainer.ActualWidth)
+        {
+            Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundTwo) + BackgroundTwo.ActualWidth);
         }
 
-        if (_gameSpeed < _maxGameSpeed)
+        // apply movement to both backgrounds
+        Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundOne) - (_gameSpeed * App.GameTimer.DeltaTime));
+        Canvas.SetLeft(BackgroundTwo, Canvas.GetLeft(BackgroundTwo) - (_gameSpeed * App.GameTimer.DeltaTime));
+
+        _backgroundTracker += App.GameTimer.DeltaTime;
+
+        // increase speed if conditions are met
+        if (_backgroundTracker > 1 && ((_gameSpeed + 10) < _maxGameSpeed))
         {
-            Canvas.SetLeft(Background, Canvas.GetLeft(Background) - (_gameSpeed * App.GameTimer.DeltaTime));
-
-            _backgroundTracker += App.GameTimer.DeltaTime;
-
-            // Check if * seconds has elapsed
-            if (_backgroundTracker > 1)
-            {
-                _backgroundTracker = 0;
-                _gameSpeed += 5;
-                Console.WriteLine(_gameSpeed);
-            }
+            _backgroundTracker = 0;
+            _gameSpeed += 10;
+            Console.WriteLine(_gameSpeed);
+        } else if ((_gameSpeed + 10) > _maxGameSpeed)
+        {
+            _gameSpeed = _maxGameSpeed;
         }
+
 
     }
 
