@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Wasmachine9000.Game.CanvasObject;
+using Wasmachine9000.Game.Entities;
 
 namespace Wasmachine9000.Windows;
 
@@ -21,6 +24,9 @@ public partial class GameWindow : Window
 
     private int _playerScore = 0;
 
+    private List<CanvasLane> _canvasLanes = new List<CanvasLane>();
+    private CanvasEntities CanvasEntities;
+
     // Player style
     private ImageBrush playerSkin = new ImageBrush();
 
@@ -29,6 +35,12 @@ public partial class GameWindow : Window
         InitializeComponent();
 
         GameCanvas.Focus(); // Makes keyboard event work
+        CanvasEntities = new CanvasEntities(GameCanvas);
+
+        // Create canvas lanes
+        _canvasLanes.Add(new CanvasLane(200));
+        _canvasLanes.Add(new CanvasLane(400));
+        _canvasLanes.Add(new CanvasLane(600));
 
         // Set bottom and ceiling level
         this._bottomLevel = 60;
@@ -37,6 +49,7 @@ public partial class GameWindow : Window
         // Register the canvas listener to the global game timer.
         App.GameTimer.AddListener("canvasListener", CanvasTick);
         App.GameTimer.AddListener("highscoreListener", HighscoreTick);
+        App.GameTimer.AddListener("entitiesListener", EntitiesTick);
 
         // Set player position
         Canvas.SetLeft(Player, Math.Round(SystemParameters.FullPrimaryScreenWidth / 10) * 2);
@@ -47,6 +60,8 @@ public partial class GameWindow : Window
         Player.Width = playerSkin.ImageSource.Width;
         Player.Height = playerSkin.ImageSource.Height;
         Player.Fill = playerSkin;
+
+        CanvasEntities.AddEntity(new DirtyClothes(1200, 60));
     }
 
     private double _playerScoreTracker = 0;
@@ -64,7 +79,7 @@ public partial class GameWindow : Window
         }
     }
 
-    public void CanvasTick(object? sender, EventArgs e)
+    private void CanvasTick(object? sender, EventArgs e)
     {
         if (_playerRising) _playerUpVelocity += _playerAcceleration;
 
@@ -103,6 +118,11 @@ public partial class GameWindow : Window
         Canvas.SetBottom(Player, Canvas.GetBottom(Player) + (_playerUpVelocity * App.GameTimer.DeltaTime));
     }
 
+    private void EntitiesTick(object? sender, EventArgs e)
+    {
+        CanvasEntities.TickEntities();
+    }
+
     private void CanvasKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Space) _playerRising = true;
@@ -111,6 +131,7 @@ public partial class GameWindow : Window
         {
             App.GameTimer.RemoveListener("canvasListener");
             App.GameTimer.RemoveListener("highscoreListener");
+            App.GameTimer.RemoveListener("entitiesListener");
             Helpers.OpenPreviousWindow();
         }
     }
@@ -118,5 +139,11 @@ public partial class GameWindow : Window
     private void CanvasKeyUp(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Space) _playerRising = false;
+    }
+
+    private CanvasLane GetRandomCanvasLane()
+    {
+        Random random = new Random();
+        return _canvasLanes[random.Next(0, _canvasLanes.Count - 1)];
     }
 }
