@@ -23,10 +23,10 @@ namespace Wasmachine9000.Game
 
         public class GamestateData
         {
-            public int Coins { get; set; }
-            public int Highscore { get; set; }
-            public string Username { get; set; }
-            public int Pincode { get; set; }
+            public int? Coins { get; set; }
+            public int? Highscore { get; set; }
+            public string? Username { get; set; }
+            public int? Pincode { get; set; }
         }
 
         // Read and parse the YAML file.
@@ -39,10 +39,10 @@ namespace Wasmachine9000.Game
                     var deserializer = new Deserializer();
                     var GamestateData = deserializer.Deserialize<GamestateData>(reader);
 
-                    Coins = GamestateData.Coins;
-                    Highscore = GamestateData.Highscore;
-                    Username = GamestateData.Username;
-                    Pincode = GamestateData.Pincode;
+                    Coins = GamestateData.Coins ?? 0;
+                    Highscore = GamestateData.Highscore ?? 0;
+                    Username = GamestateData.Username ?? "";
+                    Pincode = GamestateData.Pincode ?? 0000;
 
                     return GamestateData;
                 }
@@ -60,10 +60,10 @@ namespace Wasmachine9000.Game
             var data = ReadYamlFile(GetGameStateFilePath());
             if (data != null)
             {
-                Coins = data.Coins;
-                Highscore = data.Highscore;
-                Username = data.Username;
-                Pincode = data.Pincode;
+                Coins = data.Coins ?? 0;
+                Highscore = data.Highscore ?? 0;
+                Username = data.Username ?? "";
+                Pincode = data.Pincode ?? 0000;
             }
         }
 
