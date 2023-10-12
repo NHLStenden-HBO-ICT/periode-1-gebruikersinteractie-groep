@@ -25,6 +25,7 @@ public partial class GameWindow : Window
     private int _playerScore = 0;
 
     private List<CanvasLane> _canvasLanes = new List<CanvasLane>();
+    private CanvasLane? lastLane;
     private CanvasEntities CanvasEntities;
 
     // Player style
@@ -38,9 +39,10 @@ public partial class GameWindow : Window
         CanvasEntities = new CanvasEntities(GameCanvas);
 
         // Create canvas lanes
-        _canvasLanes.Add(new CanvasLane(200));
-        _canvasLanes.Add(new CanvasLane(400));
-        _canvasLanes.Add(new CanvasLane(600));
+
+        _canvasLanes.Add(new CanvasLane(150));
+        _canvasLanes.Add(new CanvasLane(350));
+        _canvasLanes.Add(new CanvasLane(550));
 
         // Set bottom and ceiling level
         this._bottomLevel = 60;
@@ -61,7 +63,9 @@ public partial class GameWindow : Window
         Player.Height = playerSkin.ImageSource.Height;
         Player.Fill = playerSkin;
 
-        CanvasEntities.AddEntity(new DirtyClothes(1200, 60));
+        App.PlayerRectangle = Player;
+
+        // CanvasEntities.AddEntity(new DirtyClothes(1200, 60));
     }
 
     private double _playerScoreTracker = 0;
@@ -76,6 +80,8 @@ public partial class GameWindow : Window
             _playerScoreTracker = 0;
             _playerScore++;
             ScoreTextBlock.Text = _playerScore.ToString();
+
+            CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
         }
     }
 
@@ -120,7 +126,16 @@ public partial class GameWindow : Window
 
     private void EntitiesTick(object? sender, EventArgs e)
     {
-        CanvasEntities.TickEntities();
+        foreach (CanvasEntity entity in CanvasEntities.GetCanvasEntities().ToArray())
+        {
+            entity.EntityTick();
+
+            if (Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
+            {
+                CanvasEntities.RemoveEntity(entity);
+                Console.WriteLine("NO!");
+            }
+        }
     }
 
     private void CanvasKeyDown(object sender, KeyEventArgs e)
@@ -143,7 +158,19 @@ public partial class GameWindow : Window
 
     private CanvasLane GetRandomCanvasLane()
     {
+        if (_canvasLanes.Count == 1) return _canvasLanes[0];
+
         Random random = new Random();
-        return _canvasLanes[random.Next(0, _canvasLanes.Count - 1)];
+
+        int num = random.Next(0, _canvasLanes.Count);
+        Console.WriteLine(num + ":" + _canvasLanes.Count);
+        CanvasLane randomLane = _canvasLanes[random.Next(0, _canvasLanes.Count)];
+
+        // Recurse function until another random lane has been found
+        if (lastLane != null && randomLane == lastLane) randomLane = GetRandomCanvasLane();
+
+        // Set last lane to current selected name
+        lastLane = randomLane;
+        return randomLane;
     }
 }

@@ -31,13 +31,7 @@ public class CanvasEntities
         _canvasEntities.Remove(entity);
 
         removedEntity.Destroy();
-    }
 
-    public void TickEntities()
-    {
-        foreach (CanvasEntity entity in _canvasEntities)
-        {
-            entity.EntityTick();
-        }
+        _gameCanvas.Children.Remove(removedEntity.GetEntityRectangle());
     }
 }

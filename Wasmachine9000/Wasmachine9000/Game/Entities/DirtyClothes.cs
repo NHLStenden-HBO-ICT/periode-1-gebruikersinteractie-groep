@@ -25,12 +25,19 @@ public class DirtyClothes : CanvasEntity
 
     public override void EntityTick()
     {
-        Canvas.SetLeft(EntityRectangle, Canvas.GetLeft(EntityRectangle) - 100 * App.GameTimer.DeltaTime);
+        Canvas.SetLeft(EntityRectangle, Canvas.GetLeft(EntityRectangle) - 1500 * App.GameTimer.DeltaTime);
+
+
+        if (Helpers.CollidesWithPlayer(EntityRectangle))
+        {
+            Destroy();
+        }
     }
 
     public override void Create()
     {
-        EntityImageBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/" + Sprite));
+        EntityImageBrush.ImageSource =
+            new BitmapImage(new Uri("pack://application:,,,/Assets/Sprites/Entities/" + Sprite));
         EntityRectangle.Width = EntityImageBrush.ImageSource.Width;
         EntityRectangle.Height = EntityImageBrush.ImageSource.Height;
         EntityRectangle.Fill = EntityImageBrush;
@@ -41,6 +48,7 @@ public class DirtyClothes : CanvasEntity
 
     public override void Destroy()
     {
-        // Destroy elements here and stuff.
+        Console.WriteLine("Destroying entity");
+        base.Destroy();
     }
 }

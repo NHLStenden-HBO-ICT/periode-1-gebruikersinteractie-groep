@@ -1,7 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using Wasmachine9000.Game;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Shapes;
 using Wasmachine9000.Windows;
 
 namespace Wasmachine9000
@@ -53,6 +52,19 @@ namespace Wasmachine9000
                     App.AudioPlayer.LoadAndPlayAudio("Ingame.wav");
                     break;
             }
+        }
+
+        public static bool CollidesWith(Rectangle source, Rectangle target)
+        {
+            Rect sourceRect = new Rect(Canvas.GetLeft(source), Canvas.GetBottom(source), source.Width, source.Height);
+            Rect targetRect = new Rect(Canvas.GetLeft(target), Canvas.GetBottom(target), target.Width, target.Height);
+
+            return sourceRect.IntersectsWith(targetRect);
+        }
+
+        public static bool CollidesWithPlayer(Rectangle source)
+        {
+            return CollidesWith(source, App.PlayerRectangle);
         }
     }
 }

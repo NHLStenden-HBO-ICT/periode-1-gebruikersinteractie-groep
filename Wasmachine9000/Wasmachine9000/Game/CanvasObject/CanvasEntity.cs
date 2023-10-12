@@ -12,7 +12,6 @@ public class CanvasEntity
     protected Rectangle EntityRectangle = new Rectangle();
     protected ImageBrush EntityImageBrush = new ImageBrush();
 
-
     public CanvasEntity(string sprite, int xPosition, int yPosition)
     {
         Sprite = sprite;
