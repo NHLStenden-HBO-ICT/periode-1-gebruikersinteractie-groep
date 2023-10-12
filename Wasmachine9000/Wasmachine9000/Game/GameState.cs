@@ -19,7 +19,9 @@ public class GameState
     private string Username;
     private int Pincode;
 
-   
+    // sound settings
+    public bool MusicSound = true;
+    public bool SFXSound = true;
 
     public GameState()
     {
