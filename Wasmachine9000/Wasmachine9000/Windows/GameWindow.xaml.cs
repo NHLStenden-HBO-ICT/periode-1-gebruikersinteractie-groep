@@ -22,7 +22,7 @@ public partial class GameWindow : Window
     private int _playerScore = 0;
 
     private int _gameSpeed = 400;
-    private int _maxGameSpeed = 100000;
+    private int _maxGameSpeed = 10000;
 
     // Player style
     private ImageBrush playerSkin = new ImageBrush();
@@ -122,6 +122,8 @@ public partial class GameWindow : Window
         Canvas.SetBottom(Player, Canvas.GetBottom(Player) + (_playerUpVelocity * App.GameTimer.DeltaTime));
     }
 
+    private double _backgroundTracker = 0;
+
     private void BackgroundTick(object? sender, EventArgs e)
     {
 
@@ -130,7 +132,21 @@ public partial class GameWindow : Window
             Canvas.SetLeft(Background, 0);
         }
 
-        Canvas.SetLeft(Background, Canvas.GetLeft(Background) - (_gameSpeed * App.GameTimer.DeltaTime));
+        if (_gameSpeed < _maxGameSpeed)
+        {
+            Canvas.SetLeft(Background, Canvas.GetLeft(Background) - (_gameSpeed * App.GameTimer.DeltaTime));
+
+            _backgroundTracker += App.GameTimer.DeltaTime;
+
+            // Check if * seconds has elapsed
+            if (_backgroundTracker > 1)
+            {
+                _backgroundTracker = 0;
+                _gameSpeed += 5;
+                Console.WriteLine(_gameSpeed);
+            }
+        }
+
     }
 
     private void CanvasKeyDown(object sender, KeyEventArgs e)

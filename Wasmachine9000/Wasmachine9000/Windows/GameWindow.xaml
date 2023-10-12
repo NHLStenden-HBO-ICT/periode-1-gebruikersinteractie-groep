@@ -19,9 +19,9 @@
         </Grid.ColumnDefinitions>
 
         <Grid x:Name="CanvasContainer" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <!-- <Grid.Background> -->
-            <!--     <ImageBrush ImageSource="/Assets/background.png" /> -->
-            <!-- </Grid.Background> -->
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/background.png" />
+            </Grid.Background>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="162px" />
