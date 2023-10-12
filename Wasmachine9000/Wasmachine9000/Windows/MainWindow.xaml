@@ -7,10 +7,7 @@
         WindowState="Maximized"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920"
-        KeyDown="Window_KeyDown"
-        >
-    
-    
+        KeyDown="Window_KeyDown">
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*" />
@@ -32,7 +29,49 @@
                 <ColumnDefinition Width="750px" />
                 <ColumnDefinition Width="400px" />
             </Grid.ColumnDefinitions>
-            <Button Margin="15,10,245,42" x:Name="Settings" Click="Settings_Click" BorderBrush="{x:Null}" Background="Transparent">
+
+
+            <!-- Scoreboard -->
+            <Grid Grid.Column="3" Grid.Row="2" Grid.RowSpan="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+                <Border CornerRadius="22.5" Background="LightGray" Margin="50,0,50,110">
+                    <Grid x:Name="ScoreboardContainer">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="52" />
+                            <RowDefinition Height="52" />
+                            <RowDefinition Height="52" />
+                            <RowDefinition Height="52" />
+                            <RowDefinition Height="52" />
+                            <RowDefinition Height="52" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border CornerRadius="20,20,0,0" Background="DarkGray">
+                            <TextBlock
+                                Width="300" FontSize="40" Grid.Column="0" Grid.Row="0"
+                                Text="Scoreboard"
+                                FontFamily="Baloo Bhai 2 SemiBold"
+                                TextAlignment="Center"
+                                VerticalAlignment="Center" />
+                        </Border>
+
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Button Margin="15,10,245,42" x:Name="Settings" Click="Settings_Click" BorderBrush="{x:Null}"
+                    Background="Transparent">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -55,16 +94,23 @@
                 </Button.Style>
             </Button>
 
-            <TextBlock Grid.Row="1" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="150" Grid.ColumnSpan="3">
+            <TextBlock Grid.Row="1" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" FontSize="150" Grid.ColumnSpan="3">
                 <TextBlock.Effect>
                     <DropShadowEffect BlurRadius="3" ShadowDepth="6" />
-                </TextBlock.Effect>Wasmachine 9000</TextBlock>
+                </TextBlock.Effect>
+                Wasmachine 9000
+            </TextBlock>
 
-            <Button Grid.Column="1" Grid.Row="2" Width="712.5" MaxHeight="150" HorizontalAlignment="Center" Margin="0" x:Name="Start" Click="Start_Click">
+            <Button Grid.Column="1" Grid.Row="2" Width="712.5" MaxHeight="150" HorizontalAlignment="Center" Margin="0"
+                    x:Name="Start" Click="Start_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="22.5" Background="#FF00C0FF" MaxHeight="150" MaxWidth="712.5">
-                            <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Start</TextBlock>
+                            <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText"
+                                       Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Start
+                            </TextBlock>
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
@@ -72,10 +118,11 @@
                     <Style TargetType="Button">
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FF00FFFF"/>
+                                <Setter Property="Background" Value="#FF00FFFF" />
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF"
+                                                          Direction="305" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -83,15 +130,18 @@
                     </Style>
                 </Button.Style>
             </Button>
-
 
 
             <!-- Shop button -->
-            <Button Grid.Column="1" Grid.Row="3" Width="356.25" HorizontalAlignment="Left" x:Name="Winkel" Click="Winkel_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Grid.Column="1" Grid.Row="3" Width="356.25" HorizontalAlignment="Left" x:Name="Winkel"
+                    Click="Winkel_Click" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="22.5" Background="#FF8B00FF" MaxHeight="120">
-                            <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Winkel</TextBlock>
+                            <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Winkel
+                            </TextBlock>
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
@@ -101,7 +151,8 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305" />
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF"
+                                                          Direction="305" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -110,11 +161,15 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Column="1" Grid.Row="3" Width="357" HorizontalAlignment="Right" x:Name="Oudermenu" Click="Oudermenu_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Grid.Column="1" Grid.Row="3" Width="357" HorizontalAlignment="Right" x:Name="Oudermenu"
+                    Click="Oudermenu_Click" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="22.5" Background="#FF8B00FF" MaxHeight="120">
-                            <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Ouder</TextBlock>
+                            <TextBlock FontSize="60" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Ouder
+                            </TextBlock>
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
@@ -124,7 +179,8 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305" />
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF"
+                                                          Direction="305" />
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>

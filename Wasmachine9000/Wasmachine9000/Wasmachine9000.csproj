@@ -20,10 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="YamlDotNet" Version="13.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Assets\Instellingen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -39,7 +35,11 @@
     <Resource Include="Assets\Font\BalooBhai2-Regular.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
     <Resource Include="Instellingen.png" />
-    <Resource Include="Assets\wasmachine.png" />
+    <Resource Include="Assets\wasmachine.png"/>
+    <Resource Include="Assets\Icons\clock.svg"/>
+    <Resource Include="Assets\Icons\coins.svg"/>
+    <Resource Include="Assets\Icons\person-walking.svg"/>
+    
   </ItemGroup>
 
   <ItemGroup>
