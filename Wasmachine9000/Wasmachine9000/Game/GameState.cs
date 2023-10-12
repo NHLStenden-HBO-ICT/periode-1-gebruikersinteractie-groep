@@ -160,10 +160,10 @@ namespace Wasmachine9000.Game
                 {
                     // Read game state file
                     var data = gameState.ReadYamlFile(GetGameStateFilePath());
-                    if (data != null)
-                    {
+                    // if (data != null)
+                    // {
                         // ... add data
-                    }
+                    // }
                 }
                 return gameState;
             }
