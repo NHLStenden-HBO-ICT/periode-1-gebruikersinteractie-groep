@@ -19,6 +19,8 @@ public partial class GameWindow : Window
     private double _bottomLevel = 0;
     private double _ceilingLevel = 0;
 
+    private int _playerScore = 0;
+
     // Player style
     private ImageBrush playerSkin = new ImageBrush();
 
@@ -34,6 +36,7 @@ public partial class GameWindow : Window
 
         // Register the canvas listener to the global game timer.
         App.GameTimer.AddListener("canvasListener", CanvasTick);
+        App.GameTimer.AddListener("highscoreListener", HighscoreTick);
 
         // Set player position
         Canvas.SetLeft(Player, Math.Round(SystemParameters.FullPrimaryScreenWidth / 10) * 2);
@@ -44,6 +47,21 @@ public partial class GameWindow : Window
         Player.Width = playerSkin.ImageSource.Width;
         Player.Height = playerSkin.ImageSource.Height;
         Player.Fill = playerSkin;
+    }
+
+    private double _playerScoreTracker = 0;
+
+    private void HighscoreTick(object? sender, EventArgs e)
+    {
+        _playerScoreTracker += App.GameTimer.DeltaTime;
+
+        // Check if one second has elapsed
+        if (_playerScoreTracker > 0.5)
+        {
+            _playerScoreTracker = 0;
+            _playerScore++;
+            ScoreTextBlock.Text = _playerScore.ToString();
+        }
     }
 
     public void CanvasTick(object? sender, EventArgs e)
@@ -92,6 +110,7 @@ public partial class GameWindow : Window
         if (e.Key == Key.Escape)
         {
             App.GameTimer.RemoveListener("canvasListener");
+            App.GameTimer.RemoveListener("highscoreListener");
             Helpers.OpenPreviousWindow();
         }
     }

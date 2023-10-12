@@ -7,6 +7,21 @@ using System.Threading.Tasks;
 
 namespace Wasmachine9000.Game;
 
+public class ScoreboardItem
+{
+    public int score { get; set; }
+    public string username { get; set; }
+}
+
+public class ScoreboardResult
+{
+    public List<ScoreboardItem> items { get; set; }
+    public int page { get; set; }
+    public int perPage { get; set; }
+    public int totalItems { get; set; }
+    public int totalPages { get; set; }
+}
+
 public class Scoreboard
 {
     // Although storing this in plaintext is not that good, we do it anyway.
@@ -16,16 +31,29 @@ public class Scoreboard
     {
     }
 
-    public async void PostScore(string username, int score)
+    public List<ScoreboardItem> GetScoreboard()
+    {
+        string apiUrl = "api/collections/scoreboard/records?perPage=6&sort=-score&fields=username,score";
+
+        using (HttpClient client = new HttpClient())
+        {
+            var response = client.GetAsync(this._pocketbaseUrl + apiUrl).GetAwaiter().GetResult();
+            string jsonContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            ScoreboardResult? scoreboardResult = JsonSerializer.Deserialize<ScoreboardResult>(jsonContent);
+
+            return scoreboardResult?.items;
+        }
+    }
+
+    public void PostScore(string username, int score)
     {
         var jsonContent = new
         {
             username = username,
             score = score,
-            password = "wasmachine9000"
+            password = "9000wasmachines"
         };
-        string response = await PostRequest("api/collections/scoreboard/records", jsonContent);
-        Console.WriteLine(response);
+        PostRequest("api/collections/scoreboard/records", jsonContent);
     }
 
     private async Task<string> PostRequest(string url, Object data)
@@ -39,10 +67,9 @@ public class Scoreboard
                 await httpClient.PostAsync(this._pocketbaseUrl + url, content);
 
             if (!response.IsSuccessStatusCode) return response.StatusCode.ToString();
-            
+
             string responseContent = await response.Content.ReadAsStringAsync();
             return responseContent;
-
         }
     }
 }

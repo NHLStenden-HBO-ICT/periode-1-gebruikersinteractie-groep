@@ -36,6 +36,10 @@
     <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
     <Resource Include="Instellingen.png" />
     <Resource Include="Assets\wasmachine.png"/>
+    <Resource Include="Assets\Icons\clock.svg"/>
+    <Resource Include="Assets\Icons\coins.svg"/>
+    <Resource Include="Assets\Icons\person-walking.svg"/>
+    
   </ItemGroup>
 
   <ItemGroup>
@@ -79,6 +83,10 @@
       <XamlRuntime>Wpf</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="13.7.0" />
   </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@ namespace Wasmachine9000
         public App()
         {
             GameState = GameState.LoadGameState();
-            
+
             // Start the music player
            
             
