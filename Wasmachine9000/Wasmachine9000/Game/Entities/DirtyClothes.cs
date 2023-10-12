@@ -47,10 +47,4 @@ public class DirtyClothes : CanvasEntity
         Canvas.SetLeft(EntityRectangle, EntityX);
         Canvas.SetBottom(EntityRectangle, EntityY);
     }
-
-    public override void Destroy()
-    {
-        Console.WriteLine("Destroying entity");
-        base.Destroy();
-    }
 }
