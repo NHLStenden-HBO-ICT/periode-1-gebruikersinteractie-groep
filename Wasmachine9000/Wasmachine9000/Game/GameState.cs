@@ -19,6 +19,11 @@ public class GameState
     private string Username;
     private int Pincode;
 
+    //Parental control settings
+
+    //Playtime in minutes
+    public int MaxplayTime;
+    public bool PlaytimeControl;
    
 
     public GameState()
