@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -8,6 +8,26 @@ using YamlDotNet.Serialization;
 namespace Wasmachine9000.Game
 {
     public class GameState
+    // Keep track of navigation
+    public Window CurrentWindow;
+    public Window PreviousWindow;
+
+    // User stats (coins, highscore)
+    private int Coins;
+    private int Highscore;
+
+    // User info
+    private string Username;
+    private int Pincode;
+
+    //Parental control settings
+
+    //Playtime in minutes
+    public int MaxplayTime;
+    public bool PlaytimeControl;
+   
+
+    public GameState()
     {
         // Keep track of navigation
         public Window CurrentWindow;
