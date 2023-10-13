@@ -9,6 +9,35 @@
         Title="MainWindow" Height="1080" Width="1920"
         KeyDown="Window_KeyDown"
         >
+    <Window.Resources>
+        <Style x:Key="CustomEllipseToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Ellipse x:Name="ellipse"
+                                     Width="60"
+                                     Height="50"
+                                     Fill="Transparent"
+                                     Stroke="Black"
+                                     StrokeThickness="1"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="ellipse" Property="Fill" Value="#00C0FF"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="ellipse" Property="Fill" Value="Red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
 
@@ -40,13 +69,7 @@
                 </TextBlock>
             </Border>
 
-            <Button Name="TogglePlaytime" Height="100" Click="TogglePlaytime_Click" Grid.Row="2" Margin="150,31,117,31">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Ellipse Fill="#00C0FF"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+            <ToggleButton Name="ToggleButton" Grid.Row="2" Style="{StaticResource CustomEllipseToggleButtonStyle}" Width="200" Height="100"/>
 
             <Border Grid.Row="2" Grid.Column="1" Background="Purple" CornerRadius="22.5" Width="700" Height="60">
                 <Slider Name="TimeSlider" Width="650" Height="40" Minimum="0" Maximum="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>

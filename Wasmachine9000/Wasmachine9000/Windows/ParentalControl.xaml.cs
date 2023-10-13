@@ -19,6 +19,7 @@ namespace Wasmachine9000.Windows
     /// </summary>
     public partial class ParentalControl : Window
     {
+        public bool PlaytimeToggle;
         public ParentalControl()
         {
             InitializeComponent();
@@ -28,18 +29,38 @@ namespace Wasmachine9000.Windows
         {
             if (e.Key == Key.Escape)
             {
+                SaveSettings();
                 Helpers.OpenWindow(new MainWindow());
             }
         }
 
-        private void TogglePlaytime_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
+            SaveSettings();
             Helpers.OpenWindow(new MainWindow());
+            
+        }
+
+        private void SaveSettings()
+        {
+            CheckToggle();  
+            App.GameState.MaxplayTime= (int)TimeSlider.Value;
+            App.GameState.PlaytimeControl = PlaytimeToggle;
+            
+        }
+
+        public void CheckToggle()
+        {
+            if((bool)ToggleButton.IsChecked) 
+            {
+                PlaytimeToggle = true;
+            }
+            else
+            {
+                PlaytimeToggle = false;
+            }
         }
     }
 }
