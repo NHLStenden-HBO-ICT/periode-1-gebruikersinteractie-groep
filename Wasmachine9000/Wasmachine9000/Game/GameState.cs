@@ -1,33 +1,11 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using YamlDotNet.Serialization;
 
-
 namespace Wasmachine9000.Game
 {
     public class GameState
-    // Keep track of navigation
-    public Window CurrentWindow;
-    public Window PreviousWindow;
-
-    // User stats (coins, highscore)
-    private int Coins;
-    private int Highscore;
-
-    // User info
-    private string Username;
-    private int Pincode;
-
-    //Parental control settings
-
-    //Playtime in minutes
-    public int MaxplayTime;
-    public bool PlaytimeControl;
-   
-
-    public GameState()
     {
         // Keep track of navigation
         public Window CurrentWindow;
@@ -41,13 +19,11 @@ namespace Wasmachine9000.Game
         private string Username;
         private int Pincode;
 
-        public class GamestateData
-        {
-            public int? Coins { get; set; }
-            public int? Highscore { get; set; }
-            public string? Username { get; set; }
-            public int? Pincode { get; set; }
-        }
+        //Parental control settings
+
+        //Playtime in minutes
+        public int MaxplayTime;
+        public bool PlaytimeControl;
 
         // Read and parse the YAML file.
         public GamestateData ReadYamlFile(string filePath)
@@ -182,9 +158,10 @@ namespace Wasmachine9000.Game
                     var data = gameState.ReadYamlFile(GetGameStateFilePath());
                     // if (data != null)
                     // {
-                        // ... add data
+                    // ... add data
                     // }
                 }
+
                 return gameState;
             }
             else
@@ -194,4 +171,12 @@ namespace Wasmachine9000.Game
             }
         }
     }
+}
+
+public class GamestateData
+{
+    public int? Coins { get; set; }
+    public int? Highscore { get; set; }
+    public string? Username { get; set; }
+    public int? Pincode { get; set; }
 }
