@@ -7,6 +7,7 @@ public class GameInformation
 {
     public CanvasEntity Player;
     public Canvas GameCanvas;
+    public CanvasEntities CanvasEntities = new CanvasEntities();
 
     // Bounding boxes
     public double FloorLevel = 0;

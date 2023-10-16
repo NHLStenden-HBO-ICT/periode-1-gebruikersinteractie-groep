@@ -6,11 +6,9 @@ namespace Wasmachine9000.Game.CanvasObject;
 public class CanvasEntities
 {
     private List<CanvasEntity> _canvasEntities = new();
-    private Canvas _gameCanvas;
 
-    public CanvasEntities(Canvas gameCanvas)
+    public CanvasEntities()
     {
-        _gameCanvas = gameCanvas;
     }
 
     public List<CanvasEntity> GetCanvasEntities()
@@ -22,7 +20,7 @@ public class CanvasEntities
     {
         entity.Create();
         _canvasEntities.Add(entity);
-        _gameCanvas.Children.Add(entity.GetEntityRectangle());
+        App.GameInfo.GameCanvas.Children.Add(entity.GetEntityRectangle());
     }
 
     public void RemoveEntity(CanvasEntity entity)
@@ -32,6 +30,6 @@ public class CanvasEntities
 
         removedEntity.Destroy();
 
-        _gameCanvas.Children.Remove(removedEntity.GetEntityRectangle());
+        App.GameInfo.GameCanvas.Children.Remove(removedEntity.GetEntityRectangle());
     }
 }

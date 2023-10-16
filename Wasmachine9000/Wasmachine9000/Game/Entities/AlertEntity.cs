@@ -1,37 +1,34 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using Wasmachine9000.Game.CanvasObject;
+using Wasmachine9000.Windows;
 
 namespace Wasmachine9000.Game.Entities;
 
-public class DirtyClothes : CanvasEntity
+public class AlertEntity : CanvasEntity
 {
-    private static readonly string[] Sprites =
-    {
-        "tshirt-blue.png",
-        "tshirt-green.png",
-        "tshirt-yellow.png"
-    };
+    private double _timer = 0;
+    private int _flashes = 0;
 
-
-    public DirtyClothes(int x, int y) : base(GetRandomSprite(), x, y)
+    public AlertEntity(int x, int y) : base("rocket-pants-alert.png", x, y)
     {
-    }
-
-    private static string GetRandomSprite()
-    {
-        Random random = new Random();
-        return Sprites[random.Next(0, Sprites.Length)];
+        
     }
 
     public override void EntityTick()
     {
-        SetX(GetX() - 900 * App.GameTimer.DeltaTime);
+        _timer += App.GameTimer.DeltaTime;
 
-        if (Helpers.CollidesWithPlayer(EntityRectangle))
+        if (_timer > 0.5)
         {
-            Destroy();
+            _timer = 0;
+            _flashes++;
+            // Invert entity visibility
+            SetVisible(!GetVisible());
         }
     }
 
@@ -41,7 +38,12 @@ public class DirtyClothes : CanvasEntity
         EntityRectangle.Width = EntityImageBrush.ImageSource.Width;
         EntityRectangle.Height = EntityImageBrush.ImageSource.Height;
         EntityRectangle.Fill = EntityImageBrush;
-
+        
         SetPosition(EntityX, EntityY);
+    }
+
+    public int GetFlashes()
+    {
+        return _flashes;
     }
 }

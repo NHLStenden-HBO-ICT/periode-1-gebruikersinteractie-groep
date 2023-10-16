@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -21,14 +22,29 @@ public class CanvasEntity
         EntityY = yPosition;
     }
 
-    public int GetX()
+    public void SetPosition(double x, double y)
     {
-        return (int)Canvas.GetLeft(EntityRectangle);
+        SetX(x); SetY(y);
     }
 
-    public int GetY()
+    public double GetX()
     {
-        return (int)Canvas.GetBottom(EntityRectangle);
+        return Canvas.GetLeft(EntityRectangle);
+    }
+
+    public void SetX(double x)
+    {
+        Canvas.SetLeft(EntityRectangle, x);
+    }
+
+    public double GetY()
+    {
+        return Canvas.GetBottom(EntityRectangle);
+    }
+
+    public void SetY(double y)
+    {
+        Canvas.SetBottom(EntityRectangle, y);
     }
 
     public virtual void Create()
@@ -46,5 +62,15 @@ public class CanvasEntity
     public Rectangle GetEntityRectangle()
     {
         return EntityRectangle;
+    }
+
+    public void SetVisible(bool isVisible)
+    {
+        EntityRectangle.Visibility = isVisible ? Visibility.Visible : Visibility.Hidden;
+    }
+
+    public bool GetVisible()
+    {
+        return EntityRectangle.Visibility == Visibility.Visible;
     }
 }

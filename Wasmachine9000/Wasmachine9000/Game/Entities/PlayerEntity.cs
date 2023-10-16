@@ -28,8 +28,7 @@ public class PlayerEntity : CanvasEntity
         EntityRectangle.Height = EntityImageBrush.ImageSource.Height;
         EntityRectangle.Fill = EntityImageBrush;
         
-        Canvas.SetLeft(EntityRectangle, EntityX);
-        Canvas.SetBottom(EntityRectangle, EntityY);
+        SetPosition(EntityX, EntityY);
     }
 
     public override void EntityTick()
@@ -46,29 +45,29 @@ public class PlayerEntity : CanvasEntity
         // Predict if the player is going to hit the ground, acts as ground collision detection
         if (_playerUpVelocity < 0)
         {
-            int currentPosition = (int)Canvas.GetBottom(EntityRectangle);
+            int currentPosition = (int)GetY();
             double predictedDownPosition = currentPosition - (-_playerUpVelocity * App.GameTimer.DeltaTime);
             if (predictedDownPosition < App.GameInfo.FloorLevel)
             {
                 _playerUpVelocity = 0;
-                Canvas.SetBottom(EntityRectangle, App.GameInfo.FloorLevel);
+                SetY(App.GameInfo.FloorLevel);
             }
         }
 
         // Predict if the player is going to hit the ceiling, acts as ceiling collision
         if (_playerUpVelocity > 0)
         {
-            int currentPosition = (int)Canvas.GetBottom(EntityRectangle) + (int)EntityRectangle.Height;
+            int currentPosition = (int)GetY() + (int)EntityRectangle.Height;
             double predictedUpPosition = currentPosition + (_playerUpVelocity * App.GameTimer.DeltaTime);
             if (predictedUpPosition > App.GameInfo.CeilingLevel)
             {
                 _playerUpVelocity = 0;
-                Canvas.SetBottom(EntityRectangle, App.GameInfo.CeilingLevel - EntityRectangle.Height);
+                SetY(App.GameInfo.CeilingLevel - EntityRectangle.Height);
             }
         }
 
         // Apply velocity to player
-        Canvas.SetBottom(EntityRectangle, Canvas.GetBottom(EntityRectangle) + (_playerUpVelocity * App.GameTimer.DeltaTime));
+        SetY(GetY() + (_playerUpVelocity * App.GameTimer.DeltaTime));
     }
 
 }

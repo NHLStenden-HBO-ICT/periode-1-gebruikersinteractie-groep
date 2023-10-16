@@ -26,23 +26,21 @@ public partial class GameWindow : Window
     // private int _playerScore = 0;
 
     private List<CanvasLane> _canvasLanes = new List<CanvasLane>();
-    private CanvasLane? lastLane;
-    private CanvasEntities CanvasEntities;
+    private CanvasLane? _lastLane;
 
     // Player
-    private PlayerEntity playerEntity;
+    private PlayerEntity _playerEntity;
 
     public GameWindow()
     {
         InitializeComponent();
-        
+        App.GameInfo.GameCanvas = GameCanvas;
+
         // Set bottom and ceiling level
         App.GameInfo.FloorLevel = 60;
         CanvasContainer.Loaded += (sender, args) => App.GameInfo.CeilingLevel = CanvasContainer.ActualHeight;
 
         GameCanvas.Focus(); // Makes keyboard event work
-        App.GameInfo.GameCanvas = GameCanvas;
-        CanvasEntities = new CanvasEntities(GameCanvas);
         
         // Create canvas lanes
         _canvasLanes.Add(new CanvasLane(150));
@@ -55,10 +53,11 @@ public partial class GameWindow : Window
         App.GameTimer.AddListener("entitiesListener", EntitiesTick);
 
         // Set player position and adds it to the entities list
-        playerEntity = new PlayerEntity((int)Math.Round(SystemParameters.FullPrimaryScreenWidth / 10) * 2,
+        _playerEntity = new PlayerEntity((int)Math.Round(SystemParameters.FullPrimaryScreenWidth / 10) * 2,
             (int) App.GameInfo.FloorLevel);
-        App.GameInfo.Player = playerEntity;
-        CanvasEntities.AddEntity(playerEntity);
+        App.GameInfo.Player = _playerEntity;
+        App.GameInfo.CanvasEntities.AddEntity(_playerEntity);
+        
         
     }
 
@@ -78,14 +77,18 @@ public partial class GameWindow : Window
             Random random = new Random();
             if (random.Next(0, 5) == 4)
             {
-                CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
-                CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
+                App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
+                App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
             }
             else
             {
-                CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
+                App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
             }
 
+            if (random.Next(0, 10) == 7)
+            {
+                App.GameInfo.CanvasEntities.AddEntity(new RocketPants(2000, (int) _playerEntity.GetY()));
+            }
         }
     }
 
@@ -97,23 +100,22 @@ public partial class GameWindow : Window
     private void EntitiesTick(object? sender, EventArgs e)
     {
         // 'Coppies' canvas entities array so it can be modified whilst being looped over.
-        foreach (CanvasEntity entity in CanvasEntities.GetCanvasEntities().ToArray())
+        foreach (CanvasEntity entity in App.GameInfo.CanvasEntities.GetCanvasEntities().ToArray())
         {
             // Check if entity is out of bounds
             if (entity.GetX() + entity.GetEntityRectangle().Width < 0)
             {
-                CanvasEntities.RemoveEntity(entity);
+                App.GameInfo.CanvasEntities.RemoveEntity(entity);
                 return;
             }
 
             // Process entity tick
             entity.EntityTick();
 
-
             // Destroy entity when collided with player
             if (entity is not PlayerEntity && Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
             {
-                CanvasEntities.RemoveEntity(entity);
+                App.GameInfo.CanvasEntities.RemoveEntity(entity);
                 App.GameInfo.PlayerScore = 0;
             };
         }
@@ -121,7 +123,7 @@ public partial class GameWindow : Window
 
     private void CanvasKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Space) playerEntity.SetPlayerRising(true);
+        if (e.Key == Key.Space) _playerEntity.SetPlayerRising(true);
 
         if (e.Key == Key.Escape)
         {
@@ -134,7 +136,7 @@ public partial class GameWindow : Window
 
     private void CanvasKeyUp(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Space) playerEntity.SetPlayerRising(false);
+        if (e.Key == Key.Space) _playerEntity.SetPlayerRising(false);
     }
 
     private CanvasLane GetRandomCanvasLane()
@@ -149,10 +151,10 @@ public partial class GameWindow : Window
         CanvasLane randomLane = _canvasLanes[random.Next(0, _canvasLanes.Count)];
 
         // Recurse function until another random lane has been found
-        if (lastLane != null && randomLane == lastLane) randomLane = GetRandomCanvasLane();
+        if (_lastLane != null && randomLane == _lastLane) randomLane = GetRandomCanvasLane();
 
         // Set last lane to current selected name
-        lastLane = randomLane;
+        _lastLane = randomLane;
         return randomLane;
     }
 }
