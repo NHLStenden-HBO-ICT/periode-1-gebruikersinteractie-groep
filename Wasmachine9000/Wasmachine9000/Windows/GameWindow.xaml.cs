@@ -42,7 +42,6 @@ public partial class GameWindow : Window
     private readonly ImageBrush BackgroundImageTwo = new();
 
 
-
     public GameWindow()
     {
         InitializeComponent();
@@ -50,14 +49,19 @@ public partial class GameWindow : Window
 
         // Set bottom and ceiling level
         App.GameInfo.FloorLevel = 49;
-        CanvasContainer.Loaded += (sender, args) => App.GameInfo.CeilingLevel = CanvasContainer.ActualHeight;
+        CanvasContainer.Loaded += (sender, args) =>
+        {
+            App.GameInfo.CeilingLevel = CanvasContainer.ActualHeight;
+
+            // Create canvas lanes
+            int canvasLaneAmount = 5;
+            for (int i = 0; i < canvasLaneAmount; i++)
+            {
+                _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1)));
+            }
+        };
 
         GameCanvas.Focus(); // Makes keyboard event work
-
-        // Create canvas lanes
-        _canvasLanes.Add(new CanvasLane(150));
-        _canvasLanes.Add(new CanvasLane(350));
-        _canvasLanes.Add(new CanvasLane(550));
 
         // Register the canvas listener to the global game timer.
         App.GameTimer.AddListener("canvasListener", CanvasTick);
@@ -156,8 +160,10 @@ public partial class GameWindow : Window
             Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundTwo) + BackgroundTwo.ActualWidth);
 
         // apply movement to both backgrounds
-        Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundOne) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
-        Canvas.SetLeft(BackgroundTwo, Canvas.GetLeft(BackgroundTwo) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
+        Canvas.SetLeft(BackgroundOne,
+            Canvas.GetLeft(BackgroundOne) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
+        Canvas.SetLeft(BackgroundTwo,
+            Canvas.GetLeft(BackgroundTwo) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
 
         _backgroundTracker += App.GameTimer.DeltaTime;
 
