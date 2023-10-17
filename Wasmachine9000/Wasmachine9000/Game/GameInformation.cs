@@ -14,7 +14,8 @@ public class GameInformation
     public double CeilingLevel = 0;
 
     // General information 
-    public int GameSpeed = 100;
+    public int GameSpeed = 400;
+    public int MaxGameSpeed = 10000;
     public int VelocityCap = 1200;
     public int PlayerAcceleration = 150;
     public int Gravity = 70;
