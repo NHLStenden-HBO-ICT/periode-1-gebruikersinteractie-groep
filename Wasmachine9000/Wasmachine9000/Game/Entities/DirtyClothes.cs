@@ -27,7 +27,7 @@ public class DirtyClothes : CanvasEntity
 
     public override void EntityTick()
     {
-        SetX(GetX() - 900 * App.GameTimer.DeltaTime);
+        SetX(GetX() - (900 + App.GameInfo.GameSpeed) * App.GameTimer.DeltaTime);
 
         if (Helpers.CollidesWithPlayer(EntityRectangle))
         {

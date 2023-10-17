@@ -75,14 +75,6 @@ public partial class GameWindow : Window
         App.GameTimer.AddListener("backgroundListener", BackgroundTick);
 
 
-        // Canvas.SetLeft(Background, 0);
-        //
-        // // Load background into Bakcground rectangle
-        // BackgroundImage.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/scrolling_background.jpg"));
-        // CanvasContainer.Loaded += (sender, args) => Background.Width = CanvasContainer.ActualWidth * 3;
-        // CanvasContainer.Loaded += (sender, args) => Background.Height = CanvasContainer.ActualHeight;
-        // Background.Fill = BackgroundImage;
-
         // Load background one into rectangle
         Canvas.SetLeft(BackgroundOne, 0);
         BackgroundImageOne.ImageSource =
@@ -164,18 +156,18 @@ public partial class GameWindow : Window
             Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundTwo) + BackgroundTwo.ActualWidth);
 
         // apply movement to both backgrounds
-        Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundOne) - App.GameInfo.GameSpeed * App.GameTimer.DeltaTime);
-        Canvas.SetLeft(BackgroundTwo, Canvas.GetLeft(BackgroundTwo) - App.GameInfo.GameSpeed * App.GameTimer.DeltaTime);
+        Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundOne) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
+        Canvas.SetLeft(BackgroundTwo, Canvas.GetLeft(BackgroundTwo) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
 
         _backgroundTracker += App.GameTimer.DeltaTime;
 
         // increase speed if conditions are met
-        if (_backgroundTracker > 1 && App.GameInfo.GameSpeed + 10 < App.GameInfo.MaxGameSpeed)
+        if (_backgroundTracker > 5 && (App.GameInfo.GameSpeed + 400) + 10 < App.GameInfo.MaxGameSpeed)
         {
             _backgroundTracker = 0;
-            App.GameInfo.GameSpeed += 10;
+            App.GameInfo.GameSpeed += 5;
         }
-        else if (App.GameInfo.GameSpeed + 10 > App.GameInfo.MaxGameSpeed)
+        else if ((App.GameInfo.GameSpeed + 400) + 10 > App.GameInfo.MaxGameSpeed)
         {
             App.GameInfo.GameSpeed = App.GameInfo.MaxGameSpeed;
         }
