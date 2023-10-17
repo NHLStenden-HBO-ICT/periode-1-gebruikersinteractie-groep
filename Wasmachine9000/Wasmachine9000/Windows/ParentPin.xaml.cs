@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Wasmachine9000.Windows;
 
 namespace Wasmachine9000
 {
@@ -29,12 +32,20 @@ namespace Wasmachine9000
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Helpers.OpenWindow(new MainWindow());
+            Helpers.OpenPreviousWindow();
         }
 
         private void Doorgaan_Click(object sender, RoutedEventArgs e)
         {
-
+            string password = Pincode.Password;
+            if (password == "1234")
+            {
+                Helpers.OpenWindow(new ParentalControl());
+            }
+            else
+            {
+                MessageBoxResult badPass = MessageBox.Show("Onjuiste Pincode");
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -43,6 +54,19 @@ namespace Wasmachine9000
             {
                 Helpers.OpenPreviousWindow();
             }
+        }
+
+        private void CodeButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the clicked button's content (the digit, for example "1")
+            Button button = (Button)sender;
+            string name = button.Name.ToString();
+            string pinNumber = Regex.Replace(name, "[^0-9]", "");
+
+            // Add the digit to the PasswordBox
+            PasswordBox passwordBox = Pincode;
+            passwordBox.Password += pinNumber;
+
         }
     }
 }

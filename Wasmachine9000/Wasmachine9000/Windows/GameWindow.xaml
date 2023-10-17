@@ -21,6 +21,7 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/background.png" />
             </Grid.Background>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="162px" />
                 <RowDefinition Height="162px" />
@@ -34,8 +35,10 @@
                 <ColumnDefinition Width="400px" />
             </Grid.ColumnDefinitions>
             <Canvas Grid.RowSpan="5" Grid.ColumnSpan="4" x:Name="GameCanvas" Focusable="True" KeyDown="CanvasKeyDown"
-                    KeyUp="CanvasKeyUp">
-                <Rectangle x:Name="Player" Width="60" Height="60" Fill="White" />
+                    KeyUp="CanvasKeyUp" ClipToBounds="True">
+                <!-- <Rectangle x:Name="Background" Width="60" Height="60" Fill="Blue" ></Rectangle> -->
+                <Rectangle x:Name="BackgroundTwo" Width="60" Height="60" Fill="Blue" ></Rectangle>
+                <Rectangle x:Name="BackgroundOne" Width="60" Height="60" Fill="Blue" ></Rectangle>
             </Canvas>
 
             <Grid Grid.Column="2" Margin="10">
@@ -83,7 +86,7 @@
                             <ColumnDefinition Width="145" />
                             <ColumnDefinition Width="30" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="111" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
+                        <TextBlock Grid.Column="0" Text="" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
                                    Foreground="White" HorizontalAlignment="Left" Margin="6" VerticalAlignment="Center" />
                         <Image Grid.Column="1" Margin="6">
                             <Image.Source>
