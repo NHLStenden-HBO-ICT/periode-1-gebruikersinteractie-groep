@@ -25,10 +25,26 @@ namespace Wasmachine9000.Windows
         public GameOver()
         {
             InitializeComponent();
+
+            //View score on the game over screen
+            ScoreTextBlock.Text = App.GameInfo.PlayerScore.ToString();
         }
 
         private void MainWindow_Click(object sender, RoutedEventArgs e)
         {
+            // Get the playername from the game over screen
+            string playername = Playername.Text;
+
+            // Call the PostScore method
+            string username = playername;
+            int score = App.GameInfo.PlayerScore;
+            App.Scoreboard.PostScore(username, score);
+
+            Debug.WriteLine("Score gepost!");
+
+            // Reset score
+            App.GameInfo.Reset();
+
             Helpers.OpenWindow(new MainWindow());
         }
 
@@ -41,9 +57,6 @@ namespace Wasmachine9000.Windows
         {
             // Get the playername from the game over screen
             string playername = Playername.Text;
-
-            //View score on the game over screen
-            Score.Text = App.GameInfo.PlayerScore.ToString();
 
             // Call the PostScore method
             string username = playername;
