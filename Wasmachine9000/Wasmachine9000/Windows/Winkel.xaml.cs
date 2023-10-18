@@ -41,15 +41,14 @@ namespace Wasmachine9000.Windows
         private void Buy1_Click(object sender, RoutedEventArgs e)
         {
             int itemPrice = 100; // Set the price of the item here
-            GameState gameState = GameState.LoadGameState();
     
-            if (gameState.GetCoins() >= itemPrice)
+            if (App.GameState.GetCoins() >= itemPrice)
             {
                 // Deduct coins from user
-                gameState.SetCoins(gameState.GetCoins() - itemPrice);
+                App.GameState.SetCoins(App.GameState.GetCoins() - itemPrice);
 
                 // Update user coin ammount display
-                CoinsText.Text = gameState.GetCoins().ToString();
+                CoinsText.Text = App.GameState.GetCoins().ToString();
 
                 // Update  button to "Equip"
                 // Button buyButton = (Button)sender;
