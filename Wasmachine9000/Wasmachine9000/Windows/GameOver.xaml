@@ -31,11 +31,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400px" />
                 <ColumnDefinition Width="750px" />
-                <ColumnDefinition Width="400px" />
+                <ColumnDefinition Width="311.5" />
+                <ColumnDefinition Width="88.5"/>
             </Grid.ColumnDefinitions>
             <!--Pincode overlay-->
+
             <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="#FF202020" Margin="0,0,0,5" CornerRadius="22.5" >
-                <Button Width="250" HorizontalAlignment="Left" Margin="80,309,0,10" Click="MainWindow_Click">
+                <Button Width="250" x:Name="BackHome" Visibility="Hidden" HorizontalAlignment="Left" Margin="80,309,0,10" Click="MainWindow_Click" Background="White">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border CornerRadius="22.5" Background="#FFFF7200" MaxHeight="120">
@@ -58,13 +60,28 @@
                     </Button.Style>
                 </Button>
             </Border>
+
+
+            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" x:Name="BackHomeDummy" Visibility="Visible" Background="#FF202020" Margin="0,0,0,5" CornerRadius="22.5" >
+                <Button Width="250" IsEnabled="False" HorizontalAlignment="Left" Margin="80,309,0,10" Background="White">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="22.5" Background="#88FF7200" MaxHeight="120">
+                                <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Terug naar start"/></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Border>
+
+
             <TextBlock Grid.Column="1" FontSize="64" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" Height="148.5" HorizontalAlignment="Center" Margin="0,23,0,152" Grid.RowSpan="2" Grid.Row="1" >Game Over</TextBlock>
 
             <!--navigation buttons-->
             <!-- Back button -->
 
             <!-- Doorgaan button -->
-            <Button Grid.Column="1" Grid.Row="2" Width="250" HorizontalAlignment="Left" Margin="430,147,0,15" FontFamily="Baloo Bhai 2" Grid.RowSpan="2" Click="PlayAgain_Click">
+            <Button Grid.Column="1" x:Name="PlayAgainButton" Visibility="Hidden" Grid.Row="2" Width="250" HorizontalAlignment="Left" Margin="430,147,0,15" FontFamily="Baloo Bhai 2" Grid.RowSpan="2" Click="PlayAgain_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="22.5" Background="#00FF0F" MaxHeight="120">
@@ -86,12 +103,36 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Border BorderBrush="{x:Null}" Height="50"/>
-            <TextBox HorizontalAlignment="Center" Margin="0,45,0,0" TextWrapping="Wrap"  TextAlignment="Center" Text="Spelernaam" VerticalAlignment="Top" Width="254" Height="67" Background="#FF2B2B2B" Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="2" Name="Playername"/>
+
+            <Button Grid.Column="1" x:Name="PlayAgainButtonDummy" Visibility="Visible" IsEnabled="False" Grid.Row="2" Width="250" HorizontalAlignment="Left" Margin="430,147,0,15" FontFamily="Baloo Bhai 2" Grid.RowSpan="2" Click="PlayAgain_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#7F00FF0F" MaxHeight="120">
+                            <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="Black" HorizontalAlignment="Center" TextAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center">Opnieuw spelen</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            
+            <Border BorderBrush="{x:Null}" Height="50" Margin="0,56,0,56"/>
+            <TextBox HorizontalAlignment="Center" Margin="0,45,0,0" TextWrapping="Wrap"  TextAlignment="Center" Text="Spelernaam" VerticalAlignment="Top" Width="254" Height="67" Background="#FF2B2B2B" Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="2" Name="Playername" TextChanged="Playername_IsFilled"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" Foreground="White" x:Name="Score" Height="40" Grid.Column="1" Grid.Row="1"/>
 
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="1006,439,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" Foreground="White" x:Name="Score"/>
     </Grid>
-    
-    
+
+
 </Window>

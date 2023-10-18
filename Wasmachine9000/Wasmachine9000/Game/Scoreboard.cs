@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -53,7 +54,9 @@ public class Scoreboard
             score = score,
             password = "9000wasmachines"
         };
-        PostRequest("api/collections/scoreboard/records", jsonContent);
+        PostRequest("api/collections/scoreboard/records", jsonContent).GetAwaiter().GetResult();
+
+        Debug.WriteLine(jsonContent);
     }
 
     private async Task<string> PostRequest(string url, Object data)
