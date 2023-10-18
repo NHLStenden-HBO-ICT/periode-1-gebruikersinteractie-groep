@@ -33,6 +33,7 @@ public partial class GameWindow : Window
     {
         InitializeComponent();
         App.GameInfo.GameCanvas = GameCanvas;
+        App.GameInfo.PlayerLives = 3;
 
         // Set bottom and ceiling level
         App.GameInfo.FloorLevel = 49;
@@ -152,7 +153,10 @@ public partial class GameWindow : Window
             if (entity is not PlayerEntity && entity is not SparksEntity && Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
             {
                 App.GameInfo.CanvasEntities.RemoveEntity(entity);
-                App.GameInfo.PlayerScore = 0;
+                App.GameInfo.PlayerLives--;
+                DisplayPlayerLives();
+
+                if (App.GameInfo.PlayerLives <= 0) Exit();
             }
         }
     }
@@ -238,12 +242,7 @@ public partial class GameWindow : Window
 
         if (e.Key == Key.Escape)
         {
-            App.GameTimer.RemoveListener("canvasListener");
-            App.GameTimer.RemoveListener("highscoreListener");
-            App.GameTimer.RemoveListener("entitiesListener");
-            App.GameTimer.RemoveListener("backgroundListener");
-            // App.GameTimer.RemoveListener("sparkListener");
-            Helpers.OpenPreviousWindow();
+            Exit();
         }
     }
 
@@ -269,5 +268,56 @@ public partial class GameWindow : Window
         // Set last lane to current selected name
         _lastLane = randomLane;
         return randomLane;
+    }
+
+    private void DisplayPlayerLives()
+    {
+        switch (App.GameInfo.PlayerLives)
+        {
+            case 3:
+                ShowHeart(LiveHeart1, LiveHeartEmpty1);
+                ShowHeart(LiveHeart2, LiveHeartEmpty2);
+                ShowHeart(LiveHeart3, LiveHeartEmpty3);
+                break;
+            case 2:
+                ShowHeart(LiveHeart1, LiveHeartEmpty1);
+                ShowHeart(LiveHeart2, LiveHeartEmpty2);
+                HideHeart(LiveHeart3, LiveHeartEmpty3);
+                break;
+            case 1:
+                ShowHeart(LiveHeart1, LiveHeartEmpty1);
+                HideHeart(LiveHeart2, LiveHeartEmpty2);
+                HideHeart(LiveHeart3, LiveHeartEmpty3);
+                break;
+            case 0:
+                HideHeart(LiveHeart1, LiveHeartEmpty1);
+                HideHeart(LiveHeart2, LiveHeartEmpty2);
+                HideHeart(LiveHeart3, LiveHeartEmpty3);
+                break;
+        }
+    }
+
+    private void HideHeart(Image heart, Image heartOutline)
+    {
+        heart.Visibility = Visibility.Hidden;
+        heartOutline.Visibility = Visibility.Visible;
+    }
+
+    private void ShowHeart(Image heart, Image heartOutline)
+    {
+        heart.Visibility = Visibility.Visible;
+        heartOutline.Visibility = Visibility.Hidden;
+    }
+
+    public void Exit()
+    {
+        App.GameTimer.RemoveListener("canvasListener");
+        App.GameTimer.RemoveListener("highscoreListener");
+        App.GameTimer.RemoveListener("entitiesListener");
+        App.GameTimer.RemoveListener("backgroundListener");
+
+        App.GameInfo.Reset();
+
+        Helpers.OpenPreviousWindow();
     }
 }
