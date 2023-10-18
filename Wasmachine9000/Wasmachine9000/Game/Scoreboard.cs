@@ -25,7 +25,7 @@ public class ScoreboardResult
 public class Scoreboard
 {
     // Although storing this in plaintext is not that good, we do it anyway.
-    private string _pocketbaseUrl = "https://wasmachine.vps.stef1904berg.nl/";
+    private string _pocketbaseUrl = "http://wasmachine.vps.stef1904berg.nl/";
 
     public Scoreboard()
     {
