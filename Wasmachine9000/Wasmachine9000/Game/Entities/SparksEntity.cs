@@ -34,6 +34,10 @@ public class SparksEntity : CanvasEntity
         EntityRectangle.Height = _sparkImageBrushes[0].ImageSource.Height / 3;
         EntityRectangle.Fill = _sparkImageBrushes[0];
 
+        SetVisible(false);
+
+        SetZIndex(1);
+
     }
 
     public override void EntityTick()

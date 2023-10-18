@@ -9,6 +9,7 @@ public class CanvasEntity
 {
     protected int EntityX;
     protected int EntityY;
+    protected int EntityZ;
 
     protected string Sprite;
     protected Rectangle EntityRectangle = new Rectangle();
@@ -20,6 +21,7 @@ public class CanvasEntity
 
         EntityX = xPosition;
         EntityY = yPosition;
+        SetZIndex(EntityZ);
     }
 
     public void SetPosition(double x, double y)
@@ -47,6 +49,16 @@ public class CanvasEntity
         Canvas.SetBottom(EntityRectangle, y);
     }
 
+    public void SetZIndex(int z)
+    {
+        Canvas.SetZIndex(EntityRectangle, z);
+    }
+
+    public int GetZIndex()
+    {
+        return Canvas.GetZIndex(EntityRectangle);
+    }
+
     public virtual void Create()
     {
     }
@@ -72,5 +84,16 @@ public class CanvasEntity
     public bool GetVisible()
     {
         return EntityRectangle.Visibility == Visibility.Visible;
+    }
+
+    public double GetWidth()
+    {
+        return EntityRectangle.ActualWidth;
+
+    }
+
+    public double GetLeft()
+    {
+        return Canvas.GetLeft(EntityRectangle);
     }
 }

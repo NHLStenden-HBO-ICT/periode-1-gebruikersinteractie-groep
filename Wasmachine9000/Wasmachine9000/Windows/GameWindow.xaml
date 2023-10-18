@@ -36,8 +36,8 @@
             </Grid.ColumnDefinitions>
             <Canvas Grid.RowSpan="5" Grid.ColumnSpan="4" x:Name="GameCanvas" Focusable="True" KeyDown="CanvasKeyDown"
                     KeyUp="CanvasKeyUp" ClipToBounds="True">
-                <Rectangle x:Name="BackgroundTwo" Width="60" Height="60" Fill="Blue" />
-                <Rectangle x:Name="BackgroundOne" Width="60" Height="60" Fill="Blue" />
+                <!-- <Rectangle x:Name="BackgroundTwo" Width="60" Height="60" Fill="Blue" /> -->
+                <!-- <Rectangle x:Name="BackgroundOne" Width="60" Height="60" Fill="Blue" /> -->
             </Canvas>
 
             <Grid Grid.Column="2" HorizontalAlignment="Right" Margin="10" >

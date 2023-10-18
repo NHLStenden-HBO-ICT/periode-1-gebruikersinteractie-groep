@@ -25,11 +25,11 @@
     <Resource Include="Assets\Instellingen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Sprites\Entities\Background\background1.png" />
+    <Resource Include="Assets\Sprites\Entities\Background\backgroundPlayStore.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Background\backgroundPlayStore.png" />
-    <Resource Include="Assets\Background\background1.png" />
     <Resource Include="Assets\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
