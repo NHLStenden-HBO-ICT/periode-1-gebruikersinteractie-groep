@@ -86,8 +86,12 @@
                     </Style>
                 </Button.Style>
             </Button>
-
+            <Border BorderBrush="{x:Null}" Height="50"/>
+            <TextBox HorizontalAlignment="Center" Margin="0,45,0,0" TextWrapping="Wrap"  TextAlignment="Center" Text="Spelernaam" VerticalAlignment="Top" Width="254" Height="67" Background="#FF2B2B2B" Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="2" Name="Playername"/>
 
         </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="1006,439,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" Foreground="White" x:Name="Score"/>
     </Grid>
+    
+    
 </Window>
