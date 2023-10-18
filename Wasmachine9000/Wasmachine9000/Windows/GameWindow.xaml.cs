@@ -13,18 +13,6 @@ namespace Wasmachine9000.Windows;
 public partial class GameWindow : Window
 {
     private double _backgroundTracker;
-    // public static variables needed by other parts of the game
-
-
-    // Player and movement control/variables
-    // private int _velocityCap = 1200;
-    // private int _playerAcceleration = 150;
-    // private int _gravity = 70;
-    //
-    // private double _bottomLevel = 0;
-    // private double _ceilingLevel = 0;
-    //
-    // private int _playerScore = 0;
 
     private readonly List<CanvasLane> _canvasLanes = new();
     private CanvasLane? _lastLane;
@@ -33,9 +21,6 @@ public partial class GameWindow : Window
     private readonly PlayerEntity _playerEntity;
 
     private double _playerScoreTracker;
-
-    // Background Image
-    // private ImageBrush BackgroundImage = new ImageBrush();
 
     // Background one and two images
     private readonly ImageBrush BackgroundImageOne = new();
@@ -46,6 +31,7 @@ public partial class GameWindow : Window
     {
         InitializeComponent();
         App.GameInfo.GameCanvas = GameCanvas;
+        App.GameInfo.PlayerLives = 3;
 
         // Set bottom and ceiling level
         App.GameInfo.FloorLevel = 49;
@@ -146,7 +132,10 @@ public partial class GameWindow : Window
             if (entity is not PlayerEntity && Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
             {
                 App.GameInfo.CanvasEntities.RemoveEntity(entity);
-                App.GameInfo.PlayerScore = 0;
+                App.GameInfo.PlayerLives--;
+                DisplayPlayerLives();
+
+                if (App.GameInfo.PlayerLives <= 0) Exit();
             }
         }
     }
@@ -185,11 +174,7 @@ public partial class GameWindow : Window
 
         if (e.Key == Key.Escape)
         {
-            App.GameTimer.RemoveListener("canvasListener");
-            App.GameTimer.RemoveListener("highscoreListener");
-            App.GameTimer.RemoveListener("entitiesListener");
-            App.GameTimer.RemoveListener("backgroundListener");
-            Helpers.OpenPreviousWindow();
+            Exit();
         }
     }
 
@@ -215,5 +200,56 @@ public partial class GameWindow : Window
         // Set last lane to current selected name
         _lastLane = randomLane;
         return randomLane;
+    }
+
+    private void DisplayPlayerLives()
+    {
+        switch (App.GameInfo.PlayerLives)
+        {
+            case 3:
+                ShowHeart(LiveHeart1, LiveHeartEmpty1);
+                ShowHeart(LiveHeart2, LiveHeartEmpty2);
+                ShowHeart(LiveHeart3, LiveHeartEmpty3);
+                break;
+            case 2:
+                ShowHeart(LiveHeart1, LiveHeartEmpty1);
+                ShowHeart(LiveHeart2, LiveHeartEmpty2);
+                HideHeart(LiveHeart3, LiveHeartEmpty3);
+                break;
+            case 1:
+                ShowHeart(LiveHeart1, LiveHeartEmpty1);
+                HideHeart(LiveHeart2, LiveHeartEmpty2);
+                HideHeart(LiveHeart3, LiveHeartEmpty3);
+                break;
+            case 0:
+                HideHeart(LiveHeart1, LiveHeartEmpty1);
+                HideHeart(LiveHeart2, LiveHeartEmpty2);
+                HideHeart(LiveHeart3, LiveHeartEmpty3);
+                break;
+        }
+    }
+
+    private void HideHeart(Image heart, Image heartOutline)
+    {
+        heart.Visibility = Visibility.Hidden;
+        heartOutline.Visibility = Visibility.Visible;
+    }
+
+    private void ShowHeart(Image heart, Image heartOutline)
+    {
+        heart.Visibility = Visibility.Visible;
+        heartOutline.Visibility = Visibility.Hidden;
+    }
+
+    public void Exit()
+    {
+        App.GameTimer.RemoveListener("canvasListener");
+        App.GameTimer.RemoveListener("highscoreListener");
+        App.GameTimer.RemoveListener("entitiesListener");
+        App.GameTimer.RemoveListener("backgroundListener");
+
+        App.GameInfo.Reset();
+
+        Helpers.OpenPreviousWindow();
     }
 }
