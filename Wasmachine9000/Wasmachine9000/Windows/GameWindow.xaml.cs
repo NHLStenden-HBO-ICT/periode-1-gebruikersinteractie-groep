@@ -158,7 +158,7 @@ public partial class GameWindow : Window
     }
 
     private int _currentBackground = 1;
-    private int _propaganda = 20;
+    private int _propaganda = 100;
 
     private void BackgroundTick(object? sender, EventArgs e)
     {
@@ -173,7 +173,10 @@ public partial class GameWindow : Window
             {
                 BackgroundTwo.Fill = _backgroundBrushes[1];
 
-                _propaganda =+ 20;
+                _propaganda *= 2;
+
+                Console.WriteLine(_propaganda);
+
             }
             else
             {
@@ -193,7 +196,10 @@ public partial class GameWindow : Window
             {
                 BackgroundOne.Fill = _backgroundBrushes[1];
 
-                _propaganda =+ 20;
+                _propaganda *= 2;
+
+                Console.WriteLine(_propaganda);
+
             }
             else
             {
