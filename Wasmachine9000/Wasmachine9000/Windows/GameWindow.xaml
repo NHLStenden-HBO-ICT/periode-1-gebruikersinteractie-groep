@@ -11,6 +11,7 @@
         UseLayoutRounding="True"
         SnapsToDevicePixels="True">
 
+
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
 
@@ -36,7 +37,6 @@
             </Grid.ColumnDefinitions>
             <Canvas Grid.RowSpan="5" Grid.ColumnSpan="4" x:Name="GameCanvas" Focusable="True" KeyDown="CanvasKeyDown"
                     KeyUp="CanvasKeyUp" ClipToBounds="True">
-                <!-- <Rectangle x:Name="Background" Width="60" Height="60" Fill="Blue" ></Rectangle> -->
                 <Rectangle x:Name="BackgroundTwo" Width="60" Height="60" Fill="Blue" ></Rectangle>
                 <Rectangle x:Name="BackgroundOne" Width="60" Height="60" Fill="Blue" ></Rectangle>
             </Canvas>
