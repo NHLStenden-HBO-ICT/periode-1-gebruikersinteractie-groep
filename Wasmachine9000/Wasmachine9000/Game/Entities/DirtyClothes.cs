@@ -13,8 +13,8 @@ public class DirtyClothes : CanvasEntity
         "tshirt-blue.png",
         "tshirt-green.png",
         "tshirt-yellow.png",
-            "underwear-grey.png",
-            "sock-purple.png"
+        "underwear-grey.png",
+        "sock-purple.png"
     };
 
 
@@ -44,10 +44,9 @@ public class DirtyClothes : CanvasEntity
         EntityRectangle.Width = EntityImageBrush.ImageSource.Width;
         EntityRectangle.Height = EntityImageBrush.ImageSource.Height;
         EntityRectangle.Fill = EntityImageBrush;
-        Random random = new Random();
-        RotateTransform rotateTransform = new RotateTransform(random.Next(0, 360));
-        EntityRectangle.RenderTransform = rotateTransform;
-        
+        // Random random = new Random();
+        // RotateTransform rotateTransform = new RotateTransform(random.Next(0, 360));
+        // EntityRectangle.RenderTransform = rotateTransform;
 
 
         SetPosition(EntityX, EntityY);
