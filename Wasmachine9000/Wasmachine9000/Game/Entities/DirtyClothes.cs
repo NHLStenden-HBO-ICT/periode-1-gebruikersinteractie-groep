@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Wasmachine9000.Game.CanvasObject;
 
@@ -43,6 +44,11 @@ public class DirtyClothes : CanvasEntity
         EntityRectangle.Width = EntityImageBrush.ImageSource.Width;
         EntityRectangle.Height = EntityImageBrush.ImageSource.Height;
         EntityRectangle.Fill = EntityImageBrush;
+        Random random = new Random();
+        RotateTransform rotateTransform = new RotateTransform(random.Next(0, 360));
+        EntityRectangle.RenderTransform = rotateTransform;
+        
+
 
         SetPosition(EntityX, EntityY);
     }
