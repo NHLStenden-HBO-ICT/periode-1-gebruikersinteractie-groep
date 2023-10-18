@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -21,30 +21,36 @@ namespace Wasmachine9000.Game
         private string Username;
         private int Pincode;
 
-        public class GamestateData
-        {
-            public int Coins { get; set; }
-            public int Highscore { get; set; }
-            public string Username { get; set; }
-            public int Pincode { get; set; }
-        }
+        //Parental control settings
+
+        //Playtime in minutes
+        public int MaxplayTime;
+        public bool PlaytimeControl;
 
         // Read and parse the YAML file.
         public GamestateData ReadYamlFile(string filePath)
         {
+            GamestateData gamestateData = new GamestateData();
+
             try
             {
                 using (var reader = new StreamReader(filePath))
                 {
                     var deserializer = new Deserializer();
-                    var GamestateData = deserializer.Deserialize<GamestateData>(reader);
+                    gamestateData = deserializer.Deserialize<GamestateData>(reader);
 
-                    Coins = GamestateData.Coins;
-                    Highscore = GamestateData.Highscore;
-                    Username = GamestateData.Username;
-                    Pincode = GamestateData.Pincode;
+                    if (gamestateData == null)
+                    {
+                        gamestateData = new GamestateData
+                        {
+                            Coins = 0,
+                            Highscore = 0,
+                            Username = "",
+                            Pincode = 0
+                        };
+                    }
 
-                    return GamestateData;
+                    return gamestateData;
                 }
             }
             catch (Exception ex)
@@ -60,10 +66,10 @@ namespace Wasmachine9000.Game
             var data = ReadYamlFile(GetGameStateFilePath());
             if (data != null)
             {
-                Coins = data.Coins;
-                Highscore = data.Highscore;
-                Username = data.Username;
-                Pincode = data.Pincode;
+                Coins = data.Coins ?? 0;
+                Highscore = data.Highscore ?? 0;
+                Username = data.Username ?? "";
+                Pincode = data.Pincode ?? 0000;
             }
         }
 
@@ -160,18 +166,27 @@ namespace Wasmachine9000.Game
                 {
                     // Read game state file
                     var data = gameState.ReadYamlFile(GetGameStateFilePath());
-                    // if (data != null)
-                    // {
-                        // ... add data
-                    // }
                 }
+
                 return gameState;
             }
             else
             {
+                // Create yaml file
                 FileStream creategamestate = File.Create(GetGameStateFilePath());
+                gameState = new GameState();
+                // Fill it with default data
+                gameState.SaveGameState();
                 return LoadGameState();
             }
         }
     }
+}
+
+public class GamestateData
+{
+    public int? Coins { get; set; }
+    public int? Highscore { get; set; }
+    public string? Username { get; set; }
+    public int? Pincode { get; set; }
 }

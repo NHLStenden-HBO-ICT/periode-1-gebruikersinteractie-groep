@@ -38,4 +38,3 @@ namespace Wasmachine9000
         }
     }
 }
-
