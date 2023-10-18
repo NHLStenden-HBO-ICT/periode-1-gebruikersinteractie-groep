@@ -7,61 +7,85 @@ using System.Threading.Tasks;
 using System.Security.Policy;
 using System.Windows;
 using System.IO;
+using System.Windows.Media;
 
 
-namespace Wasmachine9000.Game
-{
-    public class AudioPlayer
+
+namespace Wasmachine9000.Game 
+{ 
+ public class AudioPlayer
     {
-        private SoundPlayer _player;
-
-        public AudioPlayer()
-        {
-            
-        }
-
-        public void Start()
+        public MediaPlayer MusicPlayer;
+        public MediaPlayer SFXPlayer;
+       
+        public void StartMusic()
         {
             // Load and play the default audio file during initialization
             LoadAndPlayAudio("Menu theme.wav");
+        }
+        public void StartSFX()
+        {
+            LoadAndPlayAudio2("Game over.wav");
         }
 
         public void LoadAndPlayAudio(string fileName)
         {
             // Stop the current audio playback
-            Stop();
+            
 
             // Create a new SoundPlayer instance with the specified audio file
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
-            _player = new SoundPlayer(filePath);
-
-            // Load and play the new audio file
-            _player.Load();
-            _player.PlayLooping();
+            // string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
+            // MusicPlayer = new MediaPlayer();
+            // MusicPlayer.Open(new Uri(filePath));
+            // MusicPlayer.Play();
+            // MusicPlayer.MediaEnded += MusicPlayer_MediaEnded;
         }
 
-        public void Stop()
+        public void LoadAndPlayAudio2(string fileName2)
         {
-            if (_player != null)
+            string filePath2 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName2);
+            
+
+            SFXPlayer = new MediaPlayer();
+            SFXPlayer.Open(new Uri(filePath2));
+            SFXPlayer.Play();
+        }
+
+
+
+        public void StopMusic()
+        {
+            if (MusicPlayer != null)
             {
-                _player.Stop();
-                _player.Dispose();
-                _player = null;
+                MusicPlayer.Stop();
+            }
+        }
+        public void StopSFX()
+        {
+            if (SFXPlayer != null)
+            {
+                SFXPlayer.Stop();
             }
         }
 
         public void Mute()
         {
-            Stop();
+            StopMusic();
         }
 
         public void Unmute()
         {
             // Play the loaded audio file if it exists
-            if (_player != null)
+            if (MusicPlayer != null)
             {
-                _player.PlayLooping();
+                MusicPlayer.Play();
             }
         }
+        private void MusicPlayer_MediaEnded(object sender, EventArgs e)
+        {
+            // When the media ends, set the position to the beginning to repeat it
+            MusicPlayer.Position = TimeSpan.Zero;
+        }
+
     }
 }

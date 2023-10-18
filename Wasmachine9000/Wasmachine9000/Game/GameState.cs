@@ -1,147 +1,192 @@
-﻿using System.Windows;
 using System;
+using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
+using System.Windows;
+using YamlDotNet.Serialization;
 
-namespace Wasmachine9000.Game;
 
-public class GameState
+namespace Wasmachine9000.Game
 {
-    // Keep track of navigation
-    public Window CurrentWindow;
-    public Window PreviousWindow;
-
-    // User stats (coins, highscore)
-    private int Coins;
-    private int Highscore;
-
-    // User info
-    private string Username;
-    private int Pincode;
-
-   
-
-    public GameState()
+    public class GameState
     {
-        
-    }
+        // Keep track of navigation
+        public Window CurrentWindow;
+        public Window PreviousWindow;
 
-    public void SetCoins(int coins)
-    {
-        Coins = coins;
-    }
+        // User stats (coins, highscore)
+        private int Coins;
+        private int Highscore;
 
-    public int GetCoins()
-    {
-        return Coins;
-    }
+        // User info
+        private string Username;
+        private int Pincode;
 
-    public void SetHighscore(int highscore)
-    {
-        Highscore = highscore;
-    }
+        //Parental control settings
 
-    public int GetHighscore()
-    {
-        return Highscore;
-    }
+        //Playtime in minutes
+        public int MaxplayTime;
+        public bool PlaytimeControl;
 
-    public void SetUsername(string username)
-    {
-        if (username.Length > 12)
+        // Read and parse the YAML file.
+        public GamestateData ReadYamlFile(string filePath)
         {
-            throw new Exception("Username is too long. Max 12 characters.");
-        }
+            GamestateData gamestateData = new GamestateData();
 
-        Username = username;
-    }
-
-    public string GetUsername()
-    {
-        return Username;
-    }
-
-    public void SetPincode(int pincode)
-    {
-        if (pincode is < 1000 or > 9999)
-        {
-            throw new Exception("Pincode cannot be lower than 1000 and not higher than 9999");
-        }
-
-        Pincode = pincode;
-    }
-
-    public int GetPincode()
-    {
-        return Pincode;
-    }
-
-    public static string GetGameStateFilePath()
-    {
-        string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        return Path.Combine(appdataPath, ".wasmachine9000");
-    }
-
-    public static GameState LoadGameState()
-    {
-        GameState gameState = new GameState();
-        //check if gamestate file exists
-        if (File.Exists(GetGameStateFilePath()))
-        {
-            // Open gamestate file
-            using (StreamReader gameStateReader = new StreamReader(GetGameStateFilePath()))
+            try
             {
-                // Read gamestate file
-                string gameStateData = gameStateReader.ReadToEnd();
-                foreach (string gameStateFileLine in gameStateData.Split("\n"))
+                using (var reader = new StreamReader(filePath))
                 {
-                    string[] gameStateEntry = gameStateFileLine.Split(":");
+                    var deserializer = new Deserializer();
+                    gamestateData = deserializer.Deserialize<GamestateData>(reader);
 
-                    switch (gameStateEntry[0])
+                    if (gamestateData == null)
                     {
-                        case "Coins":
-                            gameState.SetCoins(int.Parse(gameStateEntry[1]));
-                            break;
-                        case "Highscore":
-                            gameState.SetHighscore(int.Parse(gameStateEntry[1]));
-                            break;
-                        case "Username":
-                            gameState.SetUsername(gameStateEntry[1]);
-                            break;
-                        case "Pincode":
-                            gameState.SetPincode(int.Parse(gameStateEntry[1]));
-                            break;
+                        gamestateData = new GamestateData
+                        {
+                            Coins = 0,
+                            Highscore = 0,
+                            Username = "",
+                            Pincode = 0
+                        };
                     }
+
+                    return gamestateData;
                 }
             }
-            
-            return gameState;
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return null;
+            }
         }
 
-        else
+        public GameState()
         {
-            FileStream creategamestate = File.Create(GetGameStateFilePath());
-            return LoadGameState();
+            // Load game state from the YAML file
+            var data = ReadYamlFile(GetGameStateFilePath());
+            if (data != null)
+            {
+                Coins = data.Coins ?? 0;
+                Highscore = data.Highscore ?? 0;
+                Username = data.Username ?? "";
+                Pincode = data.Pincode ?? 0000;
+            }
         }
 
-        return gameState;
-    }
-
-    public bool SaveGameState()
-    {
-        // Get %appdata% folder
-        string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-        // Open file %appdata%.wasmachine9000
-        using (StreamWriter gameStateFile = new StreamWriter(GetGameStateFilePath()))
+        public void SetCoins(int coins)
         {
-            // Write all gamestate variables to the file
-            gameStateFile.WriteLine("Coins:" + Coins);
-            gameStateFile.WriteLine("Highscore:" + Highscore);
-            gameStateFile.WriteLine("Username:" + Username);
-            gameStateFile.WriteLine("Pincode:" + Pincode);
+            Coins = coins;
+            SaveGameState();
         }
 
-        return false;
+        public int GetCoins()
+        {
+            return Coins;
+        }
+
+        public void SetHighscore(int highscore)
+        {
+            Highscore = highscore;
+            SaveGameState();
+        }
+
+        public int GetHighscore()
+        {
+            return Highscore;
+        }
+
+        public void SetUsername(string username)
+        {
+            if (username.Length > 12)
+            {
+                throw new Exception("Username is too long. Max 12 characters.");
+            }
+
+            Username = username;
+            SaveGameState();
+        }
+
+        public string GetUsername()
+        {
+            return Username;
+        }
+
+        public void SetPincode(int pincode)
+        {
+            if (pincode < 1000 || pincode > 9999)
+            {
+                throw new Exception("Pincode cannot be lower than 1000 and not higher than 9999");
+            }
+
+            Pincode = pincode;
+            SaveGameState();
+        }
+
+        public int GetPincode()
+        {
+            return Pincode;
+        }
+
+        public static string GetGameStateFilePath()
+        {
+            string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            return Path.Combine(appdataPath, ".wasmachine9000.yaml");
+        }
+
+        public bool SaveGameState()
+        {
+            // Get %appdata% folder
+            string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            // Open file %appdata%.wasmachine9000.yaml
+            using (StreamWriter gameStateFile = new StreamWriter(GetGameStateFilePath()))
+            {
+                var serializer = new Serializer();
+                var GamestateData = new GamestateData
+                {
+                    Coins = Coins,
+                    Highscore = Highscore,
+                    Username = Username,
+                    Pincode = Pincode
+                };
+                serializer.Serialize(gameStateFile, GamestateData);
+            }
+
+            return false;
+        }
+
+        public static GameState LoadGameState()
+        {
+            GameState gameState = new GameState();
+            // Check if game state file exists
+            if (File.Exists(GetGameStateFilePath()))
+            {
+                // Open game state file
+                using (StreamReader gameStateReader = new StreamReader(GetGameStateFilePath()))
+                {
+                    // Read game state file
+                    var data = gameState.ReadYamlFile(GetGameStateFilePath());
+                }
+
+                return gameState;
+            }
+            else
+            {
+                // Create yaml file
+                FileStream creategamestate = File.Create(GetGameStateFilePath());
+                gameState = new GameState();
+                // Fill it with default data
+                gameState.SaveGameState();
+                return LoadGameState();
+            }
+        }
     }
+}
+
+public class GamestateData
+{
+    public int? Coins { get; set; }
+    public int? Highscore { get; set; }
+    public string? Username { get; set; }
+    public int? Pincode { get; set; }
 }
