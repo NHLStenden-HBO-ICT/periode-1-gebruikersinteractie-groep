@@ -23,8 +23,22 @@ public class GameInformation
     // Scores, coins etc.
     public int PlayerScore = 0;
     public int PlayerCoins = 0;
+    public int PlayerLives = 0;
 
     public GameInformation()
     {
+    }
+
+    public void Reset()
+    {
+        CanvasEntities = new CanvasEntities();
+
+        FloorLevel = 0;
+        CeilingLevel = 0;
+
+        GameSpeed = 0;
+        PlayerScore = 0;
+        PlayerCoins = 0;
+        PlayerLives = 0;
     }
 }
