@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Wasmachine9000.Game.CanvasObject;
-using Wasmachine9000.Windows;
 
 namespace Wasmachine9000.Game.Entities;
 
@@ -19,7 +14,7 @@ public class RocketPants : CanvasEntity
 
     public RocketPants(int x, int y) : base("rocket-pants.png", x, y)
     {
-        _alertEntity = new AlertEntity((int) App.GameInfo.GameCanvas.ActualWidth - 100, y);
+        _alertEntity = new AlertEntity((int)App.GameInfo.GameCanvas.ActualWidth - 100, y);
         App.GameInfo.CanvasEntities.AddEntity(_alertEntity);
     }
 
@@ -30,8 +25,11 @@ public class RocketPants : CanvasEntity
             _shouldMove = true;
             App.GameInfo.CanvasEntities.RemoveEntity(_alertEntity);
         }
-        
-        if (_shouldMove) {SetX(GetX() - 2000 * App.GameTimer.DeltaTime);}
+
+        if (_shouldMove)
+        {
+            SetX(GetX() - 1500 * App.GameTimer.DeltaTime);
+        }
     }
 
     public override void Create()
