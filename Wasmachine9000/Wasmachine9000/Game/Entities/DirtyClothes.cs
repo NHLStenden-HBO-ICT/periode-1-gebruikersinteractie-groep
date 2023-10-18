@@ -11,7 +11,9 @@ public class DirtyClothes : CanvasEntity
     {
         "tshirt-blue.png",
         "tshirt-green.png",
-        "tshirt-yellow.png"
+        "tshirt-yellow.png",
+            "underwear-grey.png",
+            "sock-purple.png"
     };
 
 

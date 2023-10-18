@@ -57,7 +57,7 @@ public partial class GameWindow : Window
             int canvasLaneAmount = 5;
             for (int i = 0; i < canvasLaneAmount; i++)
             {
-                _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1)));
+                _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1) + 30));
             }
         };
 
