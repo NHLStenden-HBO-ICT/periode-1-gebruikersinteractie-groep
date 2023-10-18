@@ -36,7 +36,6 @@
             </Grid.ColumnDefinitions>
             <Canvas Grid.RowSpan="5" Grid.ColumnSpan="4" x:Name="GameCanvas" Focusable="True" KeyDown="CanvasKeyDown"
                     KeyUp="CanvasKeyUp" ClipToBounds="True">
-                <!-- <Rectangle x:Name="Background" Width="60" Height="60" Fill="Blue" ></Rectangle> -->
                 <Rectangle x:Name="BackgroundTwo" Width="60" Height="60" Fill="Blue" />
                 <Rectangle x:Name="BackgroundOne" Width="60" Height="60" Fill="Blue" />
             </Canvas>
@@ -63,7 +62,7 @@
                             <ColumnDefinition Width="5" />
                             <ColumnDefinition Width="30" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <!-- Live heart 1 -->
                         <Image Grid.Column="1" Margin="0" x:Name="LiveHeart1">
                             <Image.Source>
@@ -87,7 +86,7 @@
                                 </DrawingImage>
                             </Image.Source>
                         </Image>
-                        
+
                         <!-- Live heart 2 -->
                         <Image Grid.Column="3" Margin="0" x:Name="LiveHeart2">
                             <Image.Source>
@@ -111,7 +110,7 @@
                                 </DrawingImage>
                             </Image.Source>
                         </Image>
-                        
+
                         <!-- Live heart 3 -->
                         <Image Grid.Column="5" Margin="0" x:Name="LiveHeart3">
                             <Image.Source>
