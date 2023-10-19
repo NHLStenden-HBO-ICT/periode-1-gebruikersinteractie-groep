@@ -67,6 +67,8 @@ namespace Wasmachine9000.Windows
 
             // Reset score
             App.GameInfo.Reset();
+
+            Helpers.OpenWindow(new GameWindow());
         }
 
         private void Playername_IsFilled(object sender, RoutedEventArgs e)
