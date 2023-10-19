@@ -21,30 +21,39 @@ namespace Wasmachine9000.Game
         private string Username;
         private int Pincode;
 
-        public class GamestateData
-        {
-            public int? Coins { get; set; }
-            public int? Highscore { get; set; }
-            public string? Username { get; set; }
-            public int? Pincode { get; set; }
-        }
+        private bool Cosmetic1;
+
+        //Parental control settings
+
+        //Playtime in minutes
+        public int MaxplayTime;
+        public bool PlaytimeControl;
 
         // Read and parse the YAML file.
         public GamestateData ReadYamlFile(string filePath)
         {
+            GamestateData gamestateData = new GamestateData();
+
             try
             {
                 using (var reader = new StreamReader(filePath))
                 {
                     var deserializer = new Deserializer();
-                    var GamestateData = deserializer.Deserialize<GamestateData>(reader);
+                    gamestateData = deserializer.Deserialize<GamestateData>(reader);
 
-                    Coins = GamestateData.Coins ?? 0;
-                    Highscore = GamestateData.Highscore ?? 0;
-                    Username = GamestateData.Username ?? "";
-                    Pincode = GamestateData.Pincode ?? 0000;
+                    if (gamestateData == null)
+                    {
+                        gamestateData = new GamestateData
+                        {
+                            Coins = 0,
+                            Highscore = 0,
+                            Username = "",
+                            Pincode = 0,
+                            Cosmetic1 = false
+                        };
+                    }
 
-                    return GamestateData;
+                    return gamestateData;
                 }
             }
             catch (Exception ex)
@@ -64,6 +73,7 @@ namespace Wasmachine9000.Game
                 Highscore = data.Highscore ?? 0;
                 Username = data.Username ?? "";
                 Pincode = data.Pincode ?? 0000;
+                Cosmetic1 = data.Cosmetic1;
             }
         }
 
@@ -120,6 +130,47 @@ namespace Wasmachine9000.Game
         {
             return Pincode;
         }
+        public void SetCosmeticStatus(string cosmeticName, bool status)
+        {
+            GamestateData gamestateData = ReadYamlFile(GetGameStateFilePath());
+
+            if (gamestateData.Cosmetic1)
+            {
+                gamestateData.Cosmetic1 = status;
+            }
+            else
+            {
+                // Cosmetic not found; you can handle this case as needed.
+            }
+
+            SaveGameState();
+        }
+        public bool GetCosmeticStatus(string cosmeticName)
+        {
+            GamestateData gamestateData = ReadYamlFile(GetGameStateFilePath());
+
+            if (gamestateData != null)
+            {
+                switch (cosmeticName)
+                {
+                    case "Cosmetic1":
+                        return gamestateData.Cosmetic1;
+                    // case "Cosmetic2":
+                    //     return gamestateData.Cosmetic2;
+                    // case "Cosmetic3":
+                    //     return gamestateData.Cosmetic3;
+                    // case "Cosmetic4":
+                    //     return gamestateData.Cosmetic4;
+                    // case "Cosmetic5":
+                    //     return gamestateData.Cosmetic5;
+                    // case "Cosmetic6":
+                    //     return gamestateData.Cosmetic6;
+                    default:
+                        throw new ArgumentException("Invalid cosmetic name.");
+                }
+            }
+            return false;
+        }
 
         public static string GetGameStateFilePath()
         {
@@ -141,7 +192,8 @@ namespace Wasmachine9000.Game
                     Coins = Coins,
                     Highscore = Highscore,
                     Username = Username,
-                    Pincode = Pincode
+                    Pincode = Pincode,
+                    Cosmetic1 = Cosmetic1
                 };
                 serializer.Serialize(gameStateFile, GamestateData);
             }
@@ -160,18 +212,28 @@ namespace Wasmachine9000.Game
                 {
                     // Read game state file
                     var data = gameState.ReadYamlFile(GetGameStateFilePath());
-                    // if (data != null)
-                    // {
-                        // ... add data
-                    // }
                 }
+
                 return gameState;
             }
             else
             {
+                // Create yaml file
                 FileStream creategamestate = File.Create(GetGameStateFilePath());
+                gameState = new GameState();
+                // Fill it with default data
+                gameState.SaveGameState();
                 return LoadGameState();
             }
         }
     }
+}
+
+public class GamestateData
+{
+    public int? Coins { get; set; }
+    public int? Highscore { get; set; }
+    public string? Username { get; set; }
+    public int? Pincode { get; set; }
+    public bool Cosmetic1 { get; set; }
 }

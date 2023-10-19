@@ -21,6 +21,7 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/background.png" />
             </Grid.Background>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="162px" />
                 <RowDefinition Height="162px" />
@@ -30,25 +31,113 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400px" />
-                <ColumnDefinition Width="750px" />
-                <ColumnDefinition Width="400px" />
+                <ColumnDefinition Width="570px" />
+                <ColumnDefinition Width="580px" />
             </Grid.ColumnDefinitions>
             <Canvas Grid.RowSpan="5" Grid.ColumnSpan="4" x:Name="GameCanvas" Focusable="True" KeyDown="CanvasKeyDown"
-                    KeyUp="CanvasKeyUp">
-                <Rectangle x:Name="Player" Width="60" Height="60" Fill="White" />
+                    KeyUp="CanvasKeyUp" ClipToBounds="True">
+                <Rectangle x:Name="BackgroundTwo" Width="60" Height="60" Fill="Blue" />
+                <Rectangle x:Name="BackgroundOne" Width="60" Height="60" Fill="Blue" />
             </Canvas>
 
-            <Grid Grid.Column="2" Margin="10">
+            <Grid Grid.Column="2" HorizontalAlignment="Right" Margin="10" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="115" />
                     <ColumnDefinition Width="180" />
                     <ColumnDefinition Width="180" />
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Grid.Row="0" Width="180" HorizontalAlignment="Right" x:Name="HighscoreBorder"
+                <Border Grid.Column="0" Grid.Row="0" Width="115" HorizontalAlignment="Right" x:Name="LivesBorder"
+                        Background="Gray" CornerRadius="10" MaxHeight="40">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="30" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Live heart 1 -->
+                        <Image Grid.Column="1" Margin="0" x:Name="LiveHeart1">
+                            <Image.Source>
+                                <DrawingImage >
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                                            <GeometryDrawing Brush="#ef4747" Geometry="F1 M512,512z M0,0z M47.6,300.4L228.3,469.1C235.8,476.1 245.7,480 256,480 266.3,480 276.2,476.1 283.7,469.1L464.4,300.4C494.8,272.1,512,232.4,512,190.9L512,185.1C512,115.2 461.5,55.6 392.6,44.1 347,36.5 300.6,51.4 268,84L256,96 244,84C211.4,51.4 165,36.5 119.4,44.1 50.5,55.6 0,115.2 0,185.1L0,190.9C0,232.4,17.2,272.1,47.6,300.4z" />
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="1" Visibility="Hidden" Margin="0" x:Name="LiveHeartEmpty1">
+                            <Image.Source>
+                                <DrawingImage >
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                                            <GeometryDrawing Brush="#ef4747" Geometry="F1 M512,512z M0,0z M225.8,468.2L223.3,465.9 48.1,303.2C17.4,274.7,0,234.7,0,192.8L0,189.5C0,119.1 50,58.7 119.2,45.5 158.6,37.9 198.9,47 231,69.6 240,76 248.4,83.4 256,91.9 260.2,87.1 264.7,82.7 269.5,78.6 273.2,75.4 277,72.4 281,69.6 281,69.6 281,69.6 281,69.6 313.1,47 353.4,37.9 392.8,45.4 462,58.6 512,119.1 512,189.5L512,192.8C512,234.7,494.6,274.7,463.9,303.2L288.7,465.9 286.2,468.2C278,475.8 267.2,480.1 256,480.1 244.8,480.1 234,475.9 225.8,468.2z M239.1,145C238.7,144.7,238.4,144.3,238.1,143.9L220.3,123.9C220.3,123.9 220.2,123.8 220.2,123.8 220.2,123.8 220.2,123.8 220.2,123.8 197.1,97.9 162.2,86.1 128.2,92.6 81.6,101.5 48,142.1 48,189.5L48,192.8C48,221.3,59.9,248.6,80.8,268L256,430.7 431.2,268C452.1,248.6,464,221.3,464,192.8L464,189.5C464,142.2 430.4,101.5 383.9,92.6 349.9,86.1 314.9,98 291.9,123.8 291.9,123.8 291.9,123.8 291.8,123.9 291.7,124 291.8,123.9 291.7,124L273.9,144C273.6,144.4 273.2,144.7 272.9,145.1 268.4,149.6 262.3,152.1 256,152.1 249.7,152.1 243.6,149.6 239.1,145.1z" />
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+
+                        <!-- Live heart 2 -->
+                        <Image Grid.Column="3" Margin="0" x:Name="LiveHeart2">
+                            <Image.Source>
+                                <DrawingImage >
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                                            <GeometryDrawing Brush="#ef4747" Geometry="F1 M512,512z M0,0z M47.6,300.4L228.3,469.1C235.8,476.1 245.7,480 256,480 266.3,480 276.2,476.1 283.7,469.1L464.4,300.4C494.8,272.1,512,232.4,512,190.9L512,185.1C512,115.2 461.5,55.6 392.6,44.1 347,36.5 300.6,51.4 268,84L256,96 244,84C211.4,51.4 165,36.5 119.4,44.1 50.5,55.6 0,115.2 0,185.1L0,190.9C0,232.4,17.2,272.1,47.6,300.4z" />
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="3" Visibility="Hidden" Margin="0" x:Name="LiveHeartEmpty2">
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                                            <GeometryDrawing Brush="#ef4747" Geometry="F1 M512,512z M0,0z M225.8,468.2L223.3,465.9 48.1,303.2C17.4,274.7,0,234.7,0,192.8L0,189.5C0,119.1 50,58.7 119.2,45.5 158.6,37.9 198.9,47 231,69.6 240,76 248.4,83.4 256,91.9 260.2,87.1 264.7,82.7 269.5,78.6 273.2,75.4 277,72.4 281,69.6 281,69.6 281,69.6 281,69.6 313.1,47 353.4,37.9 392.8,45.4 462,58.6 512,119.1 512,189.5L512,192.8C512,234.7,494.6,274.7,463.9,303.2L288.7,465.9 286.2,468.2C278,475.8 267.2,480.1 256,480.1 244.8,480.1 234,475.9 225.8,468.2z M239.1,145C238.7,144.7,238.4,144.3,238.1,143.9L220.3,123.9C220.3,123.9 220.2,123.8 220.2,123.8 220.2,123.8 220.2,123.8 220.2,123.8 197.1,97.9 162.2,86.1 128.2,92.6 81.6,101.5 48,142.1 48,189.5L48,192.8C48,221.3,59.9,248.6,80.8,268L256,430.7 431.2,268C452.1,248.6,464,221.3,464,192.8L464,189.5C464,142.2 430.4,101.5 383.9,92.6 349.9,86.1 314.9,98 291.9,123.8 291.9,123.8 291.9,123.8 291.8,123.9 291.7,124 291.8,123.9 291.7,124L273.9,144C273.6,144.4 273.2,144.7 272.9,145.1 268.4,149.6 262.3,152.1 256,152.1 249.7,152.1 243.6,149.6 239.1,145.1z" />
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+
+                        <!-- Live heart 3 -->
+                        <Image Grid.Column="5" Margin="0" x:Name="LiveHeart3">
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                                            <GeometryDrawing Brush="#ef4747" Geometry="F1 M512,512z M0,0z M47.6,300.4L228.3,469.1C235.8,476.1 245.7,480 256,480 266.3,480 276.2,476.1 283.7,469.1L464.4,300.4C494.8,272.1,512,232.4,512,190.9L512,185.1C512,115.2 461.5,55.6 392.6,44.1 347,36.5 300.6,51.4 268,84L256,96 244,84C211.4,51.4 165,36.5 119.4,44.1 50.5,55.6 0,115.2 0,185.1L0,190.9C0,232.4,17.2,272.1,47.6,300.4z" />
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="5" Visibility="Hidden" Margin="0" x:Name="LiveHeartEmpty3">
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                                            <GeometryDrawing Brush="#ef4747" Geometry="F1 M512,512z M0,0z M225.8,468.2L223.3,465.9 48.1,303.2C17.4,274.7,0,234.7,0,192.8L0,189.5C0,119.1 50,58.7 119.2,45.5 158.6,37.9 198.9,47 231,69.6 240,76 248.4,83.4 256,91.9 260.2,87.1 264.7,82.7 269.5,78.6 273.2,75.4 277,72.4 281,69.6 281,69.6 281,69.6 281,69.6 313.1,47 353.4,37.9 392.8,45.4 462,58.6 512,119.1 512,189.5L512,192.8C512,234.7,494.6,274.7,463.9,303.2L288.7,465.9 286.2,468.2C278,475.8 267.2,480.1 256,480.1 244.8,480.1 234,475.9 225.8,468.2z M239.1,145C238.7,144.7,238.4,144.3,238.1,143.9L220.3,123.9C220.3,123.9 220.2,123.8 220.2,123.8 220.2,123.8 220.2,123.8 220.2,123.8 197.1,97.9 162.2,86.1 128.2,92.6 81.6,101.5 48,142.1 48,189.5L48,192.8C48,221.3,59.9,248.6,80.8,268L256,430.7 431.2,268C452.1,248.6,464,221.3,464,192.8L464,189.5C464,142.2 430.4,101.5 383.9,92.6 349.9,86.1 314.9,98 291.9,123.8 291.9,123.8 291.9,123.8 291.8,123.9 291.7,124 291.8,123.9 291.7,124L273.9,144C273.6,144.4 273.2,144.7 272.9,145.1 268.4,149.6 262.3,152.1 256,152.1 249.7,152.1 243.6,149.6 239.1,145.1z" />
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+
+                    </Grid>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="0" Width="180" HorizontalAlignment="Right" x:Name="HighscoreBorder"
                         Background="Gray" CornerRadius="10" MaxHeight="40">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -76,14 +165,14 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="1" Grid.Row="0" Width="180" HorizontalAlignment="Right" x:Name="CoinsBorder"
+                <Border Grid.Column="2" Grid.Row="0" Width="180" HorizontalAlignment="Right" x:Name="CoinsBorder"
                         Background="Gray" CornerRadius="10" MaxHeight="40">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="145" />
                             <ColumnDefinition Width="30" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="111" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
+                        <TextBlock Grid.Column="0" Text="" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
                                    Foreground="White" HorizontalAlignment="Left" Margin="6" VerticalAlignment="Center" />
                         <Image Grid.Column="1" Margin="6">
                             <Image.Source>
@@ -101,7 +190,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="1" Grid.Row="1" Width="180" HorizontalAlignment="Right" x:Name="TimeBorder"
+                <Border Grid.Column="2" Grid.Row="1" Width="180" HorizontalAlignment="Right" x:Name="TimeBorder"
                         Background="Gray" CornerRadius="10" MaxHeight="40">
                     <Grid>
                         <Grid.ColumnDefinitions>
