@@ -316,8 +316,7 @@ public partial class GameWindow : Window
         App.GameTimer.RemoveListener("entitiesListener");
         App.GameTimer.RemoveListener("backgroundListener");
 
-        App.GameInfo.Reset();
-
-        Helpers.OpenPreviousWindow();
+        //Helpers.OpenPreviousWindow();
+        Helpers.OpenWindow(new GameOver());
     }
 }
