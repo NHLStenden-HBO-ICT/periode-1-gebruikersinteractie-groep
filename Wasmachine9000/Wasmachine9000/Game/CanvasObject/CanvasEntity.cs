@@ -26,7 +26,8 @@ public class CanvasEntity
 
     public void SetPosition(double x, double y)
     {
-        SetX(x); SetY(y);
+        SetX(x);
+        SetY(y);
     }
 
     public double GetX()
@@ -89,11 +90,5 @@ public class CanvasEntity
     public double GetWidth()
     {
         return EntityRectangle.ActualWidth;
-
-    }
-
-    public double GetLeft()
-    {
-        return Canvas.GetLeft(EntityRectangle);
     }
 }
