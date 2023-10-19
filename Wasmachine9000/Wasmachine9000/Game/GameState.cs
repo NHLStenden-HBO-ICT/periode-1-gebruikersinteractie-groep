@@ -1,9 +1,7 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using YamlDotNet.Serialization;
-
 
 namespace Wasmachine9000.Game
 {
@@ -22,6 +20,9 @@ namespace Wasmachine9000.Game
         private int Pincode;
 
         private bool Cosmetic1;
+
+        public bool MusicSound;
+        public bool SFXSound;
 
         //Parental control settings
 
@@ -49,7 +50,9 @@ namespace Wasmachine9000.Game
                             Highscore = 0,
                             Username = "",
                             Pincode = 0,
-                            Cosmetic1 = false
+                            Cosmetic1 = false,
+                            MusicSound = true,
+                            SFXSound = true
                         };
                     }
 
@@ -74,6 +77,8 @@ namespace Wasmachine9000.Game
                 Username = data.Username ?? "";
                 Pincode = data.Pincode ?? 0000;
                 Cosmetic1 = data.Cosmetic1;
+                MusicSound = data.MusicSound ?? true;
+                SFXSound = data.SFXSound ?? true;
             }
         }
 
@@ -130,6 +135,7 @@ namespace Wasmachine9000.Game
         {
             return Pincode;
         }
+
         public void SetCosmeticStatus(string cosmeticName, bool status)
         {
             GamestateData gamestateData = ReadYamlFile(GetGameStateFilePath());
@@ -145,6 +151,7 @@ namespace Wasmachine9000.Game
 
             SaveGameState();
         }
+
         public bool GetCosmeticStatus(string cosmeticName)
         {
             GamestateData gamestateData = ReadYamlFile(GetGameStateFilePath());
@@ -169,6 +176,7 @@ namespace Wasmachine9000.Game
                         throw new ArgumentException("Invalid cosmetic name.");
                 }
             }
+
             return false;
         }
 
@@ -193,7 +201,9 @@ namespace Wasmachine9000.Game
                     Highscore = Highscore,
                     Username = Username,
                     Pincode = Pincode,
-                    Cosmetic1 = Cosmetic1
+                    Cosmetic1 = Cosmetic1,
+                    MusicSound = MusicSound,
+                    SFXSound = SFXSound
                 };
                 serializer.Serialize(gameStateFile, GamestateData);
             }
@@ -236,4 +246,6 @@ public class GamestateData
     public string? Username { get; set; }
     public int? Pincode { get; set; }
     public bool Cosmetic1 { get; set; }
+    public bool? MusicSound { get; set; }
+    public bool? SFXSound { get; set; }
 }

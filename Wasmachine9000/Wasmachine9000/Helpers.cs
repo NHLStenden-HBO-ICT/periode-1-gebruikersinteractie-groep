@@ -45,11 +45,11 @@ namespace Wasmachine9000
             switch (targetWindow)
             {
                 case MainWindow:
-                    if (previousWindow is GameWindow) App.AudioPlayer.LoadAndPlayAudio("Menu theme.wav");
+                    if (previousWindow is GameWindow) App.AudioPlayer.LoadAndPlayMusic("Menu theme.wav");
                     break;
 
                 case GameWindow:
-                    App.AudioPlayer.LoadAndPlayAudio("Ingame.wav");
+                    App.AudioPlayer.LoadAndPlayMusic("Ingame.wav");
                     break;
             }
         }
