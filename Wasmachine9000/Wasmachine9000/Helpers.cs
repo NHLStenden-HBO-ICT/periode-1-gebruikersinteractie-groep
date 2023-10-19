@@ -59,6 +59,11 @@ namespace Wasmachine9000
             return "pack://application:,,,/Assets/Sprites/Entities/" + filename;
         }
 
+        public static string GetBackgroundResource(string filename)
+        {
+            return "pack://application:,,,/Assets/Background/" + filename;
+        }
+
         public static bool CollidesWith(Rectangle source, Rectangle target)
         {
             Rect sourceRect = new Rect(Canvas.GetLeft(source), Canvas.GetBottom(source), source.Width, source.Height);

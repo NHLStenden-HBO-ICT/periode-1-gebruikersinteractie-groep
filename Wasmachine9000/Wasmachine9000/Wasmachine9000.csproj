@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\scrolling_background.jpg" />
+    <Resource Include="Assets\Background\backgroundPlayStore.png" />
     <Resource Include="Assets\Background\background1.png" />
     <Resource Include="Assets\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -40,6 +40,11 @@
     <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
     <Resource Include="Assets\Sprites\Entities\sock-purple.png" />
     <Resource Include="Assets\Sprites\Entities\underwear-grey.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame1.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame2.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame3.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame4.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame5.png" />
     <Resource Include="Instellingen.png" />
     <Resource Include="Assets\wasmachine.png" />
     <Resource Include="Assets\Icons\clock.svg" />
