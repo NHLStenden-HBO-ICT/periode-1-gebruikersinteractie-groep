@@ -34,11 +34,11 @@ namespace Wasmachine9000.Game
             
 
             // Create a new SoundPlayer instance with the specified audio file
-            // string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
-            // MusicPlayer = new MediaPlayer();
-            // MusicPlayer.Open(new Uri(filePath));
-            // MusicPlayer.Play();
-            // MusicPlayer.MediaEnded += MusicPlayer_MediaEnded;
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
+            MusicPlayer = new MediaPlayer();
+            MusicPlayer.Open(new Uri(filePath));
+            MusicPlayer.Play();
+            MusicPlayer.MediaEnded += MusicPlayer_MediaEnded;
         }
 
         public void LoadAndPlayAudio2(string fileName2)

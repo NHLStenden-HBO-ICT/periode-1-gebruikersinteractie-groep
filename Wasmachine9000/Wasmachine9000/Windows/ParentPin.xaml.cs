@@ -13,7 +13,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Wasmachine9000.Windows;
 
 namespace Wasmachine9000
 {
@@ -32,7 +31,7 @@ namespace Wasmachine9000
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Helpers.OpenPreviousWindow();
+            Helpers.OpenWindow(new MainWindow());
         }
 
         private void Doorgaan_Click(object sender, RoutedEventArgs e)
@@ -40,11 +39,11 @@ namespace Wasmachine9000
             string password = Pincode.Password;
             if (password == "1234")
             {
-                Helpers.OpenWindow(new ParentalControl());
+                MessageBoxResult boodPass = MessageBox.Show("Jup");
             }
             else
             {
-                MessageBoxResult badPass = MessageBox.Show("Onjuiste Pincode");
+                MessageBoxResult badPass = MessageBox.Show("Fout");
             }
         }
 

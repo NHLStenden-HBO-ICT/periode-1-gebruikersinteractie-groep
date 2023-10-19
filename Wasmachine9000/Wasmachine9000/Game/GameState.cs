@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -21,36 +21,30 @@ namespace Wasmachine9000.Game
         private string Username;
         private int Pincode;
 
-        //Parental control settings
-
-        //Playtime in minutes
-        public int MaxplayTime;
-        public bool PlaytimeControl;
+        public class GamestateData
+        {
+            public int? Coins { get; set; }
+            public int? Highscore { get; set; }
+            public string? Username { get; set; }
+            public int? Pincode { get; set; }
+        }
 
         // Read and parse the YAML file.
         public GamestateData ReadYamlFile(string filePath)
         {
-            GamestateData gamestateData = new GamestateData();
-
             try
             {
                 using (var reader = new StreamReader(filePath))
                 {
                     var deserializer = new Deserializer();
-                    gamestateData = deserializer.Deserialize<GamestateData>(reader);
+                    var GamestateData = deserializer.Deserialize<GamestateData>(reader);
 
-                    if (gamestateData == null)
-                    {
-                        gamestateData = new GamestateData
-                        {
-                            Coins = 0,
-                            Highscore = 0,
-                            Username = "",
-                            Pincode = 0
-                        };
-                    }
+                    Coins = GamestateData.Coins ?? 0;
+                    Highscore = GamestateData.Highscore ?? 0;
+                    Username = GamestateData.Username ?? "";
+                    Pincode = GamestateData.Pincode ?? 0000;
 
-                    return gamestateData;
+                    return GamestateData;
                 }
             }
             catch (Exception ex)
@@ -166,27 +160,18 @@ namespace Wasmachine9000.Game
                 {
                     // Read game state file
                     var data = gameState.ReadYamlFile(GetGameStateFilePath());
+                    // if (data != null)
+                    // {
+                        // ... add data
+                    // }
                 }
-
                 return gameState;
             }
             else
             {
-                // Create yaml file
                 FileStream creategamestate = File.Create(GetGameStateFilePath());
-                gameState = new GameState();
-                // Fill it with default data
-                gameState.SaveGameState();
                 return LoadGameState();
             }
         }
     }
-}
-
-public class GamestateData
-{
-    public int? Coins { get; set; }
-    public int? Highscore { get; set; }
-    public string? Username { get; set; }
-    public int? Pincode { get; set; }
 }
