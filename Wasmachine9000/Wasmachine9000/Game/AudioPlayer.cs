@@ -24,9 +24,9 @@ namespace Wasmachine9000.Game
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
 
-            SFXPlayer.Stop();
-            SFXPlayer.Open(new Uri(filePath));
-            SFXPlayer.Play();
+            MusicPlayer.Stop();
+            MusicPlayer.Open(new Uri(filePath));
+            MusicPlayer.Play();
         }
 
         public void LoadAndPlaySFX(string fileName)
