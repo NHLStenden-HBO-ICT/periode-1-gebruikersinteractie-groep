@@ -26,6 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\scrolling_background.jpg"/>
+    <Resource Include="Assets\Background\background1.png" />
     <Resource Include="Assets\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -40,6 +42,14 @@
     <Resource Include="Assets\Icons\coins.svg"/>
     <Resource Include="Assets\Icons\person-walking.svg"/>
     
+    <!--  Assets  -->
+    <Resource Include="Assets\Sprites\Entities\tshirt-blue.png"/>
+    <Resource Include="Assets\Sprites\Entities\tshirt-green.png"/>
+    <Resource Include="Assets\Sprites\Entities\tshirt-yellow.png"/>
+    <Resource Include="Assets\Sprites\Entities\rocket-pants.png" />
+    <Resource Include="Assets\Sprites\Entities\rocket-pants-alert.png" />
+
+
   </ItemGroup>
 
   <ItemGroup>
