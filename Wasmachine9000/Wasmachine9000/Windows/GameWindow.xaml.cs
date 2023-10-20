@@ -91,6 +91,8 @@ public partial class GameWindow : Window
 
         App.GameInfo.CanvasEntities.AddEntity(new SparksEntity(0,0));
 
+        // CanvasContainer.Loaded += (sender, args) => App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
+
     }
 
     private void HighscoreTick(object? sender, EventArgs e)
@@ -146,7 +148,7 @@ public partial class GameWindow : Window
                 App.GameInfo.PlayerLives--;
                 DisplayPlayerLives();
 
-                if (App.GameInfo.PlayerLives <= 0) Exit();
+                // if (App.GameInfo.PlayerLives <= 0) Exit();
             }
         }
     }
@@ -177,19 +179,19 @@ public partial class GameWindow : Window
         //
         //     Canvas.SetLeft(BackgroundTwo, Canvas.GetLeft(BackgroundOne) + BackgroundOne.ActualWidth);
         //
-        //     if (App.GameInfo.PlayerScore > _propaganda)
-        //     {
-        //         BackgroundTwo.Fill = _backgroundBrushes[1];
+        // if (App.GameInfo.PlayerScore > _propaganda)
+        // {
+        //     BackgroundTwo.Fill = _backgroundBrushes[1];
         //
-        //         _propaganda *= 2;
+        //     _propaganda *= 2;
         //
-        //         Console.WriteLine(_propaganda);
+        //     Console.WriteLine(_propaganda);
         //
-        //     }
-        //     else
-        //     {
-        //         BackgroundTwo.Fill = _backgroundBrushes[0];
-        //     }
+        // }
+        // else
+        // {
+        //     BackgroundTwo.Fill = _backgroundBrushes[0];
+        // }
         //
         //     _currentBackground = 2;
         //

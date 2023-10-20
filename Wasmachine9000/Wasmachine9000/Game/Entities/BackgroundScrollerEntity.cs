@@ -14,6 +14,7 @@ public class BackgroundScrollerEntity : CanvasEntity
     // private List<CanvasEntity> _createdEntities = new List<CanvasEntity>();
 
     private double _initialEntityWidth = 0;
+    private string _currentSprite = "";
 
     public BackgroundScrollerEntity (int x, int y) : base(Helpers.GetSpriteResource("Background/background1.png"), x, y) //contructor
     {
@@ -35,6 +36,7 @@ public class BackgroundScrollerEntity : CanvasEntity
 
     public void ChangeSprite(string sprite)
     {
+        _currentSprite = sprite;
         EntityImageBrush.ImageSource =  new BitmapImage(new Uri(Helpers.GetSpriteResource(sprite)));
         EntityRectangle.Fill = EntityImageBrush;
     }
@@ -47,6 +49,11 @@ public class BackgroundScrollerEntity : CanvasEntity
     public double GetInitialEntityWidth()
     {
         return _initialEntityWidth;
+    }
+
+    public string GetCurrentEntitySprite()
+    {
+        return _currentSprite;
     }
 
 }

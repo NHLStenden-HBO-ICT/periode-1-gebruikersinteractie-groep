@@ -18,100 +18,59 @@ public class BackgroundScrollerWrapper : CanvasEntity
 
     public BackgroundScrollerWrapper (int x, int y) : base(Helpers.GetSpriteResource("Background/background1.png"), x, y) //contructor
     {
-        for (int i = 0; i < 3; i++)
+        if (_backgroundList.Count != 3)
         {
-            _backgroundList.Add(new BackgroundScrollerEntity(0, 0));
-            AddToCanvasEntities(_backgroundList[i]);
-            _backgroundList[i].ChangeSprite("Background/background1.png");
-            _backgroundList[i].SetX(_backgroundList[i].GetInitialEntityWidth() * i);
+            for (int i = 0; i < 3; i++)
+            {
+                _backgroundList.Add(new BackgroundScrollerEntity(0, 0));
+                AddToCanvasEntities(_backgroundList[i]);
+                _backgroundList[i].ChangeSprite("Background/background1.png");
+                _backgroundList[i].SetX(_backgroundList[i].GetInitialEntityWidth() * i);
+            }
         }
-
     }
+
+    private double _rightmostX;
+    private int _propaganda = 100;
 
     public override void EntityTick()
     {
 
-        if (_backgroundList[_entityIndex].GetX() + _backgroundList[_entityIndex].GetWidth() <= 0)
+        _rightmostX = 0;
+
+        // double rightmostX = float.MinValue; // Initialize with a very small value
+
+        // Find the rightmost X-coordinate in the list
+        foreach (BackgroundScrollerEntity background in _backgroundList)
         {
-
-            // Update the index to switch to the next background
-            _entityIndex = (_entityIndex + 1) % _backgroundList.Count;
-
-            // Calculate the new X position for the active background
-            // double newX = _backgroundList[(_entityIndex == _backgroundList.Count) ? _entityIndex++ : _entityIndex = 0].GetX() + _backgroundList[_entityIndex].GetWidth();
-            Console.WriteLine((_entityIndex == _backgroundList.Count) ? _entityIndex = 0 : _entityIndex++ );
-
-            // Set the X position for the active background to create a seamless scrolling effect
-            _backgroundList[_entityIndex].SetX(0);
-
-            // Add any logic related to changing the appearance of the active background here
-            // For example, you can change the Fill property of the background based on certain conditions.
-            // if (App.GameInfo.PlayerScore > _propaganda)
-            // {
-            //     _backgroundList[_activeBackgroundIndex].ChangeSprite("NewBackgroundImage.png");
-            //     _propaganda *= 2;
-            // }
-            // else
-            // {
-            //     _backgroundList[_activeBackgroundIndex].ChangeSprite("DefaultBackgroundImage.png");
-            // }
-
-            // _entityIndex++;
-            // Console.WriteLine((_entityIndex == _backgroundList.Count) ? _entityIndex++ : _entityIndex = 0);
+            double backgroundRightX = background.GetX() + background.GetWidth();
+            if (backgroundRightX > _rightmostX)
+            {
+                _rightmostX = backgroundRightX;
+            }
         }
 
-        if (_entityIndex == _backgroundList.Count)
+        // Position the background entities behind the rightmost one
+        foreach (BackgroundScrollerEntity background in _backgroundList)
         {
-            _entityIndex = 0;
+            
+            if (background.GetX() + background.GetWidth() < 0 )
+            {
+                background.SetX(_rightmostX);
+
+                if (App.GameInfo.PlayerScore > _propaganda)
+                {
+                    background.ChangeSprite("Background/backgroundPlayStore.png");
+
+                    _propaganda *= 2;
+                }
+                else if (background.GetCurrentEntitySprite() == "Background/backgroundPlayStore.png")
+                {
+                    background.ChangeSprite("Background/background1.png");
+                }
+            }
+
         }
-
-
-        //
-        // Console.WriteLine(_backgroundList[_entityIndex].GetLeft());
-        // Console.WriteLine(_backgroundList[_entityIndex].GetX());
-        //
-        // if (_backgroundList[_entityIndex].GetLeft() <= 0 )
-        // {
-        //
-        //     Console.WriteLine(_backgroundList[_entityIndex].GetLeft());
-        //
-        //     int temp = _entityIndex;
-        //     temp++;
-        //     if (temp == _backgroundList.Count)
-        //     {
-        //         temp = 0;
-        //     }
-        //
-        //     _backgroundList[_entityIndex].SetX(_backgroundList[temp].GetLeft());
-        //
-        //     _entityIndex++;
-        // }
-
-        // for (int i = 0; i < _backgroundList.Count; i++)
-        // {
-        //     if (_backgroundList[i].GetX() + _backgroundList[i].GetWidth() <= 0 )
-        //     {
-        //         int next = i;
-        //         next++;
-        //         if (next == _backgroundList.Count)
-        //         {
-        //             next = 0;
-        //         }
-        //
-        //
-        //         // Console.WriteLine("trigger");
-        //         _backgroundList[i].SetX(_backgroundList[next].GetX() + _backgroundList[next].GetWidth());
-        //         // Console.WriteLine(_backgroundList[i].GetX());
-        //     }
-        //
-        //     // _backgroundList[i].SetX(_backgroundList[i].GetX() - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
-        //     // Console.WriteLine(_backgroundList[i].GetX());
-        // }
-
-        // foreach (var entity in _backgroundList)
-        // {
-        //     entity.SetX(entity.GetX() - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
-        // }
 
     }
 
