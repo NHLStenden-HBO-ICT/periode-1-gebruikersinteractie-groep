@@ -42,5 +42,6 @@ public class RocketPants : CanvasEntity
         EntityRectangle.Fill = EntityImageBrush;
 
         SetPosition(EntityX, EntityY);
+        SetZIndex(3);
     }
 }

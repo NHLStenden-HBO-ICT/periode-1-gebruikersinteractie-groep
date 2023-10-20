@@ -148,83 +148,13 @@ public partial class GameWindow : Window
                 App.GameInfo.PlayerLives--;
                 DisplayPlayerLives();
 
-                // if (App.GameInfo.PlayerLives <= 0) Exit();
+                if (App.GameInfo.PlayerLives <= 0) Exit();
             }
         }
     }
 
-    private int _currentBackground = 1;
-    private int _propaganda = 100;
-
-    private int _activeBackground = 0;
-
     private void BackgroundTick(object? sender, EventArgs e)
     {
-
-        // if (_backgroundList[_activeBackground].GetEntityRectangle().Width - -Canvas.GetLeft(BackgroundOne) < CanvasContainer.ActualWidth)
-        // {
-        //     _activeBackground++;
-        //     if (_activeBackground == _backgroundList.Count)
-        //     {
-        //         _activeBackground = 0;
-        //     }
-        // }
-
-        // Console.WriteLine(_backgroundList[_activeBackground].GetEntityRectangle().Width);
-
-
-        // rotates background for looping effect
-        // if (BackgroundOne.Width - -Canvas.GetLeft(BackgroundOne) < CanvasContainer.ActualWidth && _currentBackground == 1)
-        // {
-        //
-        //     Canvas.SetLeft(BackgroundTwo, Canvas.GetLeft(BackgroundOne) + BackgroundOne.ActualWidth);
-        //
-        // if (App.GameInfo.PlayerScore > _propaganda)
-        // {
-        //     BackgroundTwo.Fill = _backgroundBrushes[1];
-        //
-        //     _propaganda *= 2;
-        //
-        //     Console.WriteLine(_propaganda);
-        //
-        // }
-        // else
-        // {
-        //     BackgroundTwo.Fill = _backgroundBrushes[0];
-        // }
-        //
-        //     _currentBackground = 2;
-        //
-        // }
-        //
-        // if (BackgroundTwo.Width - -Canvas.GetLeft(BackgroundTwo) < CanvasContainer.ActualWidth && _currentBackground == 2)
-        // {
-        //
-        //     Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundTwo) + BackgroundTwo.ActualWidth);
-        //
-        //     if (App.GameInfo.PlayerScore > _propaganda)
-        //     {
-        //         BackgroundOne.Fill = _backgroundBrushes[1];
-        //
-        //         _propaganda *= 2;
-        //
-        //         Console.WriteLine(_propaganda);
-        //
-        //     }
-        //     else
-        //     {
-        //         BackgroundOne.Fill = _backgroundBrushes[0];
-        //     }
-        //
-        //     _currentBackground = 1;
-        //
-        // }
-
-        // apply movement to both backgrounds
-        // Canvas.SetLeft(BackgroundOne,
-        //     Canvas.GetLeft(BackgroundOne) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
-        // Canvas.SetLeft(BackgroundTwo,
-        //     Canvas.GetLeft(BackgroundTwo) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
 
         _backgroundTracker += App.GameTimer.DeltaTime;
 

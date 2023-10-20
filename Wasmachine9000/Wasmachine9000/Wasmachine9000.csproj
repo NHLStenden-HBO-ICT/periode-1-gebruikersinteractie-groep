@@ -27,6 +27,7 @@
     </Resource>
     <Resource Include="Assets\Sprites\Entities\Background\background1.png" />
     <Resource Include="Assets\Sprites\Entities\Background\backgroundPlayStore.png" />
+    <Resource Include="Assets\Sprites\Entities\Ground\groundEntity1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -107,5 +108,6 @@
   <ItemGroup>
     <PackageReference Include="YamlDotNet" Version="13.7.0" />
   </ItemGroup>
+
 
 </Project>

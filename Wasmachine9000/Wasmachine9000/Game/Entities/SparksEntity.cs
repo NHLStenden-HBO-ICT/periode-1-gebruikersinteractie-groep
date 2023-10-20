@@ -36,7 +36,7 @@ public class SparksEntity : CanvasEntity
 
         SetVisible(false);
 
-        SetZIndex(1);
+        SetZIndex(3);
 
     }
 

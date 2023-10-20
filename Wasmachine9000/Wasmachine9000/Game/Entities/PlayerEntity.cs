@@ -29,7 +29,7 @@ public class PlayerEntity : CanvasEntity
         EntityRectangle.Fill = EntityImageBrush;
         
         SetPosition(EntityX, EntityY);
-        SetZIndex(1);
+        SetZIndex(2);
     }
 
     public override void EntityTick()

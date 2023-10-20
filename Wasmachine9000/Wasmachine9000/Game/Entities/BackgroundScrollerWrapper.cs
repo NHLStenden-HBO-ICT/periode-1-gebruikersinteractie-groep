@@ -14,6 +14,7 @@ public class BackgroundScrollerWrapper : CanvasEntity
     // private List<CanvasEntity> _createdEntities = new List<CanvasEntity>();
 
     private List<BackgroundScrollerEntity> _backgroundList = new List<BackgroundScrollerEntity>();
+    private List<GroundScrollerEntity> _groundList = new List<GroundScrollerEntity>();
     private int _entityIndex = 0;
 
     public BackgroundScrollerWrapper (int x, int y) : base(Helpers.GetSpriteResource("Background/background1.png"), x, y) //contructor
@@ -28,25 +29,36 @@ public class BackgroundScrollerWrapper : CanvasEntity
                 _backgroundList[i].SetX(_backgroundList[i].GetInitialEntityWidth() * i);
             }
         }
+
+        if (_groundList.Count != 3)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                _groundList.Add(new GroundScrollerEntity(0, 0));
+                AddToCanvasEntities(_groundList[i]);
+                _groundList[i].ChangeSprite("Ground/groundEntity1.png");
+                _groundList[i].SetX(_groundList[i].GetInitialEntityWidth() * i);
+            }
+        }
     }
 
-    private double _rightmostX;
+    private double _backgroundRightmostX;
+    private double _groundRightmostX;
     private int _propaganda = 100;
 
     public override void EntityTick()
     {
 
-        _rightmostX = 0;
-
-        // double rightmostX = float.MinValue; // Initialize with a very small value
+        _backgroundRightmostX = 0;
+        _groundRightmostX = 0;
 
         // Find the rightmost X-coordinate in the list
         foreach (BackgroundScrollerEntity background in _backgroundList)
         {
             double backgroundRightX = background.GetX() + background.GetWidth();
-            if (backgroundRightX > _rightmostX)
+            if (backgroundRightX > _backgroundRightmostX)
             {
-                _rightmostX = backgroundRightX;
+                _backgroundRightmostX = backgroundRightX;
             }
         }
 
@@ -56,7 +68,7 @@ public class BackgroundScrollerWrapper : CanvasEntity
             
             if (background.GetX() + background.GetWidth() < 0 )
             {
-                background.SetX(_rightmostX);
+                background.SetX(_backgroundRightmostX);
 
                 if (App.GameInfo.PlayerScore > _propaganda)
                 {
@@ -70,6 +82,25 @@ public class BackgroundScrollerWrapper : CanvasEntity
                 }
             }
 
+        }
+
+        // Find the rightmost X-coordinate in the list
+        foreach (GroundScrollerEntity ground in _groundList)
+        {
+            double groundRightX = ground.GetX() + ground.GetWidth();
+            if (groundRightX > _groundRightmostX)
+            {
+                _groundRightmostX = groundRightX;
+            }
+        }
+
+        // Position the background entities behind the rightmost one
+        foreach (GroundScrollerEntity ground in _groundList)
+        {
+            if (ground.GetX() + ground.GetWidth() < 0 )
+            {
+                ground.SetX(_groundRightmostX);
+            }
         }
 
     }

@@ -40,6 +40,7 @@ public class AlertEntity : CanvasEntity
         EntityRectangle.Fill = EntityImageBrush;
         
         SetPosition(EntityX, EntityY);
+        SetZIndex(3);
     }
 
     public int GetFlashes()
