@@ -39,6 +39,8 @@
     <Resource Include="Assets\Cosmetics\Napoleon2.png" />
     <None Remove="Assets\Cosmetics\Anvil.png" />
     <Resource Include="Assets\Cosmetics\Anvil.png" />
+    <None Remove="Assets\Sprites\Entities\coin.png" />
+    <Resource Include="Assets\Sprites\Entities\coin.png" />
   </ItemGroup>
 
   <ItemGroup>

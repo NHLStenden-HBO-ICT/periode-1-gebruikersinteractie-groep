@@ -28,6 +28,12 @@ namespace Wasmachine9000.Windows
 
             //View score on the game over screen
             ScoreTextBlock.Text = App.GameInfo.PlayerScore.ToString();
+            // View coins gained
+            CoinsText.Text = App.GameInfo.PlayerCoins.ToString();
+            
+            GameState gameState = GameState.LoadGameState();
+            int coinAmount = gameState.GetCoins();
+            gameState.SetCoins(coinAmount + App.GameInfo.PlayerCoins);
         }
 
         private void MainWindow_Click(object sender, RoutedEventArgs e)

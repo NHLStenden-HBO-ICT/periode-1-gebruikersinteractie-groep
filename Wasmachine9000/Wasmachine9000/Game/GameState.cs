@@ -79,6 +79,7 @@ namespace Wasmachine9000.Game
                 Cosmetic1 = data.Cosmetic1;
                 MusicSound = data.MusicSound ?? true;
                 SFXSound = data.SFXSound ?? true;
+                SaveGameState();
             }
         }
 
