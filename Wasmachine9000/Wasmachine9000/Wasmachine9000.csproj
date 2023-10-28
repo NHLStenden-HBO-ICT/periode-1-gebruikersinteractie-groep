@@ -15,6 +15,8 @@
     <None Remove="Assets\Font\BalooBhai2-Regular.ttf" />
     <None Remove="Assets\Font\BalooBhai2-SemiBold.ttf" />
     <None Remove="Assets\Instellingen.png" />
+    <None Remove="Assets\Sprites\Entities\sock-purple.png" />
+    <None Remove="Assets\Sprites\Entities\underwear-grey.png" />
     <None Remove="background.png" />
     <None Remove="Instellingen.png" />
   </ItemGroup>
@@ -40,6 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\scrolling_background.jpg" />
+    <Resource Include="Assets\Background\background1.png" />
     <Resource Include="Assets\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -48,12 +52,22 @@
     <Resource Include="Assets\Font\BalooBhai2-Medium.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-Regular.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
+    <Resource Include="Assets\Sprites\Entities\sock-purple.png" />
+    <Resource Include="Assets\Sprites\Entities\underwear-grey.png" />
     <Resource Include="Instellingen.png" />
-    <Resource Include="Assets\wasmachine.png"/>
-    <Resource Include="Assets\Icons\clock.svg"/>
-    <Resource Include="Assets\Icons\coins.svg"/>
-    <Resource Include="Assets\Icons\person-walking.svg"/>
+    <Resource Include="Assets\wasmachine.png" />
+    <Resource Include="Assets\Icons\clock.svg" />
+    <Resource Include="Assets\Icons\coins.svg" />
+    <Resource Include="Assets\Icons\person-walking.svg" />
     
+    <!--  Assets  -->
+    <Resource Include="Assets\Sprites\Entities\tshirt-blue.png" />
+    <Resource Include="Assets\Sprites\Entities\tshirt-green.png" />
+    <Resource Include="Assets\Sprites\Entities\tshirt-yellow.png" />
+    <Resource Include="Assets\Sprites\Entities\rocket-pants.png" />
+    <Resource Include="Assets\Sprites\Entities\rocket-pants-alert.png" />
+
+
   </ItemGroup>
 
   <ItemGroup>
