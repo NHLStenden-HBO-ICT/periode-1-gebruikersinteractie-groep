@@ -1,14 +1,42 @@
 <Window x:Class="Wasmachine9000.Instellingen"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         WindowStyle="None"
         WindowState="Maximized"
-        mc:Ignorable="d"
+     mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920"
         KeyDown="Window_KeyDown"
->
+        >
+    <Window.Resources>
+        <Style x:Key="RoundedSliderStyle" TargetType="Slider">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5" />
+                            <Track x:Name="PART_Track">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="Slider.DecreaseLarge" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="Slider.IncreaseLarge" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Name="Thumb" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
 
@@ -27,13 +55,99 @@
                 <RowDefinition Height="162px"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400px" />
-                <ColumnDefinition Width="750px" />
-                <ColumnDefinition Width="400px" />
+                <ColumnDefinition Width="200px" />
+                <ColumnDefinition Width="1150px" />
+                <ColumnDefinition Width="200px" />
             </Grid.ColumnDefinitions>
 
-
-
+            <Button Grid.Column="1" Grid.Row="0" Width="1050" MaxHeight="150" HorizontalAlignment="Center" Margin="0" x:Name="Instellingenn">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#FF00C0FF" MaxHeight="150" MaxWidth="1050">
+                            <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Instellingen</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF00FFFF"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <TextBlock x:Name="Volumetext" Grid.Row="1" Text="Volume aan/uit" FontFamily="Baloo Bhai 2 SemiBold" FontSize="15" />
+            </Button>
+            <Button x:Name="MainToggle" Grid.Row="1" Width="100" Height="100" Content="Click Me" Click="MainToggle_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Ellipse x:Name="MainToggleEllipse" Width="75" Height="75" Fill="#FF00C0FF" />
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF00FFFF"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="MusicToggle" Grid.Row="2" Width="100" Height="100" Content="Click Me" Click="MusicToggle_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Ellipse x:Name="MusicToggleEllipse" Width="75" Height="75" Fill="#FF00C0FF"/>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF00FFFF"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="SFXToggle" Grid.Row="3" Width="100" Height="100" Content="Click Me" Click="SFXToggle_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Ellipse x:Name="SFXToggleEllipse" Width="75" Height="75" Fill="#FF00C0FF" />
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF00FFFF"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+               
         </Grid>
     </Grid>
 </Window>
