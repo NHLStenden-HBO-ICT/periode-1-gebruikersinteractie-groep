@@ -40,7 +40,7 @@
                         <ColumnDefinition Width="140" />
                         <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" x:Name="CoinsText" FontWeight="600" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" MaxHeight="100" Width="160" MaxWidth="240" Margin="10,-5,0,0"><Run Text="3901"/></TextBlock>
+                    <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" x:Name="CoinsText" FontWeight="600" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" MaxHeight="100" Width="160" MaxWidth="240" Margin="10,-5,0,0">901</TextBlock>
                     <Image Grid.Column="1" Height="30">
                         <Image.Source>
                             <DrawingImage>
@@ -73,7 +73,7 @@
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,112,0,0">
                     <Run Text="Hoge Hoed"/>
                 </TextBlock>
-                <Button Grid.Column="0" Grid.Row="0" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" x:Name="Start">
+                <Button Grid.Column="0" Grid.Row="0" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Click="CosmeticButton_Click" Tag="Cosmetic1" x:Name="BuyButton1">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="10" Background="#74777E" Height="35" MaxWidth="240" Margin="0 0 0 0">
@@ -82,8 +82,8 @@
                                         <ColumnDefinition Width="60" />
                                         <ColumnDefinition Width="30" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock FontSize="25" Margin="10 0 0 0" FontFamily="Baloo Bhai 2 SemiBold" x:Name="CoinsText" Foreground="White" VerticalAlignment="Center">
-                                        <TextBlock Text="111"/>
+                                    <TextBlock x:Name="CoinsTextOne1" FontSize="25" Margin="10 0 0 0" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White" VerticalAlignment="Center">
+                                        111
                                     </TextBlock>
                                     <Image Grid.Column="1" Margin="10 0 0 0" Height="22" HorizontalAlignment="Right">
                                         <Image.Source>
@@ -108,6 +108,29 @@
                                     <Setter Property="Effect">
                                         <Setter.Value>
                                             <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF" Direction="305" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                
+                <Button Grid.Column="0" Grid.Row="0" Content="Equip" Tag="Cosmetic1" x:Name="EquipButton1" Click="EquipButton_Click" Width="130" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Foreground="White" FontSize="25" FontFamily="Baloo Bhai 2 SemiBold">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="#FF8B00FF">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF" Direction="305" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -123,7 +146,7 @@
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,112,0,0">
                     <Run Text="Tovernaarshoed"/>
                 </TextBlock>
-                <Button Grid.Column="1" Grid.Row="0" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" x:Name="BuyTopHat">
+                <Button Grid.Column="1" Grid.Row="0" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Click="CosmeticButton_Click" Tag="Cosmetic2" x:Name="BuyTopHat">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="10" Background="#74777E" Height="35" MaxWidth="240" Margin="0 0 0 0">
@@ -154,10 +177,32 @@
                         <Style TargetType="Button">
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FF00FFFF" />
+                                    <Setter Property="Background" Value="#74777E" />
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF" Direction="305" />
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#74777E" Direction="305" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="0" Content="Equip" Tag="Cosmetic2" x:Name="EquipButton2" Click="EquipButton_Click" Width="130" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Foreground="White" FontSize="25" FontFamily="Baloo Bhai 2 SemiBold">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="#FF8B00FF">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF" Direction="305" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -173,7 +218,7 @@
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,112,0,0">
                     <Run Text="Napoleon Hoed"/>
                 </TextBlock>
-                <Button Grid.Column="2" Grid.Row="0" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" x:Name="Star22t">
+                <Button Grid.Column="2" Grid.Row="0" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Click="CosmeticButton_Click" Tag="Cosmetic3" x:Name="Star22t">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="10" Background="#74777E" Height="35" MaxWidth="240" Margin="0 0 0 0">
@@ -204,10 +249,32 @@
                         <Style TargetType="Button">
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FF00FFFF" />
+                                    <Setter Property="Background" Value="#74777E" />
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF" Direction="305" />
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#74777E" Direction="305" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Column="2" Grid.Row="0" Content="Equip" Tag="Cosmetic3" x:Name="EquipButton3" Click="EquipButton_Click" Width="130" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Foreground="White" FontSize="25" FontFamily="Baloo Bhai 2 SemiBold">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="#FF8B00FF">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF" Direction="305" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -227,7 +294,7 @@
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,132,0,0">
                     <Run Text="Viking Helm"/>
                 </TextBlock>
-                <Button Grid.Column="0" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" x:Name="Star1t">
+                <Button Grid.Column="0" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Click="CosmeticButton_Click" Tag="Cosmetic4" x:Name="Star1t">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="10" Background="#74777E" Height="35" MaxWidth="240" Margin="0 0 0 0">
@@ -258,10 +325,32 @@
                         <Style TargetType="Button">
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FF00FFFF" />
+                                    <Setter Property="Background" Value="#74777E" />
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF" Direction="305" />
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#74777E" Direction="305" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Column="0" Grid.Row="1" Content="Equip" Tag="Cosmetic4" x:Name="EquipButton4" Click="EquipButton_Click" Width="130" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Foreground="White" FontSize="25" FontFamily="Baloo Bhai 2 SemiBold">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="#FF8B00FF">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF" Direction="305" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -277,7 +366,7 @@
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,132,0,0">
                     <Run Text="Aambeeld Hoed"/>
                 </TextBlock>
-                <Button Grid.Column="1" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" x:Name="Star11t">
+                <Button Grid.Column="1" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Click="CosmeticButton_Click" Tag="Cosmetic5" x:Name="Star11t">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="10" Background="#74777E" Height="35" MaxWidth="240" Margin="0 0 0 0">
@@ -308,10 +397,32 @@
                         <Style TargetType="Button">
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FF00FFFF" />
+                                    <Setter Property="Background" Value="#74777E" />
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF" Direction="305" />
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#74777E" Direction="305" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="1" Content="Equip" Tag="Cosmetic5" x:Name="EquipButton5" Click="EquipButton_Click" Width="130" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Foreground="White" FontSize="25" FontFamily="Baloo Bhai 2 SemiBold">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="#FF8B00FF">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF" Direction="305" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -327,7 +438,7 @@
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,132,0,0">
                     <Run Text="Raket Hoed"/>
                 </TextBlock>
-                <Button Grid.Column="2" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" x:Name="Raketh">
+                <Button Grid.Column="2" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Click="CosmeticButton_Click" Tag="Cosmetic6" x:Name="Raketh">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="10" Background="#74777E" Height="35" MaxWidth="240" Margin="0 0 0 0">
@@ -358,10 +469,32 @@
                         <Style TargetType="Button">
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FF00FFFF" />
+                                    <Setter Property="Background" Value="#74777E" />
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF" Direction="305" />
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#74777E" Direction="305" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Column="2" Grid.Row="1" Content="Equip" Tag="Cosmetic6" x:Name="EquipButton6" Click="EquipButton_Click" Width="130" Height="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 0" Foreground="White" FontSize="25" FontFamily="Baloo Bhai 2 SemiBold">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="#FF8B00FF">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF8B00FF" Direction="305" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
