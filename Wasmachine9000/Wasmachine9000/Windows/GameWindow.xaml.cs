@@ -105,12 +105,15 @@ public partial class GameWindow : Window
             _playerScoreTracker = 0;
             App.GameInfo.PlayerScore++;
             ScoreTextBlock.Text = App.GameInfo.PlayerScore.ToString();
+            CoinsText.Text = App.GameInfo.PlayerCoins.ToString();
 
             var random = new Random();
             if (random.Next(0, 5) == 4)
             {
                 App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
                 App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
+                
+                App.GameInfo.CanvasEntities.AddEntity(new CoinEntity(3000, GetRandomCanvasLane().GetLanePosition()));
             }
             else
             {
@@ -145,8 +148,16 @@ public partial class GameWindow : Window
             if (entity is not PlayerEntity && entity is not SparksEntity && entity is not BackgroundScrollerEntity && Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
             {
                 App.GameInfo.CanvasEntities.RemoveEntity(entity);
-                App.GameInfo.PlayerLives--;
-                DisplayPlayerLives();
+                
+                if (entity is CoinEntity)
+                {
+                    App.GameInfo.PlayerCoins++;
+                }
+                else
+                {
+                    App.GameInfo.PlayerLives--;
+                    DisplayPlayerLives();
+                }
 
                 if (App.GameInfo.PlayerLives <= 0) Exit();
             }
@@ -252,8 +263,7 @@ public partial class GameWindow : Window
         App.GameTimer.RemoveListener("entitiesListener");
         App.GameTimer.RemoveListener("backgroundListener");
 
-        App.GameInfo.Reset();
-
-        Helpers.OpenPreviousWindow();
+        //Helpers.OpenPreviousWindow();
+        Helpers.OpenWindow(new GameOver());
     }
 }
