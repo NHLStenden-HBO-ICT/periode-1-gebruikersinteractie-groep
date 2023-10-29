@@ -50,5 +50,6 @@ public class DirtyClothes : CanvasEntity
 
 
         SetPosition(EntityX, EntityY);
+        SetZIndex(3);
     }
 }
