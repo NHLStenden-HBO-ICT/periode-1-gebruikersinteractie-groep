@@ -28,21 +28,13 @@
     <Resource Include="Assets\Sprites\Entities\Background\background1.png" />
     <Resource Include="Assets\Sprites\Entities\Background\backgroundPlayStore.png" />
     <Resource Include="Assets\Sprites\Entities\Ground\groundEntity1.png" />
-    <None Remove="Assets\Cosmetics\ttt.png" />
     <Resource Include="Assets\Cosmetics\ttt.png" />
-    <None Remove="Assets\Cosmetics\TopHat.png" />
     <Resource Include="Assets\Cosmetics\TopHat.png" />
-    <None Remove="Assets\Cosmetics\Wizard.png" />
     <Resource Include="Assets\Cosmetics\Wizard.png" />
-    <None Remove="Assets\Cosmetics\Viking.png" />
     <Resource Include="Assets\Cosmetics\Viking.png" />
-    <None Remove="Assets\Cosmetics\Rocket.png" />
     <Resource Include="Assets\Cosmetics\Rocket.png" />
-    <None Remove="Assets\Cosmetics\Napoleon2.png" />
     <Resource Include="Assets\Cosmetics\Napoleon2.png" />
-    <None Remove="Assets\Cosmetics\Anvil.png" />
     <Resource Include="Assets\Cosmetics\Anvil.png" />
-    <None Remove="Assets\Sprites\Entities\coin.png" />
     <Resource Include="Assets\Sprites\Entities\coin.png" />
   </ItemGroup>
 
