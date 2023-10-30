@@ -23,11 +23,10 @@ public partial class GameWindow : Window
 
     private double _playerScoreTracker;
 
-    // Background one and two images
-    // private readonly ImageBrush BackgroundImageOne = new();
-    // private readonly ImageBrush BackgroundImageTwo = new();
 
     private List<ImageBrush> _backgroundBrushes = new List<ImageBrush>();
+
+    private List<BackgroundScrollerEntity> _backgroundList = new List<BackgroundScrollerEntity>();
 
     public GameWindow()
     {
@@ -47,6 +46,30 @@ public partial class GameWindow : Window
             {
                 _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1) + 30));
             }
+
+            // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0,0));
+
+            BackgroundScrollerEntity BGentity = new BackgroundScrollerEntity(0, 0);
+
+            _backgroundList.Add(BGentity);
+            // _backgroundList.Add(BGentity);
+            // _backgroundList.Add(BGentity);
+
+            _backgroundList[0].ChangeSprite("Background/background1.png");
+            // _backgroundList[1].ChangeSprite("Background/background1.png");
+            // _backgroundList[2].ChangeSprite("Background/backgroundPlayStore.png");
+
+            // App.GameInfo.CanvasEntities.AddEntity(_backgroundList[0]);
+
+
+            // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0, 0));
+
+            // BackgroundScrollerWrapper test = new BackgroundScrollerWrapper(0, 0);
+            // test.ChangeSprite("Background/background1.png");
+
+            App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
+
+
         };
 
         GameCanvas.Focus(); // Makes keyboard event work
@@ -66,40 +89,9 @@ public partial class GameWindow : Window
         // Register background listener to global game timer
         App.GameTimer.AddListener("backgroundListener", BackgroundTick);
 
-        // Load background one into rectangle
-        // Canvas.SetLeft(BackgroundOne, 0);
-        // BackgroundImageOne.ImageSource =
-        //     new BitmapImage(new Uri("pack://application:,,,/Assets\\Background\\background1.png"));
-        // CanvasContainer.Loaded += (sender, args) => BackgroundOne.Width = BackgroundImageOne.ImageSource.Width;
-        // CanvasContainer.Loaded += (sender, args) => BackgroundOne.Height = CanvasContainer.ActualHeight;
-        // BackgroundOne.Fill = BackgroundImageOne;
-        //
-        // // Load background Two into rectangle
-        // Canvas.SetLeft(BackgroundTwo, 0);
-        // BackgroundImageTwo.ImageSource =
-        //     new BitmapImage(new Uri("pack://application:,,,/Assets\\Background\\background1.png"));
-        // CanvasContainer.Loaded += (sender, args) => BackgroundTwo.Width = BackgroundImageTwo.ImageSource.Width;
-        // CanvasContainer.Loaded += (sender, args) => BackgroundTwo.Height = CanvasContainer.ActualHeight;
-        // BackgroundTwo.Fill = BackgroundImageTwo;
-
-        ImageBrush brushBackground1 = new ImageBrush();
-        brushBackground1.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Background/background1.png"));
-        _backgroundBrushes.Add(brushBackground1);
-
-        ImageBrush brushBackgroundPlayStore = new ImageBrush();
-        brushBackgroundPlayStore.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Background/backgroundPlayStore.png"));;
-        _backgroundBrushes.Add(brushBackgroundPlayStore);
-
-        CanvasContainer.Loaded += (sender, args) => BackgroundOne.Width = CanvasContainer.ActualHeight * 2;
-        CanvasContainer.Loaded += (sender, args) => BackgroundOne.Height = CanvasContainer.ActualHeight;
-
-        CanvasContainer.Loaded += (sender, args) => BackgroundTwo.Width = CanvasContainer.ActualHeight * 2;
-        CanvasContainer.Loaded += (sender, args) => BackgroundTwo.Height = CanvasContainer.ActualHeight;
-
-        Canvas.SetLeft(BackgroundOne, 0);
-        BackgroundOne.Fill = brushBackground1;
-
         App.GameInfo.CanvasEntities.AddEntity(new SparksEntity(0,0));
+
+        // CanvasContainer.Loaded += (sender, args) => App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
 
     }
 
@@ -113,12 +105,15 @@ public partial class GameWindow : Window
             _playerScoreTracker = 0;
             App.GameInfo.PlayerScore++;
             ScoreTextBlock.Text = App.GameInfo.PlayerScore.ToString();
+            CoinsText.Text = App.GameInfo.PlayerCoins.ToString();
 
             var random = new Random();
             if (random.Next(0, 5) == 4)
             {
                 App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
                 App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
+                
+                App.GameInfo.CanvasEntities.AddEntity(new CoinEntity(3000, GetRandomCanvasLane().GetLanePosition()));
             }
             else
             {
@@ -150,75 +145,27 @@ public partial class GameWindow : Window
             entity.EntityTick();
 
             // Destroy entity when collided with player
-            if (entity is not PlayerEntity && entity is not SparksEntity && Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
+            if (entity is not PlayerEntity && entity is not SparksEntity && entity is not BackgroundScrollerEntity && Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
             {
                 App.GameInfo.CanvasEntities.RemoveEntity(entity);
-                App.GameInfo.PlayerLives--;
-                DisplayPlayerLives();
+                
+                if (entity is CoinEntity)
+                {
+                    App.GameInfo.PlayerCoins++;
+                }
+                else
+                {
+                    App.GameInfo.PlayerLives--;
+                    DisplayPlayerLives();
+                }
 
                 if (App.GameInfo.PlayerLives <= 0) Exit();
             }
         }
     }
 
-    private int _currentBackground = 1;
-    private int _propaganda = 100;
-
     private void BackgroundTick(object? sender, EventArgs e)
     {
-
-        // rotates background for looping effect
-        if (BackgroundOne.Width - -Canvas.GetLeft(BackgroundOne) < CanvasContainer.ActualWidth && _currentBackground == 1)
-        {
-
-            Canvas.SetLeft(BackgroundTwo, Canvas.GetLeft(BackgroundOne) + BackgroundOne.ActualWidth);
-
-            if (App.GameInfo.PlayerScore > _propaganda)
-            {
-                BackgroundTwo.Fill = _backgroundBrushes[1];
-
-                _propaganda *= 2;
-
-                Console.WriteLine(_propaganda);
-
-            }
-            else
-            {
-                BackgroundTwo.Fill = _backgroundBrushes[0];
-            }
-
-            _currentBackground = 2;
-
-        }
-
-        if (BackgroundTwo.Width - -Canvas.GetLeft(BackgroundTwo) < CanvasContainer.ActualWidth && _currentBackground == 2)
-        {
-
-            Canvas.SetLeft(BackgroundOne, Canvas.GetLeft(BackgroundTwo) + BackgroundTwo.ActualWidth);
-
-            if (App.GameInfo.PlayerScore > _propaganda)
-            {
-                BackgroundOne.Fill = _backgroundBrushes[1];
-
-                _propaganda *= 2;
-
-                Console.WriteLine(_propaganda);
-
-            }
-            else
-            {
-                BackgroundOne.Fill = _backgroundBrushes[0];
-            }
-
-            _currentBackground = 1;
-
-        }
-
-        // apply movement to both backgrounds
-        Canvas.SetLeft(BackgroundOne,
-            Canvas.GetLeft(BackgroundOne) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
-        Canvas.SetLeft(BackgroundTwo,
-            Canvas.GetLeft(BackgroundTwo) - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
 
         _backgroundTracker += App.GameTimer.DeltaTime;
 

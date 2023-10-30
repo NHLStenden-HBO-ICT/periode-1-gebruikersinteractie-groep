@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using YamlDotNet.Serialization;
@@ -19,7 +20,36 @@ namespace Wasmachine9000.Game
         private string Username;
         private int Pincode;
 
-        private bool Cosmetic1;
+        public Dictionary<string, bool> Cosmetic1 { get; set; } = new Dictionary<string, bool>
+        {
+            { "Bought", false },
+            { "Equipped", false }
+        };
+        public Dictionary<string, bool> Cosmetic2 { get; set; } = new Dictionary<string, bool>
+        {
+            { "Bought", false },
+            { "Equipped", false }
+        };
+        public Dictionary<string, bool> Cosmetic3 { get; set; } = new Dictionary<string, bool>
+        {
+            { "Bought", false },
+            { "Equipped", false }
+        };
+        public Dictionary<string, bool> Cosmetic4 { get; set; } = new Dictionary<string, bool>
+        {
+            { "Bought", false },
+            { "Equipped", false }
+        };
+        public Dictionary<string, bool> Cosmetic5 { get; set; } = new Dictionary<string, bool>
+        {
+            { "Bought", false },
+            { "Equipped", false }
+        };
+        public Dictionary<string, bool> Cosmetic6 { get; set; } = new Dictionary<string, bool>
+        {
+            { "Bought", false },
+            { "Equipped", false }
+        };
 
         public bool MusicSound;
         public bool SFXSound;
@@ -50,7 +80,36 @@ namespace Wasmachine9000.Game
                             Highscore = 0,
                             Username = "",
                             Pincode = 0,
-                            Cosmetic1 = false,
+                            Cosmetic1 = new Dictionary<string, bool>
+                            {
+                                { "Bought", false },
+                                { "Equipped", false }
+                            },
+                            Cosmetic2 = new Dictionary<string, bool>
+                            {
+                                { "Bought", false },
+                                { "Equipped", false }
+                            },
+                            Cosmetic3 = new Dictionary<string, bool>
+                            {
+                                { "Bought", false },
+                                { "Equipped", false }
+                            },
+                            Cosmetic4 = new Dictionary<string, bool>
+                            {
+                                { "Bought", false },
+                                { "Equipped", false }
+                            },
+                            Cosmetic5 = new Dictionary<string, bool>
+                            {
+                                { "Bought", false },
+                                { "Equipped", false }
+                            },
+                            Cosmetic6 = new Dictionary<string, bool>
+                            {
+                                { "Bought", false },
+                                { "Equipped", false }
+                            },
                             MusicSound = true,
                             SFXSound = true
                         };
@@ -77,8 +136,14 @@ namespace Wasmachine9000.Game
                 Username = data.Username ?? "";
                 Pincode = data.Pincode ?? 0000;
                 Cosmetic1 = data.Cosmetic1;
+                Cosmetic2 = data.Cosmetic2;
+                Cosmetic3 = data.Cosmetic3;
+                Cosmetic4 = data.Cosmetic4;
+                Cosmetic5 = data.Cosmetic5;
+                Cosmetic6 = data.Cosmetic6;
                 MusicSound = data.MusicSound ?? true;
                 SFXSound = data.SFXSound ?? true;
+                SaveGameState();
             }
         }
 
@@ -91,6 +156,145 @@ namespace Wasmachine9000.Game
         public int GetCoins()
         {
             return Coins;
+        }
+        
+        public Dictionary<string, Dictionary<string, bool>> GetAllCosmetics()
+        {
+            Dictionary<string, Dictionary<string, bool>> allCosmetics = new Dictionary<string, Dictionary<string, bool>>();
+            allCosmetics.Add("Cosmetic1", Cosmetic1);
+            allCosmetics.Add("Cosmetic2", Cosmetic2);
+            allCosmetics.Add("Cosmetic3", Cosmetic3);
+            allCosmetics.Add("Cosmetic4", Cosmetic4);
+            allCosmetics.Add("Cosmetic5", Cosmetic5);
+            allCosmetics.Add("Cosmetic6", Cosmetic6);
+
+            return allCosmetics;
+        }
+        public void UpdateCosmetic(string cosmeticName, string propertyName, bool value)
+        {
+            switch (cosmeticName)
+            {
+                case "Cosmetic1":
+                    if (propertyName == "Bought")
+                    {
+                        Cosmetic1["Bought"] = value;
+                    }
+                    else if (propertyName == "Equipped")
+                    {
+                        Cosmetic1["Equipped"] = value;
+                        if (value == true)
+                        {
+                            Cosmetic2["Equipped"] = false;
+                            Cosmetic3["Equipped"] = false;
+                            Cosmetic4["Equipped"] = false;
+                            Cosmetic5["Equipped"] = false;
+                            Cosmetic6["Equipped"] = false;
+                        }
+                    }
+                    break;
+
+                case "Cosmetic2":
+                    if (propertyName == "Bought")
+                    {
+                        Cosmetic2["Bought"] = value;
+                    }
+                    else if (propertyName == "Equipped")
+                    {
+                        Cosmetic2["Equipped"] = value;
+                        if (value == true)
+                        {
+                            Cosmetic1["Equipped"] = false;
+                            Cosmetic3["Equipped"] = false;
+                            Cosmetic4["Equipped"] = false;
+                            Cosmetic5["Equipped"] = false;
+                            Cosmetic6["Equipped"] = false;
+                        }
+                    }
+                    break;
+
+                case "Cosmetic3":
+                    if (propertyName == "Bought")
+                    {
+                        Cosmetic3["Bought"] = value;
+                    }
+                    else if (propertyName == "Equipped")
+                    {
+                        Cosmetic3["Equipped"] = value;
+                        if (value == true)
+                        {
+                            Cosmetic1["Equipped"] = false;
+                            Cosmetic2["Equipped"] = false;
+                            Cosmetic4["Equipped"] = false;
+                            Cosmetic5["Equipped"] = false;
+                            Cosmetic6["Equipped"] = false;
+                        }
+                    }
+                    break;
+
+                case "Cosmetic4":
+                    if (propertyName == "Bought")
+                    {
+                        Cosmetic4["Bought"] = value;
+                    }
+                    else if (propertyName == "Equipped")
+                    {
+                        Cosmetic4["Equipped"] = value;
+                        if (value == true)
+                        {
+                            Cosmetic1["Equipped"] = false;
+                            Cosmetic2["Equipped"] = false;
+                            Cosmetic3["Equipped"] = false;
+                            Cosmetic5["Equipped"] = false;
+                            Cosmetic6["Equipped"] = false;
+                        }
+                    }
+                    break;
+
+                case "Cosmetic5":
+                    if (propertyName == "Bought")
+                    {
+                        Cosmetic5["Bought"] = value;
+                    }
+                    else if (propertyName == "Equipped")
+                    {
+                        Cosmetic5["Equipped"] = value;
+                        if (value == true)
+                        {
+                            Cosmetic1["Equipped"] = false;
+                            Cosmetic2["Equipped"] = false;
+                            Cosmetic3["Equipped"] = false;
+                            Cosmetic4["Equipped"] = false;
+                            Cosmetic6["Equipped"] = false;
+                        }
+                    }
+                    break;
+
+                case "Cosmetic6":
+                    if (propertyName == "Bought")
+                    {
+                        Cosmetic6["Bought"] = value;
+                    }
+                    else if (propertyName == "Equipped")
+                    {
+                        Cosmetic6["Equipped"] = value;
+                        if (value == true)
+                        {
+                            Cosmetic1["Equipped"] = false;
+                            Cosmetic2["Equipped"] = false;
+                            Cosmetic3["Equipped"] = false;
+                            Cosmetic4["Equipped"] = false;
+                            Cosmetic5["Equipped"] = false;
+                        }
+                    }
+                    break;
+
+                default:
+                    // Handle unknown cosmetic names
+                    break;
+            }
+            
+            // Save the updated game state
+            SaveGameState();
         }
 
         public void SetHighscore(int highscore)
@@ -136,50 +340,6 @@ namespace Wasmachine9000.Game
             return Pincode;
         }
 
-        public void SetCosmeticStatus(string cosmeticName, bool status)
-        {
-            GamestateData gamestateData = ReadYamlFile(GetGameStateFilePath());
-
-            if (gamestateData.Cosmetic1)
-            {
-                gamestateData.Cosmetic1 = status;
-            }
-            else
-            {
-                // Cosmetic not found; you can handle this case as needed.
-            }
-
-            SaveGameState();
-        }
-
-        public bool GetCosmeticStatus(string cosmeticName)
-        {
-            GamestateData gamestateData = ReadYamlFile(GetGameStateFilePath());
-
-            if (gamestateData != null)
-            {
-                switch (cosmeticName)
-                {
-                    case "Cosmetic1":
-                        return gamestateData.Cosmetic1;
-                    // case "Cosmetic2":
-                    //     return gamestateData.Cosmetic2;
-                    // case "Cosmetic3":
-                    //     return gamestateData.Cosmetic3;
-                    // case "Cosmetic4":
-                    //     return gamestateData.Cosmetic4;
-                    // case "Cosmetic5":
-                    //     return gamestateData.Cosmetic5;
-                    // case "Cosmetic6":
-                    //     return gamestateData.Cosmetic6;
-                    default:
-                        throw new ArgumentException("Invalid cosmetic name.");
-                }
-            }
-
-            return false;
-        }
-
         public static string GetGameStateFilePath()
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -202,6 +362,11 @@ namespace Wasmachine9000.Game
                     Username = Username,
                     Pincode = Pincode,
                     Cosmetic1 = Cosmetic1,
+                    Cosmetic2 = Cosmetic2,
+                    Cosmetic3 = Cosmetic3,
+                    Cosmetic4 = Cosmetic4,
+                    Cosmetic5 = Cosmetic5,
+                    Cosmetic6 = Cosmetic6,
                     MusicSound = MusicSound,
                     SFXSound = SFXSound
                 };
@@ -223,7 +388,6 @@ namespace Wasmachine9000.Game
                     // Read game state file
                     var data = gameState.ReadYamlFile(GetGameStateFilePath());
                 }
-
                 return gameState;
             }
             else
@@ -245,7 +409,12 @@ public class GamestateData
     public int? Highscore { get; set; }
     public string? Username { get; set; }
     public int? Pincode { get; set; }
-    public bool Cosmetic1 { get; set; }
+    public Dictionary<string, bool> Cosmetic1 { get; set; }
+    public Dictionary<string, bool> Cosmetic2 { get; set; }
+    public Dictionary<string, bool> Cosmetic3 { get; set; }
+    public Dictionary<string, bool> Cosmetic4 { get; set; }
+    public Dictionary<string, bool> Cosmetic5 { get; set; }
+    public Dictionary<string, bool> Cosmetic6 { get; set; }
     public bool? MusicSound { get; set; }
     public bool? SFXSound { get; set; }
 }
