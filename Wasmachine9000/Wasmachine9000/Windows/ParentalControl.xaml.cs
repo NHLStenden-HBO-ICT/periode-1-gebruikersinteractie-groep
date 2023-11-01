@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,24 @@ namespace Wasmachine9000.Windows
     /// </summary>
     public partial class ParentalControl : Window
     {
-        public bool PlaytimeToggle;
+        public int slidervalue;
         public ParentalControl()
         {
             InitializeComponent();
+            ToggleButton.IsChecked = App.GameState.PlaytimeControl;
+            TimeSlider.Value = App.GameState.MaxplayTime;
+            changetext();
+
+
+
+
+        }
+
+       
+
+        public void changetext()
+        {
+            limit.Text = "Limiet: " + App.GameState.MaxplayTime + " Minuten";
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -45,22 +60,33 @@ namespace Wasmachine9000.Windows
 
         private void SaveSettings()
         {
-            CheckToggle();  
-            App.GameState.MaxplayTime= (int)TimeSlider.Value;
-            App.GameState.PlaytimeControl = PlaytimeToggle;
-            
+
+            App.GameState.MaxplayTime = (int) TimeSlider.Value;
+            App.GameState.PlaytimeControl = (bool)ToggleButton.IsChecked;
+            App.GameState.SaveGameState();
         }
 
-        public void CheckToggle()
+
+
+
+        private void TimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if((bool)ToggleButton.IsChecked) 
+            double newValue = e.NewValue;
+            double oldValue = e.OldValue;
+
+            // Check if the value actually changed
+            if (newValue != oldValue)
             {
-                PlaytimeToggle = true;
+                SaveSettings();
+                changetext();
             }
-            else
-            {
-                PlaytimeToggle = false;
-            }
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            
+            SaveSettings();
+            changetext();
         }
     }
 }

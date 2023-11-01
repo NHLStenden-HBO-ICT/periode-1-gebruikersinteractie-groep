@@ -25,6 +25,8 @@ namespace Wasmachine9000
             }
 
             App.GameState.PreviousWindow = currentWindow;
+
+          
         }
 
         public static void OpenPreviousWindow()
