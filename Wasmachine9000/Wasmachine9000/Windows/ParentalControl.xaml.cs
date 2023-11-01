@@ -23,9 +23,14 @@ namespace Wasmachine9000.Windows
         public int slidervalue;
         public ParentalControl()
         {
+            int maxPlayTime = App.GameState.MaxplayTime;
+            bool playtimeControl = App.GameState.PlaytimeControl;
+
             InitializeComponent();
-            ToggleButton.IsChecked = App.GameState.PlaytimeControl;
-            TimeSlider.Value = App.GameState.MaxplayTime;
+            TimeSlider.Value = maxPlayTime;
+            ToggleButton.IsChecked = playtimeControl;
+
+            SaveSettings();
             changetext();
 
 
