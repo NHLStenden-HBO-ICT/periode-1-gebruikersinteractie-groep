@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Wasmachine9000.Game;
 
 namespace Wasmachine9000.Windows
@@ -35,11 +24,12 @@ namespace Wasmachine9000.Windows
             ScoreTextBlock.Text = App.GameInfo.PlayerScore.ToString();
             // View coins gained
             CoinsText.Text = App.GameInfo.PlayerCoins.ToString();
-            
+
             GameState gameState = GameState.LoadGameState();
             int coinAmount = gameState.GetCoins();
             gameState.SetCoins(coinAmount + App.GameInfo.PlayerCoins);
         }
+
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -72,7 +62,6 @@ namespace Wasmachine9000.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void PlayAgain_Click(object sender, EventArgs e)
@@ -97,7 +86,7 @@ namespace Wasmachine9000.Windows
 
         private void Playername_IsFilled(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Playername.Text))
+            if (string.IsNullOrWhiteSpace(Playername.Text) || Playername.Text.Trim().Length < 3)
             {
                 PlayAgainButton.Visibility = Visibility.Collapsed;
                 BackHome.Visibility = Visibility.Collapsed;
@@ -112,6 +101,5 @@ namespace Wasmachine9000.Windows
                 PlayAgainButtonDummy.Visibility = Visibility.Collapsed;
             }
         }
-
     }
 }

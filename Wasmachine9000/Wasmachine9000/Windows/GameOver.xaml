@@ -129,7 +129,7 @@
             </Button>
 
             <Border BorderBrush="{x:Null}" Height="50" Margin="0,56,0,56"/>
-            <TextBox HorizontalAlignment="Center" Margin="0,63,0,0" TextWrapping="Wrap"  TextAlignment="Center" VerticalAlignment="Top" Width="254" Height="40" Background="#FF2B2B2B" Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="2" Name="Playername" TextChanged="Playername_IsFilled"/>
+            <TextBox MaxLength="8" HorizontalAlignment="Center" Margin="0,63,0,0" TextWrapping="Wrap"  TextAlignment="Center" VerticalAlignment="Top" Width="254" Height="40" Background="#FF2B2B2B" Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="2" Name="Playername" TextChanged="Playername_IsFilled"/>
 
 
             <Border Grid.Column="1" Grid.Row="1" Width="180" HorizontalAlignment="Right" x:Name="CoinsBorder"
