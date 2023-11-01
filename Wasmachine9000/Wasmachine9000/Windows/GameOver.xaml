@@ -9,7 +9,8 @@
         Title="GameOver" Height="1080" Width="1920"
         RenderOptions.BitmapScalingMode="HighQuality"
         UseLayoutRounding="True"
-        SnapsToDevicePixels="True">
+        SnapsToDevicePixels="True"
+        KeyDown="Window_KeyDown">
 
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
