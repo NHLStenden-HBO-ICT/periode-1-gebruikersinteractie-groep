@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Wasmachine9000.Game.CanvasObject;
 using Wasmachine9000.Game.Entities;
 
@@ -46,7 +44,8 @@ public partial class GameWindow : Window
             int canvasLaneAmount = 5;
             for (int i = 0; i < canvasLaneAmount; i++)
             {
-                _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1) + 30));
+                _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1) +
+                                                30));
             }
 
             // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0,0));
@@ -58,8 +57,6 @@ public partial class GameWindow : Window
             // _backgroundList[0].ChangeSprite("Background/background1.png");
 
             App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
-
-
         };
 
         GameCanvas.Focus(); // Makes keyboard event work
@@ -79,10 +76,9 @@ public partial class GameWindow : Window
         // Register background listener to global game timer
         App.GameTimer.AddListener("backgroundListener", BackgroundTick);
 
-        App.GameInfo.CanvasEntities.AddEntity(new SparksEntity(0,0));
+        App.GameInfo.CanvasEntities.AddEntity(new SparksEntity(0, 0));
 
         // CanvasContainer.Loaded += (sender, args) => App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
-
     }
 
 
@@ -105,7 +101,7 @@ public partial class GameWindow : Window
             {
                 App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
                 App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
-                
+
                 App.GameInfo.CanvasEntities.AddEntity(new CoinEntity(3000, GetRandomCanvasLane().GetLanePosition()));
             }
             else
@@ -126,7 +122,7 @@ public partial class GameWindow : Window
     private void EntitiesTick(object? sender, EventArgs e)
     {
         if (IsGamePaused) return;
-        
+
         // 'Coppies' canvas entities array so it can be modified whilst being looped over.
         foreach (var entity in App.GameInfo.CanvasEntities.GetCanvasEntities().ToArray())
         {
@@ -141,10 +137,11 @@ public partial class GameWindow : Window
             entity.EntityTick();
 
             // Destroy entity when collided with player
-            if (entity is not PlayerEntity && entity is not SparksEntity && entity is not BackgroundScrollerEntity && Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
+            if (entity is not PlayerEntity && entity is not SparksEntity && entity is not BackgroundScrollerEntity &&
+                Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
             {
                 App.GameInfo.CanvasEntities.RemoveEntity(entity);
-                
+
                 if (entity is CoinEntity)
                 {
                     App.GameInfo.PlayerCoins++;
@@ -176,13 +173,19 @@ public partial class GameWindow : Window
         {
             App.GameInfo.GameSpeed = App.GameInfo.MaxGameSpeed;
         }
+    }
 
+    private void HideInstructionText()
+    {
+        if (!InstructionText.IsVisible) return;
+        InstructionText.Visibility = Visibility.Hidden;
     }
 
 
     private void CanvasKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Space) _playerEntity.SetPlayerRising(true);
+        HideInstructionText();
 
         if (e.Key == Key.Escape)
         {
@@ -194,7 +197,8 @@ public partial class GameWindow : Window
                 StopButton.Visibility = Visibility.Hidden;
                 ContinueButton.Visibility = Visibility.Hidden;
                 PauseScreen.Visibility = Visibility.Hidden;
-            } else
+            }
+            else
             {
                 PlayAgainButton.Visibility = Visibility.Visible;
                 StopButton.Visibility = Visibility.Visible;
@@ -280,14 +284,14 @@ public partial class GameWindow : Window
 
     private void ContinueButton_Click(object sender, RoutedEventArgs e)
     {
-       IsGamePaused = !IsGamePaused;
+        IsGamePaused = !IsGamePaused;
 
-       PlayAgainButton.Visibility = Visibility.Hidden;
-       StopButton.Visibility = Visibility.Hidden;
-       ContinueButton.Visibility = Visibility.Hidden;
-       PauseScreen.Visibility = Visibility.Hidden;
+        PlayAgainButton.Visibility = Visibility.Hidden;
+        StopButton.Visibility = Visibility.Hidden;
+        ContinueButton.Visibility = Visibility.Hidden;
+        PauseScreen.Visibility = Visibility.Hidden;
 
-       GameCanvas.Focus();
+        GameCanvas.Focus();
     }
 
 
@@ -314,6 +318,5 @@ public partial class GameWindow : Window
 
         //Helpers.OpenPreviousWindow();
         Helpers.OpenWindow(new GameOver());
-
     }
 }
