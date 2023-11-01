@@ -35,6 +35,13 @@ namespace Wasmachine9000.Windows
             int coinAmount = gameState.GetCoins();
             gameState.SetCoins(coinAmount + App.GameInfo.PlayerCoins);
         }
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Helpers.OpenWindow(new MainWindow());
+            }
+        }
 
         private void MainWindow_Click(object sender, RoutedEventArgs e)
         {
