@@ -97,6 +97,7 @@ public partial class GameWindow : Window
 
     }
 
+
     private void HighscoreTick(object? sender, EventArgs e)
     {
         if (IsGamePaused) return;
@@ -291,21 +292,34 @@ public partial class GameWindow : Window
 
     private void ContinueButton_Click(object sender, RoutedEventArgs e)
     {
+       // IsGamePaused = !IsGamePaused;
+
+      //  PlayAgainButton.Visibility = Visibility.Hidden;
+       // StopButton.Visibility = Visibility.Hidden;
+       // ContinueButton.Visibility = Visibility.Hidden;
+       // PauseScreen.Visibility = Visibility.Hidden;
+
+       GameCanvas.Focus();
+    }
+
+
+    private void PlayAgain_Click(object sender, RoutedEventArgs e)
+    {
         IsGamePaused = !IsGamePaused;
+       // App.GameInfo.PlayerLives = 3;
+       // App.GameInfo.PlayerScore = 0;
+
+       // DisplayPlayerLives();
+
 
         PlayAgainButton.Visibility = Visibility.Hidden;
         StopButton.Visibility = Visibility.Hidden;
         ContinueButton.Visibility = Visibility.Hidden;
         PauseScreen.Visibility = Visibility.Hidden;
 
+        App.GameInfo.Reset();
         GameCanvas.Focus();
     }
-
-    private void PlayAgain_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
-
 
     private void StopButton_Click(object sender, RoutedEventArgs e)
     {
