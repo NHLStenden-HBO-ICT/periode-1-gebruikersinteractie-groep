@@ -292,12 +292,12 @@ public partial class GameWindow : Window
 
     private void ContinueButton_Click(object sender, RoutedEventArgs e)
     {
-       // IsGamePaused = !IsGamePaused;
+       IsGamePaused = !IsGamePaused;
 
-      //  PlayAgainButton.Visibility = Visibility.Hidden;
-       // StopButton.Visibility = Visibility.Hidden;
-       // ContinueButton.Visibility = Visibility.Hidden;
-       // PauseScreen.Visibility = Visibility.Hidden;
+       PlayAgainButton.Visibility = Visibility.Hidden;
+       StopButton.Visibility = Visibility.Hidden;
+       ContinueButton.Visibility = Visibility.Hidden;
+       PauseScreen.Visibility = Visibility.Hidden;
 
        GameCanvas.Focus();
     }
@@ -306,19 +306,15 @@ public partial class GameWindow : Window
     private void PlayAgain_Click(object sender, RoutedEventArgs e)
     {
         IsGamePaused = !IsGamePaused;
-       // App.GameInfo.PlayerLives = 3;
-       // App.GameInfo.PlayerScore = 0;
 
-       // DisplayPlayerLives();
-
-
-        PlayAgainButton.Visibility = Visibility.Hidden;
-        StopButton.Visibility = Visibility.Hidden;
-        ContinueButton.Visibility = Visibility.Hidden;
-        PauseScreen.Visibility = Visibility.Hidden;
+        App.GameTimer.RemoveListener("canvasListener");
+        App.GameTimer.RemoveListener("highscoreListener");
+        App.GameTimer.RemoveListener("entitiesListener");
+        App.GameTimer.RemoveListener("backgroundListener");
 
         App.GameInfo.Reset();
-        GameCanvas.Focus();
+
+        Helpers.OpenWindow(new GameWindow());
     }
 
     private void StopButton_Click(object sender, RoutedEventArgs e)
