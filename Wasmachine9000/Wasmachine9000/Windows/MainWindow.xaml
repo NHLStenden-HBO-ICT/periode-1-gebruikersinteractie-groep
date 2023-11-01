@@ -106,7 +106,7 @@
                     x:Name="Start" Click="Start_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="22.5" Background="#FF00C0FF" MaxHeight="150" MaxWidth="712.5">
+                        <Border CornerRadius="22" Background="#FF00C0FF" MaxHeight="150" MaxWidth="712.5">
                             <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText"
                                        Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 Start
