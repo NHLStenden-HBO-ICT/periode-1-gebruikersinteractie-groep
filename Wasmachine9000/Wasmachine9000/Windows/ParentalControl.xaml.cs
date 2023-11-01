@@ -23,7 +23,7 @@ namespace Wasmachine9000.Windows
         public int slidervalue;
         public ParentalControl()
         {
-            int maxPlayTime = App.GameState.MaxplayTime;
+            int maxPlayTime = App.GameState.MaxplayTime /60;
             bool playtimeControl = App.GameState.PlaytimeControl;
 
             InitializeComponent();
@@ -42,7 +42,7 @@ namespace Wasmachine9000.Windows
 
         public void changetext()
         {
-            limit.Text = "Limiet: " + App.GameState.MaxplayTime + " Minuten";
+            limit.Text = "Limiet: " + App.GameState.MaxplayTime/60 + " Minuten";
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -66,7 +66,7 @@ namespace Wasmachine9000.Windows
         private void SaveSettings()
         {
 
-            App.GameState.MaxplayTime = (int) TimeSlider.Value;
+            App.GameState.MaxplayTime = (int) TimeSlider.Value *60;
             App.GameState.PlaytimeControl = (bool)ToggleButton.IsChecked;
             App.GameState.SaveGameState();
         }

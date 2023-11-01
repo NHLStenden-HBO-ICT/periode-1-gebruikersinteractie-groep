@@ -26,6 +26,7 @@ namespace Wasmachine9000
 
             App.GameState.PreviousWindow = currentWindow;
 
+
           
         }
 
@@ -78,5 +79,7 @@ namespace Wasmachine9000
         {
             return CollidesWith(source, App.GameInfo.Player.GetEntityRectangle());
         }
+
+       
     }
 }

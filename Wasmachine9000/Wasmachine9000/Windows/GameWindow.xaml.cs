@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Wasmachine9000.Game.CanvasObject;
 using Wasmachine9000.Game.Entities;
 
@@ -28,11 +30,23 @@ public partial class GameWindow : Window
 
     private List<BackgroundScrollerEntity> _backgroundList = new List<BackgroundScrollerEntity>();
 
+   public DispatcherTimer parentalcontroltimer = new DispatcherTimer();
+
+    public TimeSpan Timeleft;
+
+
     public GameWindow()
     {
         InitializeComponent();
+        
+        parentalcontroltimer.Tick += Parentalcontroltimer_Tick;
+        parentalcontroltimer.Interval = TimeSpan.FromSeconds(1);
+        parentalcontroltimer.Start();
+
         App.GameInfo.GameCanvas = GameCanvas;
         App.GameInfo.PlayerLives = 3;
+
+  
 
         // Set bottom and ceiling level
         App.GameInfo.FloorLevel = 49;
@@ -93,6 +107,22 @@ public partial class GameWindow : Window
 
         // CanvasContainer.Loaded += (sender, args) => App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
 
+    }
+    
+    private void Parentalcontroltimer_Tick(object? sender, EventArgs e)
+    {
+        App.GameState.PlaytimePassed += 1;
+        Timeleft = TimeSpan.FromSeconds(App.GameState.MaxplayTime - App.GameState.PlaytimePassed);
+        if(Timeleft != TimeSpan.Zero && Timeleft !<= TimeSpan.Zero)
+        {
+            string formattedTime = $"{Timeleft.Minutes:00}:{Timeleft.Seconds:00}";
+            TimeLimit.Text = formattedTime;
+        }
+       else
+        {
+            TimeLimit.Text = "0:00";
+        }
+        
     }
 
     private void HighscoreTick(object? sender, EventArgs e)

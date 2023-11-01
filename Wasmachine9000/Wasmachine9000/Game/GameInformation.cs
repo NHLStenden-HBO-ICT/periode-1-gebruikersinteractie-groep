@@ -25,6 +25,8 @@ public class GameInformation
     public int PlayerCoins = 0;
     public int PlayerLives = 0;
 
+  
+
     public GameInformation()
     {
     }

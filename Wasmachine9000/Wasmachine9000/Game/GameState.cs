@@ -16,6 +16,7 @@ namespace Wasmachine9000.Game
         private int Coins;
         private int Highscore;
 
+
         // User info
         private string Username;
         private int Pincode;
@@ -55,10 +56,13 @@ namespace Wasmachine9000.Game
         public bool SFXSound;
 
         //Parental control settings
+        public DateTime SlotStart;
 
         //Playtime in minutes
         public int MaxplayTime;
         public bool PlaytimeControl;
+        public int PlaytimePassed;
+
 
         // Read and parse the YAML file.
         public GamestateData ReadYamlFile(string filePath)
@@ -114,6 +118,7 @@ namespace Wasmachine9000.Game
                             SFXSound = true,
                             PlaytimeControl = false,
                             MaxplayTime = 0,
+                            PlaytimePassed = 0,
                         };
                     }
 
@@ -147,6 +152,8 @@ namespace Wasmachine9000.Game
                 SFXSound = data.SFXSound ?? true;
                 PlaytimeControl = data.PlaytimeControl ?? false;
                 MaxplayTime = data.MaxplayTime ?? 0;
+                PlaytimePassed = data.PlaytimePassed ?? 0;
+                SlotStart = data.SlotStart ?? DateTime.MinValue;
                 SaveGameState();
             }
         }
@@ -301,6 +308,21 @@ namespace Wasmachine9000.Game
             SaveGameState();
         }
 
+        public bool CheckRemainingPlaytime()
+        {
+            //check if the remaining time is bigger then or equal to the playtimelimit
+            if (App.GameState.PlaytimePassed >= App.GameState.MaxplayTime)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool CheckWaitTimePassed()
+        {
+            return true;
+        }
+
         public void SetHighscore(int highscore)
         {
             Highscore = highscore;
@@ -374,7 +396,10 @@ namespace Wasmachine9000.Game
                     MusicSound = MusicSound,
                     SFXSound = SFXSound,
                     PlaytimeControl = PlaytimeControl,
-                    MaxplayTime = MaxplayTime
+                    MaxplayTime = MaxplayTime,
+                    PlaytimePassed = PlaytimePassed,
+                    SlotStart = SlotStart
+
                 };
                 serializer.Serialize(gameStateFile, GamestateData);
             }
@@ -425,4 +450,7 @@ public class GamestateData
     public bool? MusicSound { get; set; }
     public bool? SFXSound { get; set; }
     public int? MaxplayTime { get; set; }   
+    public int? PlaytimePassed { get; set; }
+    public DateTime? SlotStart { get; set; }
+
 }
