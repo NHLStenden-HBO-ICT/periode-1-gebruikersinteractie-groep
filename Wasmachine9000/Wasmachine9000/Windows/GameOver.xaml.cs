@@ -26,6 +26,11 @@ namespace Wasmachine9000.Windows
         {
             InitializeComponent();
 
+            if (App.GameState.GetUsername() != null)
+            {
+                Playername.Text = App.GameState.GetUsername();
+            }
+
             //View score on the game over screen
             ScoreTextBlock.Text = App.GameInfo.PlayerScore.ToString();
             // View coins gained
@@ -68,6 +73,8 @@ namespace Wasmachine9000.Windows
             string username = playername;
             int score = App.GameInfo.PlayerScore;
             App.Scoreboard.PostScore(username, score);
+
+            App.GameState.SetUsername(username);
 
             Debug.WriteLine("Score gepost!");
 
