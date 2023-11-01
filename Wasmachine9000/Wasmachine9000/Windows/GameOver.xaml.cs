@@ -44,6 +44,8 @@ namespace Wasmachine9000.Windows
         {
             if (e.Key == Key.Escape)
             {
+                App.GameInfo.Reset();
+
                 Helpers.OpenWindow(new MainWindow());
             }
         }
@@ -57,6 +59,8 @@ namespace Wasmachine9000.Windows
             string username = playername;
             int score = App.GameInfo.PlayerScore;
             App.Scoreboard.PostScore(username, score);
+
+            App.GameState.SetUsername(username);
 
             Debug.WriteLine("Score gepost!");
 
