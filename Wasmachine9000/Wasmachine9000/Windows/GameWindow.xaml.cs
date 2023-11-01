@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Wasmachine9000.Game.CanvasObject;
 using Wasmachine9000.Game.Entities;
+using YamlDotNet.Serialization;
 
 namespace Wasmachine9000.Windows;
 
@@ -197,6 +198,7 @@ public partial class GameWindow : Window
                 StopButton.Visibility = Visibility.Hidden;
                 ContinueButton.Visibility = Visibility.Hidden;
                 PauseScreen.Visibility = Visibility.Hidden;
+                Settings.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -204,6 +206,7 @@ public partial class GameWindow : Window
                 StopButton.Visibility = Visibility.Visible;
                 ContinueButton.Visibility = Visibility.Visible;
                 PauseScreen.Visibility = Visibility.Visible;
+                Settings.Visibility = Visibility.Visible;
             }
         }
     }
@@ -290,6 +293,7 @@ public partial class GameWindow : Window
         StopButton.Visibility = Visibility.Hidden;
         ContinueButton.Visibility = Visibility.Hidden;
         PauseScreen.Visibility = Visibility.Hidden;
+        Settings.Visibility = Visibility.Hidden;
 
         GameCanvas.Focus();
     }
@@ -318,5 +322,10 @@ public partial class GameWindow : Window
 
         //Helpers.OpenPreviousWindow();
         Helpers.OpenWindow(new GameOver());
+    }
+
+    private void Settings_Click(object sender, RoutedEventArgs e)
+    {
+        Helpers.OpenWindow(new Instellingen());
     }
 }

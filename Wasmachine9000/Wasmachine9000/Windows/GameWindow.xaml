@@ -40,9 +40,6 @@
                     <TextBlock  Foreground="White" FontSize="50" FontFamily="Baloo Bhai 2 SemiBold">Druk op spatie om omhoog te gaan.</TextBlock>
                 </Border>
 
-                <Border x:Name="PauseScreen" Visibility="Hidden" Background="#FF202020" CornerRadius="22.5" BorderThickness="21,0,0,0" Height="445" Canvas.Top="187" Width="906" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="322" >
-                    <TextBlock FontSize="64" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" Height="148.5" HorizontalAlignment="Left" Margin="349,34,0,262" ><Run Language="nl-nl" Text="Pauze"/></TextBlock>
-                </Border>
             </Canvas>
 
             <Grid Grid.Column="2" HorizontalAlignment="Right" Margin="10" >
@@ -223,7 +220,10 @@
                 <!-- <TextBlock Text="0000000" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" /> -->
                 <!-- </Border> -->
             </Grid>
-            <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="354,100,324,62" Grid.RowSpan="2">
+            <Border Grid.RowSpan="3" x:Name="PauseScreen" Visibility="Hidden" Background="#FF202020" Margin="345,41,345,11" CornerRadius="22.5" Grid.ColumnSpan="3" Grid.Row="1" >
+                <TextBlock FontSize="64" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText_Copy" Foreground="White" Height="148.5" HorizontalAlignment="Center" Margin="0,35,0,250" ><Run Language="nl-nl" Text="Pauze"/></TextBlock>
+            </Border>
+            <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="345,103,344,81" Grid.RowSpan="2">
                 <Button x:Name="StopButton" Visibility="Hidden" IsEnabled="True" Width="250" HorizontalAlignment="Center" FontFamily="Baloo Bhai 2" Click="StopButton_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -246,7 +246,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button x:Name="ContinueButton" Width="250" Visibility="Hidden" IsEnabled="True" HorizontalAlignment="Left" Margin="28,4,0,4" Background="White" Click="ContinueButton_Click">
+                <Button x:Name="ContinueButton" Width="250" Visibility="Hidden" IsEnabled="True" HorizontalAlignment="Left" Margin="10,4,0,4" Background="White" Click="ContinueButton_Click">
                     <Button.Template>
                         <ControlTemplate>
                             <Border CornerRadius="22.5" Background="#FF00FF0F" MaxHeight="120">
@@ -254,8 +254,21 @@
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
-                <Button x:Name="PlayAgainButton" Visibility="Hidden" IsEnabled="True" Width="250" HorizontalAlignment="Left" Margin="585,0,0,0" FontFamily="Baloo Bhai 2" Click="PlayAgain_Click">
+                <Button x:Name="PlayAgainButton" Visibility="Hidden" IsEnabled="True" Width="250" HorizontalAlignment="Left" Margin="602,0,0,0" FontFamily="Baloo Bhai 2" Click="PlayAgain_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border CornerRadius="22.5" Background="#FF00C0FF" MaxHeight="120">
@@ -280,7 +293,31 @@
             </Grid>
 
 
+
         </Grid>
+        <Button Margin="569,367,1256,620" Visibility="Hidden" x:Name="Settings" Click="Settings_Click" BorderBrush="{x:Null}"
+            Background="Transparent" Width="120" Height="120">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image Source="/Instellingen.png" />
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 
 
