@@ -32,15 +32,37 @@
                 <ColumnDefinition Width="400px" />
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.Column="1" CornerRadius="22.5" Background="#FF00C0FF" MaxHeight="130" MaxWidth="712.5" Margin="0,15,0,0" VerticalAlignment="Center" >
-                <TextBlock FontSize="108" FontFamily="Baloo Bhai 2 SemiBold" x:Name="WinkelText" FontWeight="600" Foreground="White" HorizontalAlignment="Center" ><Run Text="Winkel"/></TextBlock>
+                <TextBlock FontSize="100" FontFamily="Baloo Bhai 2 SemiBold" x:Name="WinkelText" FontWeight="600" Foreground="White" HorizontalAlignment="Center" ><Run Text="Winkel"/></TextBlock>
             </Border>
+            <Button Grid.Column="2" Grid.Row="0" Width="150" HorizontalAlignment="Left" Margin="100,0,0,0" x:Name="Back" Click="Back_OnClick">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#FFFF7200" MaxHeight="120">
+                            <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Terug</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Border Grid.Row="1" Grid.Column="1" CornerRadius="15" Background="#74777E" Height="45" MaxHeight="100" Width="190" MaxWidth="712.5" Margin="20,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="140" />
                         <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" x:Name="CoinsText" FontWeight="600" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" MaxHeight="100" Width="160" MaxWidth="240" Margin="10,-5,0,0">901</TextBlock>
+                    <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" x:Name="CoinsText" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Height="55" MaxHeight="100" Width="160" MaxWidth="240" Margin="10,-5,0,0">901</TextBlock>
                     <Image Grid.Column="1" Height="30">
                         <Image.Source>
                             <DrawingImage>
