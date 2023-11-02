@@ -183,7 +183,7 @@ public partial class GameWindow : Window
                     DisplayPlayerLives();
                 }
 
-                // if (App.GameInfo.PlayerLives <= 0) Exit();
+                if (App.GameInfo.PlayerLives <= 0) Exit();
             }
         }
     }
