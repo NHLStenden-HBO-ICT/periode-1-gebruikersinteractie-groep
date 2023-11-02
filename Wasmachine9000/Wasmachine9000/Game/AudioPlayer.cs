@@ -9,6 +9,11 @@ namespace Wasmachine9000.Game
         public MediaPlayer MusicPlayer = new MediaPlayer();
         public MediaPlayer SFXPlayer = new MediaPlayer();
 
+        public AudioPlayer()
+        {
+            MusicPlayer.MediaEnded += (sender, args) => { MusicPlayer.Position = TimeSpan.Zero; };
+        }
+
         public void StartMusic()
         {
             // Load and play the default audio file during initialization
@@ -24,9 +29,9 @@ namespace Wasmachine9000.Game
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
 
-            SFXPlayer.Stop();
-            SFXPlayer.Open(new Uri(filePath));
-            SFXPlayer.Play();
+            MusicPlayer.Stop();
+            MusicPlayer.Open(new Uri(filePath));
+            MusicPlayer.Play();
         }
 
         public void LoadAndPlaySFX(string fileName)

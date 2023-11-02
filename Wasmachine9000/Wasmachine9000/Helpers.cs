@@ -50,6 +50,10 @@ namespace Wasmachine9000
                     if (previousWindow is GameWindow) App.AudioPlayer.LoadAndPlayMusic("Menu theme.wav");
                     break;
 
+                case GameOver:
+                    App.AudioPlayer.LoadAndPlayMusic("Game over.wav");
+                    break;
+
                 case GameWindow:
                     App.AudioPlayer.LoadAndPlayMusic("Ingame.wav");
                     break;
