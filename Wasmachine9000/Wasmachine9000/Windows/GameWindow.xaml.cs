@@ -52,11 +52,11 @@ public partial class GameWindow : Window
             App.GameInfo.CeilingLevel = CanvasContainer.ActualHeight;
 
             // Create canvas lanes
-            int canvasLaneAmount = 5;
+            int canvasLaneAmount = 6;
             for (int i = 0; i < canvasLaneAmount; i++)
             {
                 _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1) +
-                                                27));
+                                                20));
             }
 
             // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0,0));
