@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Wasmachine9000.Windows
 {
@@ -20,10 +8,9 @@ namespace Wasmachine9000.Windows
     /// </summary>
     public partial class ParentalControl : Window
     {
-        public int slidervalue;
         public ParentalControl()
         {
-            int maxPlayTime = App.GameState.MaxplayTime /60;
+            int maxPlayTime = App.GameState.MaxplayTime / 60;
             bool playtimeControl = App.GameState.PlaytimeControl;
 
             InitializeComponent();
@@ -32,17 +19,12 @@ namespace Wasmachine9000.Windows
 
             SaveSettings();
             changetext();
-
-
-
-
         }
 
-       
 
         public void changetext()
         {
-            limit.Text = "Limiet: " + App.GameState.MaxplayTime/60 + " Minuten";
+            limit.Text = "Limiet: " + App.GameState.MaxplayTime / 60 + " Minuten";
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -54,24 +36,19 @@ namespace Wasmachine9000.Windows
             }
         }
 
-      
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             SaveSettings();
             Helpers.OpenWindow(new MainWindow());
-            
         }
 
         private void SaveSettings()
         {
-
-            App.GameState.MaxplayTime = (int) TimeSlider.Value *60;
+            App.GameState.MaxplayTime = (int)TimeSlider.Value * 60;
             App.GameState.PlaytimeControl = (bool)ToggleButton.IsChecked;
             App.GameState.SaveGameState();
         }
-
-
 
 
         private void TimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -89,7 +66,6 @@ namespace Wasmachine9000.Windows
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-            
             SaveSettings();
             changetext();
         }

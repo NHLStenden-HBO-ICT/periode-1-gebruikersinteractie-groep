@@ -26,26 +26,31 @@ namespace Wasmachine9000.Game
             { "Bought", false },
             { "Equipped", false }
         };
+
         public Dictionary<string, bool> Cosmetic2 { get; set; } = new Dictionary<string, bool>
         {
             { "Bought", false },
             { "Equipped", false }
         };
+
         public Dictionary<string, bool> Cosmetic3 { get; set; } = new Dictionary<string, bool>
         {
             { "Bought", false },
             { "Equipped", false }
         };
+
         public Dictionary<string, bool> Cosmetic4 { get; set; } = new Dictionary<string, bool>
         {
             { "Bought", false },
             { "Equipped", false }
         };
+
         public Dictionary<string, bool> Cosmetic5 { get; set; } = new Dictionary<string, bool>
         {
             { "Bought", false },
             { "Equipped", false }
         };
+
         public Dictionary<string, bool> Cosmetic6 { get; set; } = new Dictionary<string, bool>
         {
             { "Bought", false },
@@ -56,7 +61,7 @@ namespace Wasmachine9000.Game
         public bool SFXSound;
 
         //Parental control settings
-        public DateTime SlotStart;
+        public DateTime PlayLockedUntil;
 
         //Playtime in minutes
         public int MaxplayTime;
@@ -119,6 +124,7 @@ namespace Wasmachine9000.Game
                             PlaytimeControl = false,
                             MaxplayTime = 0,
                             PlaytimePassed = 0,
+                            PlayLockedUntil = null
                         };
                     }
 
@@ -153,7 +159,7 @@ namespace Wasmachine9000.Game
                 PlaytimeControl = data.PlaytimeControl ?? false;
                 MaxplayTime = data.MaxplayTime ?? 0;
                 PlaytimePassed = data.PlaytimePassed ?? 0;
-                SlotStart = data.SlotStart ?? DateTime.MinValue;
+                PlayLockedUntil = data.PlayLockedUntil ?? DateTime.MinValue;
                 SaveGameState();
             }
         }
@@ -168,10 +174,11 @@ namespace Wasmachine9000.Game
         {
             return Coins;
         }
-        
+
         public Dictionary<string, Dictionary<string, bool>> GetAllCosmetics()
         {
-            Dictionary<string, Dictionary<string, bool>> allCosmetics = new Dictionary<string, Dictionary<string, bool>>();
+            Dictionary<string, Dictionary<string, bool>> allCosmetics =
+                new Dictionary<string, Dictionary<string, bool>>();
             allCosmetics.Add("Cosmetic1", Cosmetic1);
             allCosmetics.Add("Cosmetic2", Cosmetic2);
             allCosmetics.Add("Cosmetic3", Cosmetic3);
@@ -181,6 +188,7 @@ namespace Wasmachine9000.Game
 
             return allCosmetics;
         }
+
         public void UpdateCosmetic(string cosmeticName, string propertyName, bool value)
         {
             switch (cosmeticName)
@@ -202,6 +210,7 @@ namespace Wasmachine9000.Game
                             Cosmetic6["Equipped"] = false;
                         }
                     }
+
                     break;
 
                 case "Cosmetic2":
@@ -221,6 +230,7 @@ namespace Wasmachine9000.Game
                             Cosmetic6["Equipped"] = false;
                         }
                     }
+
                     break;
 
                 case "Cosmetic3":
@@ -240,6 +250,7 @@ namespace Wasmachine9000.Game
                             Cosmetic6["Equipped"] = false;
                         }
                     }
+
                     break;
 
                 case "Cosmetic4":
@@ -259,6 +270,7 @@ namespace Wasmachine9000.Game
                             Cosmetic6["Equipped"] = false;
                         }
                     }
+
                     break;
 
                 case "Cosmetic5":
@@ -278,6 +290,7 @@ namespace Wasmachine9000.Game
                             Cosmetic6["Equipped"] = false;
                         }
                     }
+
                     break;
 
                 case "Cosmetic6":
@@ -297,13 +310,14 @@ namespace Wasmachine9000.Game
                             Cosmetic5["Equipped"] = false;
                         }
                     }
+
                     break;
 
                 default:
                     // Handle unknown cosmetic names
                     break;
             }
-            
+
             // Save the updated game state
             SaveGameState();
         }
@@ -315,6 +329,7 @@ namespace Wasmachine9000.Game
             {
                 return false;
             }
+
             return true;
         }
 
@@ -374,9 +389,6 @@ namespace Wasmachine9000.Game
 
         public bool SaveGameState()
         {
-            // Get %appdata% folder
-            string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
             // Open file %appdata%.wasmachine9000.yaml
             using (StreamWriter gameStateFile = new StreamWriter(GetGameStateFilePath()))
             {
@@ -398,8 +410,7 @@ namespace Wasmachine9000.Game
                     PlaytimeControl = PlaytimeControl,
                     MaxplayTime = MaxplayTime,
                     PlaytimePassed = PlaytimePassed,
-                    SlotStart = SlotStart
-
+                    PlayLockedUntil = PlayLockedUntil
                 };
                 serializer.Serialize(gameStateFile, GamestateData);
             }
@@ -419,6 +430,7 @@ namespace Wasmachine9000.Game
                     // Read game state file
                     var data = gameState.ReadYamlFile(GetGameStateFilePath());
                 }
+
                 return gameState;
             }
             else
@@ -449,8 +461,7 @@ public class GamestateData
     public Dictionary<string, bool> Cosmetic6 { get; set; }
     public bool? MusicSound { get; set; }
     public bool? SFXSound { get; set; }
-    public int? MaxplayTime { get; set; }   
+    public int? MaxplayTime { get; set; }
     public int? PlaytimePassed { get; set; }
-    public DateTime? SlotStart { get; set; }
-
+    public DateTime? PlayLockedUntil { get; set; }
 }

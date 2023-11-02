@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -70,6 +71,12 @@ namespace Wasmachine9000
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            if (App.GameState.PlayLockedUntil > DateTime.Now)
+            {
+                MessageBox.Show("Je mag niet spelen :(. Je moet wachten tot " + App.GameState.PlayLockedUntil);
+                return;
+            }
+
             Helpers.OpenWindow(new GameWindow());
         }
 

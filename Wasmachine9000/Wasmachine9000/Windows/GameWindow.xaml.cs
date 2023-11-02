@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Wasmachine9000.Game.CanvasObject;
 using Wasmachine9000.Game.Entities;
@@ -15,38 +12,34 @@ namespace Wasmachine9000.Windows;
 public partial class GameWindow : Window
 {
     private double _backgroundTracker;
-    // public static variables needed by other parts of the game
 
     private readonly List<CanvasLane> _canvasLanes = new();
     private CanvasLane? _lastLane;
 
     // Player
     private readonly PlayerEntity _playerEntity;
-
     private double _playerScoreTracker;
 
 
-    private List<ImageBrush> _backgroundBrushes = new List<ImageBrush>();
-
     private List<BackgroundScrollerEntity> _backgroundList = new List<BackgroundScrollerEntity>();
 
-   public DispatcherTimer parentalcontroltimer = new DispatcherTimer();
-
-    public TimeSpan Timeleft;
+    // Parental control trackers
+    private DispatcherTimer _parentalControlTimer = new();
+    private TimeSpan _timeLeft;
 
 
     public GameWindow()
     {
         InitializeComponent();
-        
-        parentalcontroltimer.Tick += Parentalcontroltimer_Tick;
-        parentalcontroltimer.Interval = TimeSpan.FromSeconds(1);
-        parentalcontroltimer.Start();
+
+        // Parent controll timer
+        _parentalControlTimer.Tick += ParentalControlTimerTick;
+        _parentalControlTimer.Interval = TimeSpan.FromSeconds(1);
+        _parentalControlTimer.Start();
 
         App.GameInfo.GameCanvas = GameCanvas;
         App.GameInfo.PlayerLives = 3;
 
-  
 
         // Set bottom and ceiling level
         App.GameInfo.FloorLevel = 49;
@@ -58,7 +51,8 @@ public partial class GameWindow : Window
             int canvasLaneAmount = 5;
             for (int i = 0; i < canvasLaneAmount; i++)
             {
-                _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1) + 30));
+                _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1) +
+                                                30));
             }
 
             // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0,0));
@@ -82,8 +76,6 @@ public partial class GameWindow : Window
             // test.ChangeSprite("Background/background1.png");
 
             App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
-
-
         };
 
         GameCanvas.Focus(); // Makes keyboard event work
@@ -103,26 +95,33 @@ public partial class GameWindow : Window
         // Register background listener to global game timer
         App.GameTimer.AddListener("backgroundListener", BackgroundTick);
 
-        App.GameInfo.CanvasEntities.AddEntity(new SparksEntity(0,0));
+        App.GameInfo.CanvasEntities.AddEntity(new SparksEntity(0, 0));
 
         // CanvasContainer.Loaded += (sender, args) => App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
-
     }
-    
-    private void Parentalcontroltimer_Tick(object? sender, EventArgs e)
+
+    private void ParentalControlTimerTick(object? sender, EventArgs e)
     {
+        // Increase time played.
         App.GameState.PlaytimePassed += 1;
-        Timeleft = TimeSpan.FromSeconds(App.GameState.MaxplayTime - App.GameState.PlaytimePassed);
-        if((Timeleft != TimeSpan.Zero) && Timeleft !<= TimeSpan.Zero)
+
+        _timeLeft = TimeSpan.FromSeconds(App.GameState.MaxplayTime - App.GameState.PlaytimePassed);
+        if (_timeLeft > TimeSpan.Zero)
         {
-            string formattedTime = $"{Timeleft.Minutes:00}:{Timeleft.Seconds:00}";
-            TimeLimit.Text = formattedTime;
+            // Display left over time.
+            TimeLimit.Text = $"{_timeLeft.Minutes:00}:{_timeLeft.Seconds:00}";
         }
-       else
+        else
         {
+            // Set player locked date one hour from now and reset play time passed.
+            App.GameState.PlayLockedUntil = DateTime.Now + TimeSpan.FromHours(1);
+            App.GameState.PlaytimePassed = 0;
+            App.GameState.SaveGameState();
+
             TimeLimit.Text = "0:00";
+
+            Exit();
         }
-        
     }
 
     private void HighscoreTick(object? sender, EventArgs e)
@@ -142,7 +141,7 @@ public partial class GameWindow : Window
             {
                 App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
                 App.GameInfo.CanvasEntities.AddEntity(new DirtyClothes(2000, GetRandomCanvasLane().GetLanePosition()));
-                
+
                 App.GameInfo.CanvasEntities.AddEntity(new CoinEntity(3000, GetRandomCanvasLane().GetLanePosition()));
             }
             else
@@ -175,17 +174,18 @@ public partial class GameWindow : Window
             entity.EntityTick();
 
             // Destroy entity when collided with player
-            if (entity is not PlayerEntity && entity is not SparksEntity && entity is not BackgroundScrollerEntity && Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
+            if (entity is not PlayerEntity && entity is not SparksEntity && entity is not BackgroundScrollerEntity &&
+                Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
             {
                 App.GameInfo.CanvasEntities.RemoveEntity(entity);
-                
+
                 if (entity is CoinEntity)
                 {
                     App.GameInfo.PlayerCoins++;
                 }
                 else
                 {
-                    App.GameInfo.PlayerLives--;
+                    // App.GameInfo.PlayerLives--;
                     DisplayPlayerLives();
                 }
 
@@ -196,7 +196,6 @@ public partial class GameWindow : Window
 
     private void BackgroundTick(object? sender, EventArgs e)
     {
-
         _backgroundTracker += App.GameTimer.DeltaTime;
 
         // increase speed if conditions are met
@@ -209,7 +208,6 @@ public partial class GameWindow : Window
         {
             App.GameInfo.GameSpeed = App.GameInfo.MaxGameSpeed;
         }
-
     }
 
 

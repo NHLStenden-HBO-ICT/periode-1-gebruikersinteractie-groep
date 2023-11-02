@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Wasmachine9000.Game;
 
 namespace Wasmachine9000.Windows
@@ -34,7 +22,6 @@ namespace Wasmachine9000.Windows
             GameState gameState = GameState.LoadGameState();
             int coinAmount = gameState.GetCoins();
             gameState.SetCoins(coinAmount + App.GameInfo.PlayerCoins);
-            
         }
 
         private void MainWindow_Click(object sender, RoutedEventArgs e)
@@ -57,7 +44,6 @@ namespace Wasmachine9000.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void PlayAgain_Click(object sender, EventArgs e)
@@ -74,6 +60,13 @@ namespace Wasmachine9000.Windows
 
             // Reset score
             App.GameInfo.Reset();
+
+            if (App.GameState.PlayLockedUntil > DateTime.Now)
+            {
+                MessageBox.Show("Je mag niet spelen :(. Je moet wachten tot " + App.GameState.PlayLockedUntil);
+                Helpers.OpenWindow(new MainWindow());
+                return;
+            }
 
             Helpers.OpenWindow(new GameWindow());
         }
@@ -95,6 +88,5 @@ namespace Wasmachine9000.Windows
                 PlayAgainButtonDummy.Visibility = Visibility.Collapsed;
             }
         }
-
     }
 }
