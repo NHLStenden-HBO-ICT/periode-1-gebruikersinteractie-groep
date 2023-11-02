@@ -9,33 +9,7 @@
         Title="MainWindow" Height="1080" Width="1920"
         KeyDown="Window_KeyDown"
         >
-    <Window.Resources>
-        <Style x:Key="RoundedSliderStyle" TargetType="Slider">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Slider">
-                        <Grid>
-                            <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5" />
-                            <Track x:Name="PART_Track">
-                                <Track.DecreaseRepeatButton>
-                                    <RepeatButton Command="Slider.DecreaseLarge" />
-                                </Track.DecreaseRepeatButton>
-                                <Track.IncreaseRepeatButton>
-                                    <RepeatButton Command="Slider.IncreaseLarge" />
-                                </Track.IncreaseRepeatButton>
-                                <Track.Thumb>
-                                    <Thumb Name="Thumb" />
-                                </Track.Thumb>
-                            </Track>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+
 
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
@@ -147,7 +121,10 @@
                     </Style>
                 </Button.Style>
             </Button>
-               
+            <Slider x:Name="MainSlider" Minimum="0" Maximum="1" Grid.Row="1" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="MainSlider_ValueChanged" ></Slider>
+            <Slider x:Name="MusicSlider" Minimum="0" Maximum="1" Grid.Row="2" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="MusicSlider_ValueChanged" ></Slider>
+            <Slider x:Name="SFXSlider" Minimum="0" Maximum="1" Grid.Row="3" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="VFXSlider_ValueChanged" ></Slider>
         </Grid>
     </Grid>
+
 </Window>

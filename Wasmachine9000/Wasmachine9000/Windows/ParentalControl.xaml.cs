@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Wasmachine9000.Windows
 {
@@ -19,10 +9,30 @@ namespace Wasmachine9000.Windows
     /// </summary>
     public partial class ParentalControl : Window
     {
-        public bool PlaytimeToggle;
         public ParentalControl()
         {
+            int maxPlayTime = App.GameState.MaxplayTime / 60;
+            bool playtimeControl = App.GameState.PlaytimeControl;
+
             InitializeComponent();
+            TimeSlider.Value = maxPlayTime;
+            ToggleButton.IsChecked = playtimeControl;
+
+            SaveSettings();
+            changetext();
+
+            if (App.GameState.GetPincode() != 0)
+            {
+                PincodeInstructie.Text =
+                    "Voor een nieuwe pincoe in en druk op `opslaan` om een nieuwe pincode in te stellen";
+                PincodeInstructie.FontSize = 20;
+            }
+        }
+
+
+        public void changetext()
+        {
+            limit.Text = "Limiet: " + App.GameState.MaxplayTime / 60 + " Minuten";
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -34,33 +44,69 @@ namespace Wasmachine9000.Windows
             }
         }
 
-      
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             SaveSettings();
             Helpers.OpenWindow(new MainWindow());
-            
         }
 
         private void SaveSettings()
         {
-            CheckToggle();  
-            App.GameState.MaxplayTime= (int)TimeSlider.Value;
-            App.GameState.PlaytimeControl = PlaytimeToggle;
-            
+            App.GameState.MaxplayTime = (int)TimeSlider.Value * 60;
+            App.GameState.PlaytimeControl = (bool)ToggleButton.IsChecked;
+            App.GameState.SaveGameState();
         }
 
-        public void CheckToggle()
+
+        private void TimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if((bool)ToggleButton.IsChecked) 
+            double newValue = e.NewValue;
+            double oldValue = e.OldValue;
+
+            // Check if the value actually changed
+            if (newValue != oldValue)
             {
-                PlaytimeToggle = true;
+                SaveSettings();
+                changetext();
             }
-            else
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SaveSettings();
+            changetext();
+        }
+
+        private void NumericOnly(object sender, TextCompositionEventArgs e)
+        {
+            if (IsTextNumeric(e.Text))
             {
-                PlaytimeToggle = false;
+                e.Handled = true;
             }
+
+            if (PincodeInput.Text.Length >= 4)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private static bool IsTextNumeric(string str)
+        {
+            System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("[^1-9]");
+            return reg.IsMatch(str);
+        }
+
+        private void SavePincodeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            App.GameState.SetPincode(Convert.ToInt32(PincodeInput.Text));
+            PincodeInstructie.Text = "Nieuwe pincode is ingesteld.";
+            PincodeInstructie.FontSize = 40;
+        }
+
+        private void Back_OnClick(object sender, RoutedEventArgs e)
+        {
+            Helpers.OpenWindow(new MainWindow());
         }
     }
 }

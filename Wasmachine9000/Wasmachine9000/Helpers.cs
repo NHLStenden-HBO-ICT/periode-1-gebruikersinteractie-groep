@@ -25,6 +25,9 @@ namespace Wasmachine9000
             }
 
             App.GameState.PreviousWindow = currentWindow;
+
+
+          
         }
 
         public static void OpenPreviousWindow()
@@ -46,6 +49,10 @@ namespace Wasmachine9000
             {
                 case MainWindow:
                     if (previousWindow is GameWindow) App.AudioPlayer.LoadAndPlayMusic("Menu theme.wav");
+                    break;
+
+                case GameOver:
+                    App.AudioPlayer.LoadAndPlayMusic("Game over.wav");
                     break;
 
                 case GameWindow:
@@ -76,5 +83,7 @@ namespace Wasmachine9000
         {
             return CollidesWith(source, App.GameInfo.Player.GetEntityRectangle());
         }
+
+       
     }
 }

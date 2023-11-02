@@ -9,33 +9,7 @@
         Title="MainWindow" Height="1080" Width="1920"
         KeyDown="Window_KeyDown"
         >
-    <Window.Resources>
-        <Style x:Key="CustomEllipseToggleButtonStyle" TargetType="ToggleButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
-                        <Grid>
-                            <Ellipse x:Name="ellipse"
-                                     Width="60"
-                                     Height="50"
-                                     Fill="Transparent"
-                                     Stroke="Black"
-                                     StrokeThickness="1"/>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="ellipse" Property="Fill" Value="#00C0FF"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter TargetName="ellipse" Property="Fill" Value="Red"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+   
 
 
     <Grid Background="Black">
@@ -69,14 +43,7 @@
                 </TextBlock>
             </Border>
 
-            <ToggleButton Name="ToggleButton" Grid.Row="2" Style="{StaticResource CustomEllipseToggleButtonStyle}" Width="200" Height="100"/>
-
-            <Border Grid.Row="2" Grid.Column="1" Background="Purple" CornerRadius="22.5" Width="700" Height="60">
-                <Slider Name="TimeSlider" Width="650" Height="40" Minimum="0" Maximum="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
-            </Border>
-
-
-            <Button Grid.Column="2" Grid.Row="0" Width="150" HorizontalAlignment="Left" Margin="100,0,0,0" x:Name="Back" Click="Back_Click">
+            <Button Grid.Column="2" Grid.Row="0" Width="150" HorizontalAlignment="Left" Margin="100,0,0,0" x:Name="Back" Click="Back_OnClick">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="22.5" Background="#FFFF7200" MaxHeight="120">
@@ -98,6 +65,63 @@
                     </Style>
                 </Button.Style>
             </Button>
+
+            <Border Grid.Row="2" Grid.Column="1" Background="#8b00ff" CornerRadius="22.5" Width="700" Height="60">
+                <Slider Name="TimeSlider" Width="650" Height="40" Minimum="0" Maximum="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" ValueChanged="TimeSlider_ValueChanged"/>
+            </Border>
+
+            <CheckBox Name="ToggleButton" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked">
+                <CheckBox.RenderTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3" />
+                </CheckBox.RenderTransform>
+            </CheckBox>
+            
+            <Grid Grid.Row="4" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500" />
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PincodeInstructie" Grid.ColumnSpan="2" FontSize="40" FontFamily="Baloo Bhai 2 SemiBold">Er is nog geen pincode ingesteld. </TextBlock>
+                
+                <Border Grid.Column="0" Grid.Row="1" CornerRadius="22">
+                    <TextBox x:Name="PincodeInput" FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" PreviewTextInput="NumericOnly"/>
+                </Border>
+                <Button Grid.Row="1" Grid.Column="1" x:Name="SavePincodeButton" Click="SavePincodeButton_OnClick" IsEnabled="True" Width="240" HorizontalAlignment="Left" Margin="10,4,0,4" Background="White">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="22.5" Background="#FF00FF0F" MaxHeight="120">
+                                <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">Opslaan</TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+            </Grid>
+            
+
+
+            
+
+            <TextBlock Text="Schuif om tijdslimiet in te stellen" Grid.Column="1" Grid.Row="2" FontFamily="Baloo Bhai 2" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" />
+            <TextBlock Text="" x:Name="limit" Grid.Column="1" Grid.Row="3" FontFamily="Baloo Bhai 2" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" />
 
         </Grid>
     </Grid>

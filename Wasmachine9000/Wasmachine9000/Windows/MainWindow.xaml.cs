@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using Wasmachine9000.Game;
 using Wasmachine9000.Windows;
 
@@ -14,6 +17,7 @@ namespace Wasmachine9000
     public partial class MainWindow : Window
     {
         private List<ScoreboardItem> _scoreboard = new();
+        public DispatcherTimer ScoreboardTimer = new DispatcherTimer();
 
         public MainWindow()
         {
@@ -25,14 +29,27 @@ namespace Wasmachine9000
 
             _scoreboard = App.Scoreboard.GetScoreboard();
             UpdateScoreboard(_scoreboard);
+            ScoreboardTimer.Interval= TimeSpan.FromSeconds(10);
+            ScoreboardTimer.Tick += ScoreboardTimer_Tick;
+            ScoreboardTimer.Start();    
+        }
+
+        private void ScoreboardTimer_Tick(object? sender, EventArgs e)
+        {
+            _scoreboard = App.Scoreboard.GetScoreboard();
+            UpdateScoreboard(_scoreboard);
         }
 
         private void UpdateScoreboard(List<ScoreboardItem> scoreboard)
         {
             int scoreIndex = 1;
 
+            // copy scorevoard
+            List<UIElement> childrenCopy = new List<UIElement>(ScoreboardContainer.Children.OfType<UIElement>());
+
+
             // Clear all items on the grid except the title text
-            foreach (UIElement child in ScoreboardContainer.Children)
+            foreach (UIElement child in childrenCopy)
             {
                 if (child is not Border) ScoreboardContainer.Children.Remove(child);
             }
@@ -70,6 +87,12 @@ namespace Wasmachine9000
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            if (App.GameState.PlayLockedUntil > DateTime.Now && App.GameState.PlaytimeControl)
+            {
+                MessageBox.Show("Je mag niet spelen :(. Je moet wachten tot " + App.GameState.PlayLockedUntil);
+                return;
+            }
+
             Helpers.OpenWindow(new GameWindow());
         }
 
@@ -81,6 +104,12 @@ namespace Wasmachine9000
 
         private void Oudermenu_Click(object sender, RoutedEventArgs e)
         {
+            if (App.GameState.GetPincode() == 0)
+            {
+                Helpers.OpenWindow(new ParentalControl());
+                return;
+            }
+
             Helpers.OpenWindow(new ParentPin());
         }
 

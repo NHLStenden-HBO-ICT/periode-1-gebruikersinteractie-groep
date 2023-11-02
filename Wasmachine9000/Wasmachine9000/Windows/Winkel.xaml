@@ -126,10 +126,10 @@
                         <Style TargetType="Button">
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FF00FFFF" />
+                                    <Setter Property="Background" Value="#74777E" />
                                     <Setter Property="Effect">
                                         <Setter.Value>
-                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#FF00FFFF" Direction="305" />
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="#74777E" Direction="305" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
