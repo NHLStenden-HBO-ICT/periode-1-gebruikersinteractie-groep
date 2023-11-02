@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -13,12 +12,8 @@ namespace Wasmachine9000
         public SolidColorBrush backgroundRed = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff7200"));
         public SolidColorBrush backgroundBlue = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00c0ff"));
 
-        private Type _originWindow;
-
-        public Instellingen(Type originWindow)
+        public Instellingen()
         {
-            _originWindow = originWindow;
-
             InitializeComponent();
             Ellipse musicToggleEllipse = (Ellipse)MusicToggle.Template.FindName("MusicToggleEllipse", MusicToggle);
             Ellipse MainToggleEllipse = (Ellipse)MainToggle.Template.FindName("MainToggleEllipse", MainToggle);
@@ -29,10 +24,11 @@ namespace Wasmachine9000
             SFXSlider.Value = App.GameState.SFXVolume;
 
             Loaded += Window_loaded;
-
+           
             // sets WPS height and width to the same height and width as the primary display
             this.Height = SystemParameters.FullPrimaryScreenHeight;
             this.Width = SystemParameters.FullPrimaryScreenWidth;
+           
         }
 
         public void Window_loaded(object sender, RoutedEventArgs e)
@@ -41,7 +37,7 @@ namespace Wasmachine9000
             Ellipse MainToggleEllipse = (Ellipse)MainToggle.Template.FindName("MainToggleEllipse", MainToggle);
             Ellipse SFXToggleEllipse = (Ellipse)SFXToggle.Template.FindName("SFXToggleEllipse", SFXToggle);
 
-
+        
             if (App.GameState.MusicSound == true)
             {
                 musicToggleEllipse.Fill = backgroundBlue;
@@ -78,7 +74,7 @@ namespace Wasmachine9000
         {
             if (e.Key == Key.Escape)
             {
-                Helpers.OpenWindow(Activator.CreateInstance(_originWindow) as Window);
+                Helpers.OpenPreviousWindow();
             }
         }
 

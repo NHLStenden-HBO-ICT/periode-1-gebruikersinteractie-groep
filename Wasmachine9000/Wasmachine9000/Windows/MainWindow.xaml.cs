@@ -29,6 +29,7 @@ namespace Wasmachine9000
 
             _scoreboard = App.Scoreboard.GetScoreboard();
             UpdateScoreboard(_scoreboard);
+
             ScoreboardTimer.Interval = TimeSpan.FromSeconds(10);
             ScoreboardTimer.Tick += ScoreboardTimer_Tick;
             ScoreboardTimer.Start();
@@ -36,6 +37,7 @@ namespace Wasmachine9000
 
         private void ScoreboardTimer_Tick(object? sender, EventArgs e)
         {
+            Console.WriteLine("Updated scoreboard");
             _scoreboard = App.Scoreboard.GetScoreboard();
             UpdateScoreboard(_scoreboard);
         }
@@ -82,7 +84,9 @@ namespace Wasmachine9000
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            Helpers.OpenWindow(new Instellingen(typeof(MainWindow)));
+            ScoreboardTimer.Stop();
+
+            Helpers.OpenWindow(new Instellingen());
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
@@ -93,17 +97,23 @@ namespace Wasmachine9000
                 return;
             }
 
+            ScoreboardTimer.Stop();
+
             Helpers.OpenWindow(new GameWindow());
         }
 
         private void Winkel_Click(object sender, RoutedEventArgs e)
         {
+            ScoreboardTimer.Stop();
+
             //open a new Winkel window and close the current window
             Helpers.OpenWindow(new Winkel());
         }
 
         private void Oudermenu_Click(object sender, RoutedEventArgs e)
         {
+            ScoreboardTimer.Stop();
+
             if (App.GameState.GetPincode() == 0)
             {
                 Helpers.OpenWindow(new ParentalControl());

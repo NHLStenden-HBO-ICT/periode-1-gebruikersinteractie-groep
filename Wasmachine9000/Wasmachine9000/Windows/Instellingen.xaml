@@ -34,6 +34,23 @@
                 <ColumnDefinition Width="200px" />
             </Grid.ColumnDefinitions>
 
+            <TextBlock Grid.Column="0" Grid.Row="1" FontSize="20" HorizontalAlignment="Center" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >Algemeen volume</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="20" HorizontalAlignment="Center" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >Muziek volume</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="3" FontSize="20" HorizontalAlignment="Center" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >Geluid effect volume</TextBlock>
+            
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="20" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >Aan/Uit</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2" Margin="20" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >Aan/Uit</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="3" Margin="20" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >Aan/Uit</TextBlock>
+            
+            <TextBlock Grid.Column="1" Grid.Row="1" Margin="30" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >0%</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" Margin="30" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >100%</TextBlock>
+            
+            <TextBlock Grid.Column="1" Grid.Row="2" Margin="30" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >0%</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="2" Margin="30" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >100%</TextBlock>
+            
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="30" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >0%</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="30" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >100%</TextBlock>
+            
             <Button Grid.Column="1" Grid.Row="0" Width="1050" MaxHeight="150" HorizontalAlignment="Center" Margin="0" x:Name="Instellingenn">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -121,9 +138,18 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Slider x:Name="MainSlider" Minimum="0" Maximum="1" Grid.Row="1" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="MainSlider_ValueChanged" ></Slider>
-            <Slider x:Name="MusicSlider" Minimum="0" Maximum="1" Grid.Row="2" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="MusicSlider_ValueChanged" ></Slider>
-            <Slider x:Name="SFXSlider" Minimum="0" Maximum="1" Grid.Row="3" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="VFXSlider_ValueChanged" ></Slider>
+            
+           
+            <Border Grid.Row="1" Grid.Column="1" Background="#8b00ff" CornerRadius="22.5" Width="1050" Height="60">
+            </Border>
+            <Border Grid.Row="2" Grid.Column="1" Background="#8b00ff" CornerRadius="22.5" Width="1050" Height="60">
+            </Border>
+            <Border Grid.Row="3" Grid.Column="1" Background="#8b00ff" CornerRadius="22.5" Width="1050" Height="60">
+            </Border>
+            
+            <Slider x:Name="MainSlider" IsSnapToTickEnabled="True" TickFrequency="0.05" Minimum="0" Maximum="1" Grid.Row="1" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="MainSlider_ValueChanged" ></Slider>
+            <Slider x:Name="MusicSlider" IsSnapToTickEnabled="True" TickFrequency="0.05" Minimum="0" Maximum="1" Grid.Row="2" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="MusicSlider_ValueChanged" ></Slider>
+            <Slider x:Name="SFXSlider" IsSnapToTickEnabled="True" TickFrequency="0.05" Minimum="0" Maximum="1" Grid.Row="3" Grid.Column="1" Margin="75" Background="#8b00ff" Width="1000" RenderTransformOrigin="0.5,0.5" ValueChanged="VFXSlider_ValueChanged" ></Slider>
         </Grid>
     </Grid>
 
