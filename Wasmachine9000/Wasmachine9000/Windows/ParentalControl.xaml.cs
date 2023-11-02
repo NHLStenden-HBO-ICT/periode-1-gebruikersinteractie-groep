@@ -103,5 +103,10 @@ namespace Wasmachine9000.Windows
             PincodeInstructie.Text = "Nieuwe pincode is ingesteld.";
             PincodeInstructie.FontSize = 40;
         }
+
+        private void Back_OnClick(object sender, RoutedEventArgs e)
+        {
+            Helpers.OpenWindow(new MainWindow());
+        }
     }
 }
