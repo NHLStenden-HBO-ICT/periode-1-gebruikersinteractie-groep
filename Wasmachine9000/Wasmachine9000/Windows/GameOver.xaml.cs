@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
 using Wasmachine9000.Game;
 
 namespace Wasmachine9000.Windows
@@ -14,14 +15,29 @@ namespace Wasmachine9000.Windows
         {
             InitializeComponent();
 
+            if (App.GameState.GetUsername() != null)
+            {
+                Playername.Text = App.GameState.GetUsername();
+            }
+
             //View score on the game over screen
             ScoreTextBlock.Text = App.GameInfo.PlayerScore.ToString();
             // View coins gained
             CoinsText.Text = App.GameInfo.PlayerCoins.ToString();
-            App.GameState.SaveGameState();
+
             GameState gameState = GameState.LoadGameState();
             int coinAmount = gameState.GetCoins();
             gameState.SetCoins(coinAmount + App.GameInfo.PlayerCoins);
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                App.GameInfo.Reset();
+
+                Helpers.OpenWindow(new MainWindow());
+            }
         }
 
         private void MainWindow_Click(object sender, RoutedEventArgs e)
@@ -33,6 +49,8 @@ namespace Wasmachine9000.Windows
             string username = playername;
             int score = App.GameInfo.PlayerScore;
             App.Scoreboard.PostScore(username, score);
+
+            App.GameState.SetUsername(username);
 
             Debug.WriteLine("Score gepost!");
 
@@ -56,6 +74,8 @@ namespace Wasmachine9000.Windows
             int score = App.GameInfo.PlayerScore;
             App.Scoreboard.PostScore(username, score);
 
+            App.GameState.SetUsername(username);
+
             Debug.WriteLine("Score gepost!");
 
             // Reset score
@@ -73,7 +93,7 @@ namespace Wasmachine9000.Windows
 
         private void Playername_IsFilled(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Playername.Text))
+            if (string.IsNullOrWhiteSpace(Playername.Text) || Playername.Text.Trim().Length < 3)
             {
                 PlayAgainButton.Visibility = Visibility.Collapsed;
                 BackHome.Visibility = Visibility.Collapsed;

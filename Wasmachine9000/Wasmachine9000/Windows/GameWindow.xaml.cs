@@ -6,11 +6,14 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Wasmachine9000.Game.CanvasObject;
 using Wasmachine9000.Game.Entities;
+using YamlDotNet.Serialization;
 
 namespace Wasmachine9000.Windows;
 
 public partial class GameWindow : Window
 {
+    private bool IsGamePaused = false;
+
     private double _backgroundTracker;
 
     private readonly List<CanvasLane> _canvasLanes = new();
@@ -19,10 +22,7 @@ public partial class GameWindow : Window
     // Player
     private readonly PlayerEntity _playerEntity;
     private double _playerScoreTracker;
-
-
-    private List<BackgroundScrollerEntity> _backgroundList = new List<BackgroundScrollerEntity>();
-
+    
     // Parental control trackers
     private DispatcherTimer _parentalControlTimer = new();
     private TimeSpan _timeLeft;
@@ -62,23 +62,11 @@ public partial class GameWindow : Window
 
             // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0,0));
 
-            BackgroundScrollerEntity BGentity = new BackgroundScrollerEntity(0, 0);
+            // BackgroundScrollerEntity BGentity = new BackgroundScrollerEntity(0, 0);
 
-            _backgroundList.Add(BGentity);
             // _backgroundList.Add(BGentity);
-            // _backgroundList.Add(BGentity);
-
-            _backgroundList[0].ChangeSprite("Background/background1.png");
-            // _backgroundList[1].ChangeSprite("Background/background1.png");
-            // _backgroundList[2].ChangeSprite("Background/backgroundPlayStore.png");
-
-            // App.GameInfo.CanvasEntities.AddEntity(_backgroundList[0]);
-
-
-            // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0, 0));
-
-            // BackgroundScrollerWrapper test = new BackgroundScrollerWrapper(0, 0);
-            // test.ChangeSprite("Background/background1.png");
+            //
+            // _backgroundList[0].ChangeSprite("Background/background1.png");
 
             App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
         };
@@ -129,8 +117,11 @@ public partial class GameWindow : Window
         }
     }
 
+
     private void HighscoreTick(object? sender, EventArgs e)
     {
+        if (IsGamePaused) return;
+
         _playerScoreTracker += App.GameTimer.DeltaTime;
 
         // Check if one second has elapsed
@@ -161,10 +152,13 @@ public partial class GameWindow : Window
 
     private void CanvasTick(object? sender, EventArgs e)
     {
+        if (IsGamePaused) return;
     }
 
     private void EntitiesTick(object? sender, EventArgs e)
     {
+        if (IsGamePaused) return;
+
         // 'Coppies' canvas entities array so it can be modified whilst being looped over.
         foreach (var entity in App.GameInfo.CanvasEntities.GetCanvasEntities().ToArray())
         {
@@ -190,7 +184,7 @@ public partial class GameWindow : Window
                 }
                 else
                 {
-                    // App.GameInfo.PlayerLives--;
+                    App.GameInfo.PlayerLives--;
                     DisplayPlayerLives();
                 }
 
@@ -201,6 +195,8 @@ public partial class GameWindow : Window
 
     private void BackgroundTick(object? sender, EventArgs e)
     {
+        if (IsGamePaused) return;
+
         _backgroundTracker += App.GameTimer.DeltaTime;
 
         // increase speed if conditions are met
@@ -215,14 +211,38 @@ public partial class GameWindow : Window
         }
     }
 
+    private void HideInstructionText()
+    {
+        if (!InstructionText.IsVisible) return;
+        InstructionText.Visibility = Visibility.Hidden;
+    }
+
 
     private void CanvasKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Space) _playerEntity.SetPlayerRising(true);
+        HideInstructionText();
 
         if (e.Key == Key.Escape)
         {
-            Exit();
+            //Exit();
+            IsGamePaused = !IsGamePaused;
+            if (PlayAgainButton.Visibility == Visibility.Visible)
+            {
+                PlayAgainButton.Visibility = Visibility.Hidden;
+                StopButton.Visibility = Visibility.Hidden;
+                ContinueButton.Visibility = Visibility.Hidden;
+                PauseScreen.Visibility = Visibility.Hidden;
+                Settings.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                PlayAgainButton.Visibility = Visibility.Visible;
+                StopButton.Visibility = Visibility.Visible;
+                ContinueButton.Visibility = Visibility.Visible;
+                PauseScreen.Visibility = Visibility.Visible;
+                Settings.Visibility = Visibility.Visible;
+            }
         }
     }
 
@@ -298,5 +318,49 @@ public partial class GameWindow : Window
 
         //Helpers.OpenPreviousWindow();
         Helpers.OpenWindow(new GameOver());
+    }
+
+    private void ContinueButton_Click(object sender, RoutedEventArgs e)
+    {
+        IsGamePaused = !IsGamePaused;
+
+        PlayAgainButton.Visibility = Visibility.Hidden;
+        StopButton.Visibility = Visibility.Hidden;
+        ContinueButton.Visibility = Visibility.Hidden;
+        PauseScreen.Visibility = Visibility.Hidden;
+        Settings.Visibility = Visibility.Hidden;
+
+        GameCanvas.Focus();
+    }
+
+
+    private void PlayAgain_Click(object sender, RoutedEventArgs e)
+    {
+        IsGamePaused = !IsGamePaused;
+
+        App.GameTimer.RemoveListener("canvasListener");
+        App.GameTimer.RemoveListener("highscoreListener");
+        App.GameTimer.RemoveListener("entitiesListener");
+        App.GameTimer.RemoveListener("backgroundListener");
+
+        App.GameInfo.Reset();
+
+        Helpers.OpenWindow(new GameWindow());
+    }
+
+    private void StopButton_Click(object sender, RoutedEventArgs e)
+    {
+        App.GameTimer.RemoveListener("canvasListener");
+        App.GameTimer.RemoveListener("highscoreListener");
+        App.GameTimer.RemoveListener("entitiesListener");
+        App.GameTimer.RemoveListener("backgroundListener");
+
+        //Helpers.OpenPreviousWindow();
+        Helpers.OpenWindow(new GameOver());
+    }
+
+    private void Settings_Click(object sender, RoutedEventArgs e)
+    {
+        Helpers.OpenWindow(new Instellingen());
     }
 }
