@@ -49,74 +49,82 @@ public class BackgroundScrollerWrapper : CanvasEntity
     private int _door = 3;
     private int _exit = 4;
 
-    public override void EntityTick()
+    private int _backgroundId = 0;
+    private int _floorId = 0;
+
+    public override async void EntityTick()
     {
 
         _backgroundRightmostX = 0;
         _groundRightmostX = 0;
 
-        // Position the background entities behind the rightmost one
-        foreach (BackgroundScrollerEntity background in _backgroundList)
+        if (_backgroundList[_backgroundId].GetX() +_backgroundList[_backgroundId].GetWidth() < 0 )
         {
-            
-            if (background.GetX() + background.GetWidth() < 0 )
+            foreach (BackgroundScrollerEntity backgroundCalc in _backgroundList)
             {
-
-                foreach (BackgroundScrollerEntity backgroundCalc in _backgroundList)
+                double backgroundRightX = backgroundCalc.GetX() + backgroundCalc.GetWidth();
+                if (backgroundRightX > _backgroundRightmostX)
                 {
-                    double backgroundRightX = backgroundCalc.GetX() + backgroundCalc.GetWidth();
-                    if (backgroundRightX > _backgroundRightmostX)
-                    {
-                        _backgroundRightmostX = backgroundRightX;
-                    }
+                    _backgroundRightmostX = backgroundRightX;
                 }
+            }
 
-                background.SetX(_backgroundRightmostX);
+            _backgroundList[_backgroundId].SetX(_backgroundRightmostX);
+            _backgroundRightmostX = 0;
 
-                if (App.GameInfo.PlayerScore > _propaganda)
-                {
-                    background.ChangeSprite("Background/backgroundPlayStore.png");
+            if (App.GameInfo.PlayerScore > _propaganda)
+            {
+                _backgroundList[_backgroundId].ChangeSprite("Background/backgroundPlayStore.png");
 
-                    _propaganda *= 2;
-                }
-                // else if (_door == _counter)
-                // {
-                //     background.ChangeSprite("Background/backgroundDoor.png");
-                //     _door += 3;
-                // }
-                // else if (_exit == _counter)
-                // {
-                //     background.ChangeSprite("Background/backgroundExit.png");
-                //     _exit += 3;
-                // }
-                else if (background.GetCurrentEntitySprite() != "Background/background1.png")
-                {
-                    background.ChangeSprite("Background/background1.png");
-                }
-                else
-                {
-                    _counter++;
-                }
+                _propaganda *= 2;
+            }
+            // else if (_door == _counter)
+            // {
+            //     _backgroundList[_backgroundId].ChangeSprite("Background/backgroundDoor.png");
+            //     _door += 3;
+            // }
+            // else if (_exit == _counter)
+            // {
+            //     _backgroundList[_backgroundId].ChangeSprite("Background/backgroundExit.png");
+            //     _exit += 3;
+            // }
+            else if (_backgroundList[_backgroundId].GetCurrentEntitySprite() != "Background/background1.png")
+            {
+                _backgroundList[_backgroundId].ChangeSprite("Background/background1.png");
+            }
+            else
+            {
+                _counter++;
+            }
+
+            _backgroundId++;
+            if (_backgroundId == _backgroundList.Count)
+            {
+                _backgroundId = 0;
             }
 
         }
 
-        // Find the rightmost X-coordinate in the list
-        foreach (GroundScrollerEntity ground in _groundList)
-        {
-            double groundRightX = ground.GetX() + ground.GetWidth();
-            if (groundRightX > _groundRightmostX)
-            {
-                _groundRightmostX = groundRightX;
-            }
-        }
 
         // Position the background entities behind the rightmost one
-        foreach (GroundScrollerEntity ground in _groundList)
+        if (_groundList[_floorId].GetX() + _groundList[_floorId].GetWidth() < 0 )
         {
-            if (ground.GetX() + ground.GetWidth() < 0 )
+
+            foreach (GroundScrollerEntity groundCalc in _groundList)
             {
-                ground.SetX(_groundRightmostX);
+                double groundRightX = groundCalc.GetX() + groundCalc.GetWidth();
+                if (groundRightX > _groundRightmostX)
+                {
+                    _groundRightmostX = groundRightX;
+                }
+            }
+
+            _groundList[_floorId].SetX(_groundRightmostX);
+
+            _floorId++;
+            if (_floorId == _groundList.Count)
+            {
+                _floorId = 0;
             }
         }
 

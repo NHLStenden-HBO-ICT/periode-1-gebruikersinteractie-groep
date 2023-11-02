@@ -39,9 +39,10 @@ public class BackgroundScrollerEntity : CanvasEntity
         EntityRectangle.Fill = EntityImageBrush;
     }
 
-    public override void EntityTick()
+    public override async void EntityTick()
     {
         SetX(GetX() - (App.GameInfo.GameSpeed + 400) * App.GameTimer.DeltaTime);
+        // SetX(GetX() - 450 * App.GameTimer.DeltaTime);
     }
 
     public double GetInitialEntityWidth()
