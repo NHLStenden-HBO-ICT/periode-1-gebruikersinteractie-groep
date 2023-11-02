@@ -201,135 +201,25 @@ namespace Wasmachine9000.Game
 
         public void UpdateCosmetic(string cosmeticName, string propertyName, bool value)
         {
-            switch (cosmeticName)
+            Dictionary<string, Dictionary<string, bool>> CosmeticsList = GetAllCosmetics();
+            if (CosmeticsList.TryGetValue(cosmeticName, out var cosmetic))
             {
-                case "Cosmetic1":
-                    if (propertyName == "Bought")
+                // Set cosmetic property value
+                cosmetic[propertyName] = value;
+                // If updating the "equipped" property unequip every other cosmetic
+                if (propertyName == "Equipped" && value)
+                {
+                    foreach (var otherCosmetic in CosmeticsList)
                     {
-                        Cosmetic1["Bought"] = value;
-                    }
-                    else if (propertyName == "Equipped")
-                    {
-                        Cosmetic1["Equipped"] = value;
-                        if (value == true)
+                        if (otherCosmetic.Key != cosmeticName)
                         {
-                            Cosmetic2["Equipped"] = false;
-                            Cosmetic3["Equipped"] = false;
-                            Cosmetic4["Equipped"] = false;
-                            Cosmetic5["Equipped"] = false;
-                            Cosmetic6["Equipped"] = false;
+                            otherCosmetic.Value["Equipped"] = false;
                         }
                     }
+                }
 
-                    break;
-
-                case "Cosmetic2":
-                    if (propertyName == "Bought")
-                    {
-                        Cosmetic2["Bought"] = value;
-                    }
-                    else if (propertyName == "Equipped")
-                    {
-                        Cosmetic2["Equipped"] = value;
-                        if (value == true)
-                        {
-                            Cosmetic1["Equipped"] = false;
-                            Cosmetic3["Equipped"] = false;
-                            Cosmetic4["Equipped"] = false;
-                            Cosmetic5["Equipped"] = false;
-                            Cosmetic6["Equipped"] = false;
-                        }
-                    }
-
-                    break;
-
-                case "Cosmetic3":
-                    if (propertyName == "Bought")
-                    {
-                        Cosmetic3["Bought"] = value;
-                    }
-                    else if (propertyName == "Equipped")
-                    {
-                        Cosmetic3["Equipped"] = value;
-                        if (value == true)
-                        {
-                            Cosmetic1["Equipped"] = false;
-                            Cosmetic2["Equipped"] = false;
-                            Cosmetic4["Equipped"] = false;
-                            Cosmetic5["Equipped"] = false;
-                            Cosmetic6["Equipped"] = false;
-                        }
-                    }
-
-                    break;
-
-                case "Cosmetic4":
-                    if (propertyName == "Bought")
-                    {
-                        Cosmetic4["Bought"] = value;
-                    }
-                    else if (propertyName == "Equipped")
-                    {
-                        Cosmetic4["Equipped"] = value;
-                        if (value == true)
-                        {
-                            Cosmetic1["Equipped"] = false;
-                            Cosmetic2["Equipped"] = false;
-                            Cosmetic3["Equipped"] = false;
-                            Cosmetic5["Equipped"] = false;
-                            Cosmetic6["Equipped"] = false;
-                        }
-                    }
-
-                    break;
-
-                case "Cosmetic5":
-                    if (propertyName == "Bought")
-                    {
-                        Cosmetic5["Bought"] = value;
-                    }
-                    else if (propertyName == "Equipped")
-                    {
-                        Cosmetic5["Equipped"] = value;
-                        if (value == true)
-                        {
-                            Cosmetic1["Equipped"] = false;
-                            Cosmetic2["Equipped"] = false;
-                            Cosmetic3["Equipped"] = false;
-                            Cosmetic4["Equipped"] = false;
-                            Cosmetic6["Equipped"] = false;
-                        }
-                    }
-
-                    break;
-
-                case "Cosmetic6":
-                    if (propertyName == "Bought")
-                    {
-                        Cosmetic6["Bought"] = value;
-                    }
-                    else if (propertyName == "Equipped")
-                    {
-                        Cosmetic6["Equipped"] = value;
-                        if (value == true)
-                        {
-                            Cosmetic1["Equipped"] = false;
-                            Cosmetic2["Equipped"] = false;
-                            Cosmetic3["Equipped"] = false;
-                            Cosmetic4["Equipped"] = false;
-                            Cosmetic5["Equipped"] = false;
-                        }
-                    }
-
-                    break;
-
-                default:
-                    // Handle unknown cosmetic names
-                    break;
+                SaveGameState();
             }
-
-            // Save the updated game state
-            SaveGameState();
         }
 
         public bool CheckRemainingPlaytime()
