@@ -71,7 +71,7 @@ namespace Wasmachine9000
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            if (App.GameState.PlayLockedUntil > DateTime.Now)
+            if (App.GameState.PlayLockedUntil > DateTime.Now && App.GameState.PlaytimeControl)
             {
                 MessageBox.Show("Je mag niet spelen :(. Je moet wachten tot " + App.GameState.PlayLockedUntil);
                 return;

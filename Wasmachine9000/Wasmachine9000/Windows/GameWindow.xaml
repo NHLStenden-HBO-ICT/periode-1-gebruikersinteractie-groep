@@ -190,7 +190,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="2" Grid.Row="1" Width="180" HorizontalAlignment="Right" x:Name="TimeBorder"
+                <Border Grid.Column="2" Grid.Row="1" Width="180" HorizontalAlignment="Right" x:Name="TimeBorder" Visibility="Hidden"
                         Background="Gray" CornerRadius="10" MaxHeight="40">
                     <Grid>
                         <Grid.ColumnDefinitions>

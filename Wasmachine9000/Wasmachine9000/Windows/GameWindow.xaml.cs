@@ -33,9 +33,14 @@ public partial class GameWindow : Window
         InitializeComponent();
 
         // Parent controll timer
-        _parentalControlTimer.Tick += ParentalControlTimerTick;
-        _parentalControlTimer.Interval = TimeSpan.FromSeconds(1);
-        _parentalControlTimer.Start();
+        if (App.GameState.PlaytimeControl)
+        {
+            _parentalControlTimer.Tick += ParentalControlTimerTick;
+            _parentalControlTimer.Interval = TimeSpan.FromSeconds(1);
+            _parentalControlTimer.Start();
+            TimeBorder.Visibility = Visibility.Visible;
+        }
+
 
         App.GameInfo.GameCanvas = GameCanvas;
         App.GameInfo.PlayerLives = 3;
