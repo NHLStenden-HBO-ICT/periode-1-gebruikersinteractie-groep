@@ -32,7 +32,7 @@ namespace Wasmachine9000.Windows
 
         private void checkCosmetics()
         {
-            GameState gameState = GameState.LoadGameState();
+            GameState gameState = App.GameState;
             Dictionary<string, Dictionary<string, bool>> checkCosmetic1 = gameState.GetAllCosmetics();
 
             if (checkCosmetic1["Cosmetic1"]["Bought"] == true)
@@ -141,7 +141,7 @@ namespace Wasmachine9000.Windows
         private void UpdateCoinAmount()
         {
             // Load the GameState to get the coin amount
-            GameState gameState = GameState.LoadGameState();
+            GameState gameState = App.GameState;
             int coinAmount = gameState.GetCoins();
             // Update the TextBlock with the coin amount
             CoinsText.Text = coinAmount.ToString();
@@ -154,7 +154,7 @@ namespace Wasmachine9000.Windows
             string cosmeticName = button.Tag as string;
 
             // Load the GameState to get the coin amount
-            GameState gameState = GameState.LoadGameState();
+            GameState gameState = App.GameState;
             int coinAmount = gameState.GetCoins();
             int requiredCoins = 111;
 
@@ -180,7 +180,7 @@ namespace Wasmachine9000.Windows
 
         private void EquipButton_Click(object sender, RoutedEventArgs e)
         {
-            GameState gameState = GameState.LoadGameState();
+            GameState gameState = App.GameState;
             Button button = (Button)sender;
             string cosmeticName = button.Tag as string;
             TextBlock theText = button.Template.FindName("theText", button) as TextBlock;
