@@ -99,6 +99,13 @@ namespace Wasmachine9000.Windows
 
         private void SavePincodeButton_OnClick(object sender, RoutedEventArgs e)
         {
+            if (PincodeInput.Text.Trim().Length != 4)
+            {
+                PincodeInstructie.Text = "Pincode moet uit 4 cijfers bestaan.";
+                PincodeInstructie.FontSize = 35;
+                return;
+            }
+
             App.GameState.SetPincode(Convert.ToInt32(PincodeInput.Text));
             PincodeInstructie.Text = "Nieuwe pincode is ingesteld.";
             PincodeInstructie.FontSize = 40;
