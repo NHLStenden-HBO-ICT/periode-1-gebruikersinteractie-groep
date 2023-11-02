@@ -53,6 +53,9 @@ namespace Wasmachine9000.Game
 
         public bool MusicSound;
         public bool SFXSound;
+        public double MainVolume;
+        public double MusicVolume;
+        public double SFXVolume;
 
         //Parental control settings
 
@@ -80,6 +83,9 @@ namespace Wasmachine9000.Game
                             Highscore = 0,
                             Username = "",
                             Pincode = 0,
+                           MainVolume = 0.5,
+                           MusicVolume = 0.5,
+                           SFXVolume = 0.5,
                             Cosmetic1 = new Dictionary<string, bool>
                             {
                                 { "Bought", false },
@@ -111,9 +117,7 @@ namespace Wasmachine9000.Game
                                 { "Equipped", false }
                             },
                             MusicSound = true,
-                            SFXSound = true,
-                            PlaytimeControl = false,
-                            MaxplayTime = 0,
+                            SFXSound = true
                         };
                     }
 
@@ -137,6 +141,9 @@ namespace Wasmachine9000.Game
                 Highscore = data.Highscore ?? 0;
                 Username = data.Username ?? "";
                 Pincode = data.Pincode ?? 0000;
+                MainVolume = data.MainVolume ?? 0;
+                MusicVolume = data.MusicVolume ?? 0;
+                SFXVolume = data.SFXVolume ?? 0;
                 Cosmetic1 = data.Cosmetic1;
                 Cosmetic2 = data.Cosmetic2;
                 Cosmetic3 = data.Cosmetic3;
@@ -145,11 +152,10 @@ namespace Wasmachine9000.Game
                 Cosmetic6 = data.Cosmetic6;
                 MusicSound = data.MusicSound ?? true;
                 SFXSound = data.SFXSound ?? true;
-                PlaytimeControl = data.PlaytimeControl ?? false;
-                MaxplayTime = data.MaxplayTime ?? 0;
                 SaveGameState();
             }
         }
+
 
         public void SetCoins(int coins)
         {
@@ -365,6 +371,9 @@ namespace Wasmachine9000.Game
                     Highscore = Highscore,
                     Username = Username,
                     Pincode = Pincode,
+                    MainVolume = MainVolume,
+                    MusicVolume = MusicVolume,
+                    SFXVolume = SFXVolume,
                     Cosmetic1 = Cosmetic1,
                     Cosmetic2 = Cosmetic2,
                     Cosmetic3 = Cosmetic3,
@@ -372,9 +381,7 @@ namespace Wasmachine9000.Game
                     Cosmetic5 = Cosmetic5,
                     Cosmetic6 = Cosmetic6,
                     MusicSound = MusicSound,
-                    SFXSound = SFXSound,
-                    PlaytimeControl = PlaytimeControl,
-                    MaxplayTime = MaxplayTime
+                    SFXSound = SFXSound
                 };
                 serializer.Serialize(gameStateFile, GamestateData);
             }
@@ -411,7 +418,6 @@ namespace Wasmachine9000.Game
 
 public class GamestateData
 {
-    public bool? PlaytimeControl { get; set; }
     public int? Coins { get; set; }
     public int? Highscore { get; set; }
     public string? Username { get; set; }
@@ -424,5 +430,7 @@ public class GamestateData
     public Dictionary<string, bool> Cosmetic6 { get; set; }
     public bool? MusicSound { get; set; }
     public bool? SFXSound { get; set; }
-    public int? MaxplayTime { get; set; }   
+    public double? MainVolume { get; set; }
+    public double? MusicVolume { get; set; }
+    public double? SFXVolume { get;set; }
 }
