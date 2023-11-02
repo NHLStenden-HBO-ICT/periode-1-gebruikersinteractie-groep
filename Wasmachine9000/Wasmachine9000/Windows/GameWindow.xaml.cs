@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Wasmachine9000.Game.CanvasObject;
 using Wasmachine9000.Game.Entities;
 using YamlDotNet.Serialization;
@@ -14,26 +15,36 @@ public partial class GameWindow : Window
     private bool IsGamePaused = false;
 
     private double _backgroundTracker;
-    // public static variables needed by other parts of the game
 
     private readonly List<CanvasLane> _canvasLanes = new();
     private CanvasLane? _lastLane;
 
     // Player
     private readonly PlayerEntity _playerEntity;
-
     private double _playerScoreTracker;
+    
+    // Parental control trackers
+    private DispatcherTimer _parentalControlTimer = new();
+    private TimeSpan _timeLeft;
 
-
-    // private List<ImageBrush> _backgroundBrushes = new List<ImageBrush>();
-    //
-    // private List<BackgroundScrollerEntity> _backgroundList = new List<BackgroundScrollerEntity>();
 
     public GameWindow()
     {
         InitializeComponent();
+
+        // Parent controll timer
+        if (App.GameState.PlaytimeControl)
+        {
+            _parentalControlTimer.Tick += ParentalControlTimerTick;
+            _parentalControlTimer.Interval = TimeSpan.FromSeconds(1);
+            _parentalControlTimer.Start();
+            TimeBorder.Visibility = Visibility.Visible;
+        }
+
+
         App.GameInfo.GameCanvas = GameCanvas;
         App.GameInfo.PlayerLives = 3;
+
 
         // Set bottom and ceiling level
         App.GameInfo.FloorLevel = 49;
@@ -80,6 +91,30 @@ public partial class GameWindow : Window
         App.GameInfo.CanvasEntities.AddEntity(new SparksEntity(0, 0));
 
         // CanvasContainer.Loaded += (sender, args) => App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
+    }
+
+    private void ParentalControlTimerTick(object? sender, EventArgs e)
+    {
+        // Increase time played.
+        App.GameState.PlaytimePassed += 1;
+
+        _timeLeft = TimeSpan.FromSeconds(App.GameState.MaxplayTime - App.GameState.PlaytimePassed);
+        if (_timeLeft > TimeSpan.Zero)
+        {
+            // Display left over time.
+            TimeLimit.Text = $"{_timeLeft.Minutes:00}:{_timeLeft.Seconds:00}";
+        }
+        else
+        {
+            // Set player locked date one hour from now and reset play time passed.
+            App.GameState.PlayLockedUntil = DateTime.Now + TimeSpan.FromHours(1);
+            App.GameState.PlaytimePassed = 0;
+            App.GameState.SaveGameState();
+
+            TimeLimit.Text = "0:00";
+
+            Exit();
+        }
     }
 
 

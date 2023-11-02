@@ -192,14 +192,14 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="2" Grid.Row="1" Width="180" HorizontalAlignment="Right" x:Name="TimeBorder"
+                <Border Grid.Column="2" Grid.Row="1" Width="180" HorizontalAlignment="Right" x:Name="TimeBorder" Visibility="Hidden"
                         Background="Gray" CornerRadius="10" MaxHeight="40">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="145" />
                             <ColumnDefinition Width="30" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="9001" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
+                        <TextBlock x:Name="TimeLimit" Grid.Column="0" Text="" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
                                    Foreground="White" HorizontalAlignment="Left" Margin="6" VerticalAlignment="Center" />
                         <Image Grid.Column="1" Margin="6">
                             <Image.Source>

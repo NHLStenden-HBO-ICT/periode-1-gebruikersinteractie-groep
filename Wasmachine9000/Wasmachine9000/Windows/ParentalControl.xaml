@@ -54,12 +54,53 @@
                     <ScaleTransform ScaleX="3" ScaleY="3" />
                 </CheckBox.RenderTransform>
             </CheckBox>
+            
+            <Grid Grid.Row="4" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500" />
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="PincodeInstructie" Grid.ColumnSpan="2" FontSize="40" FontFamily="Baloo Bhai 2 SemiBold">Er is nog geen pincode ingesteld. </TextBlock>
+                
+                <Border Grid.Column="0" Grid.Row="1" CornerRadius="22">
+                    <TextBox x:Name="PincodeInput" FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" PreviewTextInput="NumericOnly"/>
+                </Border>
+                <Button Grid.Row="1" Grid.Column="1" x:Name="SavePincodeButton" Click="SavePincodeButton_OnClick" IsEnabled="True" Width="240" HorizontalAlignment="Left" Margin="10,4,0,4" Background="White">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="22.5" Background="#FF00FF0F" MaxHeight="120">
+                                <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center">Opslaan</TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+            </Grid>
+            
 
 
             
 
-            <TextBlock Text="Schuif om tijdslimiet in te stellen" Grid.Column="1" Grid.Row="2" FontFamily="Baloo Bhai 2" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"></TextBlock>
-            <TextBlock Text="" x:Name="limit" Grid.Column="1" Grid.Row="3" FontFamily="Baloo Bhai 2" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"></TextBlock>
+            <TextBlock Text="Schuif om tijdslimiet in te stellen" Grid.Column="1" Grid.Row="2" FontFamily="Baloo Bhai 2" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" />
+            <TextBlock Text="" x:Name="limit" Grid.Column="1" Grid.Row="3" FontFamily="Baloo Bhai 2" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" />
 
         </Grid>
     </Grid>
