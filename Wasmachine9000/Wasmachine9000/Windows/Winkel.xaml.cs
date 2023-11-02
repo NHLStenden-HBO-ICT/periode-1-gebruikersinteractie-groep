@@ -26,7 +26,7 @@ namespace Wasmachine9000.Windows
         {
             if (e.Key == Key.Escape)
             {
-                Helpers.OpenWindow(new MainWindow());
+                Helpers.OpenPreviousWindow();
             }
         }
 
@@ -203,7 +203,7 @@ namespace Wasmachine9000.Windows
 
         private void Back_OnClick(object sender, RoutedEventArgs e)
         {
-            Helpers.OpenWindow(new MainWindow());
+            Helpers.OpenPreviousWindow();
         }
     }
 }
