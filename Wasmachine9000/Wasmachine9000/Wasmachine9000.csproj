@@ -29,6 +29,8 @@
     <Resource Include="Assets\Sprites\Entities\Ground\groundEntity1.png" />
     <Resource Include="Assets\Sprites\Entities\coin.png" />
     <None Remove="Assets\Sprites\Entities\cosmetic1.png" />
+    <Resource Include="Assets\Sprites\Entities\Background\backgroundDoor.png" />
+    <Resource Include="Assets\Sprites\Entities\Background\backgroundExit.png" />
   </ItemGroup>
 
   <ItemGroup>

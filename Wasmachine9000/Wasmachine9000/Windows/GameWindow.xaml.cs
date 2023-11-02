@@ -59,14 +59,6 @@ public partial class GameWindow : Window
                                                 20));
             }
 
-            // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0,0));
-
-            // BackgroundScrollerEntity BGentity = new BackgroundScrollerEntity(0, 0);
-
-            // _backgroundList.Add(BGentity);
-            //
-            // _backgroundList[0].ChangeSprite("Background/background1.png");
-
             App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
         };
 
@@ -191,7 +183,7 @@ public partial class GameWindow : Window
                     DisplayPlayerLives();
                 }
 
-                if (App.GameInfo.PlayerLives <= 0) Exit();
+                // if (App.GameInfo.PlayerLives <= 0) Exit();
             }
         }
     }
@@ -202,7 +194,7 @@ public partial class GameWindow : Window
 
         _backgroundTracker += App.GameTimer.DeltaTime;
 
-        // increase speed if conditions are met
+        // // increase speed if conditions are met
         if (_backgroundTracker > 5 && (App.GameInfo.GameSpeed + 400) + 10 < App.GameInfo.MaxGameSpeed)
         {
             _backgroundTracker = 0;

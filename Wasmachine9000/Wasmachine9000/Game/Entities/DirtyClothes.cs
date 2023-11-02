@@ -38,7 +38,7 @@ public class DirtyClothes : CanvasEntity
         }
     }
 
-    public override void Create()
+    public override async void Create()
     {
         EntityImageBrush.ImageSource = new BitmapImage(new Uri(Helpers.GetSpriteResource(Sprite)));
         EntityRectangle.Width = EntityImageBrush.ImageSource.Width;
