@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Wasmachine9000.Windows
@@ -19,6 +20,13 @@ namespace Wasmachine9000.Windows
 
             SaveSettings();
             changetext();
+
+            if (App.GameState.GetPincode() != 0)
+            {
+                PincodeInstructie.Text =
+                    "Voor een nieuwe pincoe in en druk op `opslaan` om een nieuwe pincode in te stellen";
+                PincodeInstructie.FontSize = 20;
+            }
         }
 
 
@@ -68,6 +76,32 @@ namespace Wasmachine9000.Windows
         {
             SaveSettings();
             changetext();
+        }
+
+        private void NumericOnly(object sender, TextCompositionEventArgs e)
+        {
+            if (IsTextNumeric(e.Text))
+            {
+                e.Handled = true;
+            }
+
+            if (PincodeInput.Text.Length >= 4)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private static bool IsTextNumeric(string str)
+        {
+            System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("[^1-9]");
+            return reg.IsMatch(str);
+        }
+
+        private void SavePincodeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            App.GameState.SetPincode(Convert.ToInt32(PincodeInput.Text));
+            PincodeInstructie.Text = "Nieuwe pincode is ingesteld.";
+            PincodeInstructie.FontSize = 40;
         }
     }
 }

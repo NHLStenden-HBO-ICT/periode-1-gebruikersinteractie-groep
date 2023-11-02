@@ -88,6 +88,12 @@ namespace Wasmachine9000
 
         private void Oudermenu_Click(object sender, RoutedEventArgs e)
         {
+            if (App.GameState.GetPincode() == 0)
+            {
+                Helpers.OpenWindow(new ParentalControl());
+                return;
+            }
+
             Helpers.OpenWindow(new ParentPin());
         }
 
