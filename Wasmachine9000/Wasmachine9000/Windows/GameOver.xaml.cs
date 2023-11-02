@@ -25,7 +25,7 @@ namespace Wasmachine9000.Windows
             // View coins gained
             CoinsText.Text = App.GameInfo.PlayerCoins.ToString();
 
-            GameState gameState = GameState.LoadGameState();
+            GameState gameState = App.GameState;
             int coinAmount = gameState.GetCoins();
             gameState.SetCoins(coinAmount + App.GameInfo.PlayerCoins);
         }
