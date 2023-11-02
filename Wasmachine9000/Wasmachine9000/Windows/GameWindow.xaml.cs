@@ -4,10 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Wasmachine9000.Game;
 using Wasmachine9000.Game.CanvasObject;
 using Wasmachine9000.Game.Entities;
-using YamlDotNet.Serialization;
 
 namespace Wasmachine9000.Windows;
 
@@ -97,6 +95,8 @@ public partial class GameWindow : Window
 
     private void ParentalControlTimerTick(object? sender, EventArgs e)
     {
+        if (IsGamePaused) return;
+
         // Increase time played.
         App.GameState.PlaytimePassed += 1;
 
@@ -175,7 +175,8 @@ public partial class GameWindow : Window
             entity.EntityTick();
 
             // Destroy entity when collided with player
-            if (entity is not PlayerEntity && entity is not SparksEntity && entity is not CosmeticEntity && entity is not BackgroundScrollerEntity &&
+            if (entity is not PlayerEntity && entity is not SparksEntity && entity is not CosmeticEntity &&
+                entity is not BackgroundScrollerEntity &&
                 Helpers.CollidesWithPlayer(entity.GetEntityRectangle()))
             {
                 App.GameInfo.CanvasEntities.RemoveEntity(entity);
