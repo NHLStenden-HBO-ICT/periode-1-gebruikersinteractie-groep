@@ -10,10 +10,17 @@ public class PlayerEntity : CanvasEntity
 {
     private bool _playerRising = false;
     private int _playerUpVelocity = 0;
+    private CosmeticEntity _cosmeticEntity;
     
     public PlayerEntity(int x, int y) : base("wasmachine.png", x, y)
     {
-        
+        _cosmeticEntity = new CosmeticEntity(x + 20, y + 90);
+        App.GameInfo.CanvasEntities.AddEntity(_cosmeticEntity);
+    }
+
+    public void CheckCosmetic()
+    {
+        _cosmeticEntity.CheckCosmetic();
     }
 
     public void SetPlayerRising(bool isRising)
@@ -69,6 +76,7 @@ public class PlayerEntity : CanvasEntity
 
         // Apply velocity to player
         SetY(GetY() + (_playerUpVelocity * App.GameTimer.DeltaTime));
+        _cosmeticEntity.SetPosition(GetX() + 20, GetY() + 90);
     }
 
 }

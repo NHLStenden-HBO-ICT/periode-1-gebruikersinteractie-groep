@@ -186,15 +186,16 @@ namespace Wasmachine9000.Game
 
         public Dictionary<string, Dictionary<string, bool>> GetAllCosmetics()
         {
-            Dictionary<string, Dictionary<string, bool>> allCosmetics =
-                new Dictionary<string, Dictionary<string, bool>>();
+            LoadGameState();
+            Dictionary<string, Dictionary<string, bool>> allCosmetics = new Dictionary<string, Dictionary<string, bool>>();
+            allCosmetics = new Dictionary<string, Dictionary<string, bool>>();
             allCosmetics.Add("Cosmetic1", Cosmetic1);
             allCosmetics.Add("Cosmetic2", Cosmetic2);
             allCosmetics.Add("Cosmetic3", Cosmetic3);
             allCosmetics.Add("Cosmetic4", Cosmetic4);
             allCosmetics.Add("Cosmetic5", Cosmetic5);
             allCosmetics.Add("Cosmetic6", Cosmetic6);
-
+            SaveGameState();
             return allCosmetics;
         }
 
@@ -426,7 +427,6 @@ namespace Wasmachine9000.Game
                 };
                 serializer.Serialize(gameStateFile, GamestateData);
             }
-
             return false;
         }
 
