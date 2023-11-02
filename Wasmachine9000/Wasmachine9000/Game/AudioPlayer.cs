@@ -6,8 +6,13 @@ namespace Wasmachine9000.Game
 {
     public class AudioPlayer
     {
-        public MediaPlayer MusicPlayer = new MediaPlayer();
-        public MediaPlayer SFXPlayer = new MediaPlayer();
+        public static MediaPlayer MusicPlayer = new MediaPlayer();
+        public static MediaPlayer SFXPlayer = new MediaPlayer();
+
+        public AudioPlayer()
+        {
+            MusicPlayer.MediaEnded += (sender, args) => { MusicPlayer.Position = TimeSpan.Zero; };
+        }
 
         public AudioPlayer()
         {
@@ -43,6 +48,15 @@ namespace Wasmachine9000.Game
             SFXPlayer.Play();
         }
 
+        public void SetMusicVolume(double MusicVolume)
+        {
+            MusicPlayer.Volume = MusicVolume;
+        }
+
+        public void SetSFXVolume(double SFXVolume)
+        {
+            SFXPlayer.Volume = SFXVolume;
+        }
 
         public void StopMusic()
         {
@@ -74,10 +88,6 @@ namespace Wasmachine9000.Game
             }
         }
 
-        private void MusicPlayer_MediaEnded(object sender, EventArgs e)
-        {
-            // When the media ends, set the position to the beginning to repeat it
-            MusicPlayer.Position = TimeSpan.Zero;
-        }
+       
     }
 }
