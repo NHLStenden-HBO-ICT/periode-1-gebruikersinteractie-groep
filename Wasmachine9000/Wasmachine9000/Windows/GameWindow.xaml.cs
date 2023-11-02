@@ -6,7 +6,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Wasmachine9000.Game.CanvasObject;
 using Wasmachine9000.Game.Entities;
-using YamlDotNet.Serialization;
 
 namespace Wasmachine9000.Windows;
 
@@ -22,7 +21,7 @@ public partial class GameWindow : Window
     // Player
     private readonly PlayerEntity _playerEntity;
     private double _playerScoreTracker;
-    
+
     // Parental control trackers
     private DispatcherTimer _parentalControlTimer = new();
     private TimeSpan _timeLeft;
@@ -57,7 +56,7 @@ public partial class GameWindow : Window
             for (int i = 0; i < canvasLaneAmount; i++)
             {
                 _canvasLanes.Add(new CanvasLane((int)(GameCanvas.ActualHeight / (canvasLaneAmount + 2)) * (i + 1) +
-                                                30));
+                                                27));
             }
 
             // App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerEntity(0,0));
