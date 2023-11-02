@@ -76,7 +76,7 @@ public class PlayerEntity : CanvasEntity
 
         // Apply velocity to player
         SetY(GetY() + (_playerUpVelocity * App.GameTimer.DeltaTime));
-        _cosmeticEntity.SetPosition(GetX() + 20, GetY() + 90);
+        _cosmeticEntity.SetPosition(GetX(), GetY() + 80);
     }
 
 }

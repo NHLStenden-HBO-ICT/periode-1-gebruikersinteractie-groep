@@ -37,8 +37,8 @@ public class CosmeticEntity : CanvasEntity
             return;
         }
         EntityImageBrush.ImageSource = new BitmapImage(new Uri(Helpers.GetSpriteResource(Sprites())));
-        EntityRectangle.Width = EntityImageBrush.ImageSource.Width;
-        EntityRectangle.Height = EntityImageBrush.ImageSource.Height;
+        EntityRectangle.Width = EntityImageBrush.ImageSource.Width + 40;
+        EntityRectangle.Height = EntityImageBrush.ImageSource.Height + 40;
         EntityRectangle.Fill = EntityImageBrush;
 
         SetPosition(EntityX, EntityY);
