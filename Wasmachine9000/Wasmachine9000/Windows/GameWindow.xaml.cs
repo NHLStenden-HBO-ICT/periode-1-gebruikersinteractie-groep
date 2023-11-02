@@ -113,7 +113,7 @@ public partial class GameWindow : Window
     {
         App.GameState.PlaytimePassed += 1;
         Timeleft = TimeSpan.FromSeconds(App.GameState.MaxplayTime - App.GameState.PlaytimePassed);
-        if(Timeleft != TimeSpan.Zero && Timeleft !<= TimeSpan.Zero)
+        if((Timeleft != TimeSpan.Zero) && Timeleft !<= TimeSpan.Zero)
         {
             string formattedTime = $"{Timeleft.Minutes:00}:{Timeleft.Seconds:00}";
             TimeLimit.Text = formattedTime;
