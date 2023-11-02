@@ -5,6 +5,9 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,6 +39,8 @@
     <Resource Include="Assets\Cosmetics\Napoleon2.png" />
     <Resource Include="Assets\Cosmetics\Anvil.png" />
     <Resource Include="Assets\Sprites\Entities\coin.png" />
+    <Resource Include="Assets\Sprites\Entities\Background\backgroundDoor.png" />
+    <Resource Include="Assets\Sprites\Entities\Background\backgroundExit.png" />
   </ItemGroup>
 
   <ItemGroup>

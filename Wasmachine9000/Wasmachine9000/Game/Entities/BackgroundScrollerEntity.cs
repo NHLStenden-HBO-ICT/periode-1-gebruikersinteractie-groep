@@ -35,6 +35,7 @@ public class BackgroundScrollerEntity : CanvasEntity
     {
         _currentSprite = sprite;
         EntityImageBrush.ImageSource =  new BitmapImage(new Uri(Helpers.GetSpriteResource(sprite)));
+        EntityRectangle.Width = App.GameInfo.GameCanvas.ActualHeight * (EntityImageBrush.ImageSource.Width / EntityImageBrush.ImageSource.Height);
         EntityRectangle.Fill = EntityImageBrush;
     }
 

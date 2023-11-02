@@ -45,6 +45,9 @@ public class BackgroundScrollerWrapper : CanvasEntity
     private double _backgroundRightmostX;
     private double _groundRightmostX;
     private int _propaganda = 100;
+    private int _counter;
+    private int _door = 3;
+    private int _exit = 4;
 
     public override void EntityTick()
     {
@@ -52,22 +55,22 @@ public class BackgroundScrollerWrapper : CanvasEntity
         _backgroundRightmostX = 0;
         _groundRightmostX = 0;
 
-        // Find the rightmost X-coordinate in the list
-        foreach (BackgroundScrollerEntity background in _backgroundList)
-        {
-            double backgroundRightX = background.GetX() + background.GetWidth();
-            if (backgroundRightX > _backgroundRightmostX)
-            {
-                _backgroundRightmostX = backgroundRightX;
-            }
-        }
-
         // Position the background entities behind the rightmost one
         foreach (BackgroundScrollerEntity background in _backgroundList)
         {
             
             if (background.GetX() + background.GetWidth() < 0 )
             {
+
+                foreach (BackgroundScrollerEntity backgroundCalc in _backgroundList)
+                {
+                    double backgroundRightX = backgroundCalc.GetX() + backgroundCalc.GetWidth();
+                    if (backgroundRightX > _backgroundRightmostX)
+                    {
+                        _backgroundRightmostX = backgroundRightX;
+                    }
+                }
+
                 background.SetX(_backgroundRightmostX);
 
                 if (App.GameInfo.PlayerScore > _propaganda)
@@ -76,9 +79,23 @@ public class BackgroundScrollerWrapper : CanvasEntity
 
                     _propaganda *= 2;
                 }
-                else if (background.GetCurrentEntitySprite() == "Background/backgroundPlayStore.png")
+                // else if (_door == _counter)
+                // {
+                //     background.ChangeSprite("Background/backgroundDoor.png");
+                //     _door += 3;
+                // }
+                // else if (_exit == _counter)
+                // {
+                //     background.ChangeSprite("Background/backgroundExit.png");
+                //     _exit += 3;
+                // }
+                else if (background.GetCurrentEntitySprite() != "Background/background1.png")
                 {
                     background.ChangeSprite("Background/background1.png");
+                }
+                else
+                {
+                    _counter++;
                 }
             }
 
