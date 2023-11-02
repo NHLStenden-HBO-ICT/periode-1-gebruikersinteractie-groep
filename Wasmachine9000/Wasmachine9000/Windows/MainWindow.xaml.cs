@@ -29,9 +29,9 @@ namespace Wasmachine9000
 
             _scoreboard = App.Scoreboard.GetScoreboard();
             UpdateScoreboard(_scoreboard);
-            ScoreboardTimer.Interval= TimeSpan.FromSeconds(10);
+            ScoreboardTimer.Interval = TimeSpan.FromSeconds(10);
             ScoreboardTimer.Tick += ScoreboardTimer_Tick;
-            ScoreboardTimer.Start();    
+            ScoreboardTimer.Start();
         }
 
         private void ScoreboardTimer_Tick(object? sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace Wasmachine9000
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            Helpers.OpenWindow(new Instellingen());
+            Helpers.OpenWindow(new Instellingen(typeof(MainWindow)));
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)

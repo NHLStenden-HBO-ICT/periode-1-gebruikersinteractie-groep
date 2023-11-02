@@ -21,7 +21,7 @@ namespace Wasmachine9000
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Helpers.OpenPreviousWindow();
+            Helpers.OpenWindow(new MainWindow());
         }
 
         private void Doorgaan_Click(object sender, RoutedEventArgs e)
@@ -41,7 +41,7 @@ namespace Wasmachine9000
         {
             if (e.Key == Key.Escape)
             {
-                Helpers.OpenPreviousWindow();
+                Helpers.OpenWindow(new MainWindow());
             }
         }
 

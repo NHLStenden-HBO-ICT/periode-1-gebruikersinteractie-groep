@@ -183,7 +183,7 @@ public partial class GameWindow : Window
                     DisplayPlayerLives();
                 }
 
-                // if (App.GameInfo.PlayerLives <= 0) Exit();
+                if (App.GameInfo.PlayerLives <= 0) Exit();
             }
         }
     }
@@ -194,7 +194,7 @@ public partial class GameWindow : Window
 
         _backgroundTracker += App.GameTimer.DeltaTime;
 
-        // // increase speed if conditions are met
+        // increase speed if conditions are met
         if (_backgroundTracker > 5 && (App.GameInfo.GameSpeed + 400) + 10 < App.GameInfo.MaxGameSpeed)
         {
             _backgroundTracker = 0;
@@ -356,6 +356,6 @@ public partial class GameWindow : Window
 
     private void Settings_Click(object sender, RoutedEventArgs e)
     {
-        Helpers.OpenWindow(new Instellingen());
+        Helpers.OpenWindow(new Instellingen(typeof(GameWindow)));
     }
 }

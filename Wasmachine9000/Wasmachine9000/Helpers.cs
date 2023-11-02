@@ -18,29 +18,7 @@ namespace Wasmachine9000
 
             ChangeMusic(targetWindow, App.GameState.PreviousWindow);
             // Set previous window in GameState to previously closed window and close window
-            currentWindow.Hide();
-            if (App.GameState.PreviousWindow != null)
-            {
-                App.GameState.PreviousWindow.Close();
-            }
-
-            App.GameState.PreviousWindow = currentWindow;
-
-
-          
-        }
-
-        public static void OpenPreviousWindow()
-        {
-            Window targetWindow = App.GameState.PreviousWindow;
-            Window currentWindow = App.GameState.CurrentWindow;
-            ChangeMusic(targetWindow, App.GameState.CurrentWindow);
-
-            targetWindow.Show();
-            currentWindow.Hide();
-
-            App.GameState.PreviousWindow = currentWindow;
-            App.GameState.CurrentWindow = targetWindow;
+            currentWindow.Close();
         }
 
         public static void ChangeMusic(Window targetWindow, Window previousWindow)
@@ -83,7 +61,5 @@ namespace Wasmachine9000
         {
             return CollidesWith(source, App.GameInfo.Player.GetEntityRectangle());
         }
-
-       
     }
 }
