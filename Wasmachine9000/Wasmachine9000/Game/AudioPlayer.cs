@@ -14,11 +14,6 @@ namespace Wasmachine9000.Game
             MusicPlayer.MediaEnded += (sender, args) => { MusicPlayer.Position = TimeSpan.Zero; };
         }
 
-        public AudioPlayer()
-        {
-            MusicPlayer.MediaEnded += (sender, args) => { MusicPlayer.Position = TimeSpan.Zero; };
-        }
-
         public void StartMusic()
         {
             // Load and play the default audio file during initialization
