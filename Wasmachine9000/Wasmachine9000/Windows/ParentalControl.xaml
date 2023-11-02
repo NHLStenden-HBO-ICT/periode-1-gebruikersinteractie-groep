@@ -66,7 +66,7 @@
                 </Button.Style>
             </Button>
 
-            <Border Grid.Row="2" Grid.Column="1" Background="Purple" CornerRadius="22.5" Width="700" Height="60">
+            <Border Grid.Row="2" Grid.Column="1" Background="#8b00ff" CornerRadius="22.5" Width="700" Height="60">
                 <Slider Name="TimeSlider" Width="650" Height="40" Minimum="0" Maximum="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" ValueChanged="TimeSlider_ValueChanged"/>
             </Border>
 
