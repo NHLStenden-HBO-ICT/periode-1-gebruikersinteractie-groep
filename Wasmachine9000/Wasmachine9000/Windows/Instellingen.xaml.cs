@@ -138,7 +138,6 @@ namespace Wasmachine9000
                 }
                 else
                 {
-                    App.AudioPlayer.StartSFX();
                     App.GameState.SFXSound = true;
                     Debug.WriteLine(App.GameState.SFXSound);
                     SFXToggleEllipse.Fill = backgroundBlue;
