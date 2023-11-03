@@ -10,18 +10,15 @@
         RenderOptions.BitmapScalingMode="HighQuality"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True">
-
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
 
             <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
-
         <Grid x:Name="CanvasContainer" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/background.png" />
             </Grid.Background>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="162px" />
                 <RowDefinition Height="162px" />
@@ -41,7 +38,7 @@
                 </Border>
 
             </Canvas>
-
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,3" FontSize="30" Foreground="Yellow" FontWeight="Bold" x:Name="FpsTextBlock"></TextBlock>
             <Grid Grid.Column="2" HorizontalAlignment="Right" Margin="10" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />

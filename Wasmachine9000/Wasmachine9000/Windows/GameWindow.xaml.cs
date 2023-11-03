@@ -25,7 +25,8 @@ public partial class GameWindow : Window
     // Parental control trackers
     private DispatcherTimer _parentalControlTimer = new();
     private TimeSpan _timeLeft;
-
+    private int frameCount;
+    private DateTime lastUpdateTime;
 
     public GameWindow()
     {
@@ -83,6 +84,26 @@ public partial class GameWindow : Window
         App.GameInfo.CanvasEntities.AddEntity(new SparksEntity(0, 0));
 
         // CanvasContainer.Loaded += (sender, args) => App.GameInfo.CanvasEntities.AddEntity(new BackgroundScrollerWrapper(0, 0));
+        lastUpdateTime = DateTime.Now;
+        var fpsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        fpsTimer.Tick += UpdateFPS;
+        fpsTimer.Start();
+    }
+    private void UpdateFPS(object sender, EventArgs e)
+    {
+        // Calculate the elapsed time since the last update
+        var currentTime = DateTime.Now;
+        var elapsedSeconds = (currentTime - lastUpdateTime).TotalSeconds;
+
+        // Calculate the FPS
+        var fps = (int)(frameCount / elapsedSeconds);
+
+        // Update the FPS TextBlock
+        FpsTextBlock.Text = $"{fps}";
+
+        // Reset frame count and update time
+        frameCount = 0;
+        lastUpdateTime = currentTime;
     }
 
     private void ParentalControlTimerTick(object? sender, EventArgs e)
@@ -147,6 +168,7 @@ public partial class GameWindow : Window
     private void CanvasTick(object? sender, EventArgs e)
     {
         if (IsGamePaused) return;
+        frameCount++;
     }
 
     private void EntitiesTick(object? sender, EventArgs e)
