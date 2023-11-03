@@ -51,6 +51,29 @@
             <TextBlock Grid.Column="1" Grid.Row="3" Margin="30" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >0%</TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="3" Margin="30" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="White" FontFamily="Baloo Bhai 2 SemiBold" >100%</TextBlock>
             
+            <Button Grid.Column="2" Grid.Row="0" Width="150" HorizontalAlignment="Left" Margin="35,0,0,0" x:Name="Back" Click="Back_OnClick" >
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#FFFF7200" MaxHeight="120">
+                            <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" >Terug</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            
             <Button Grid.Column="1" Grid.Row="0" Width="1050" MaxHeight="150" HorizontalAlignment="Center" Margin="0" x:Name="Instellingenn">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">

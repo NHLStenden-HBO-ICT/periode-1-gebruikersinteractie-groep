@@ -198,5 +198,10 @@ namespace Wasmachine9000
             App.AudioPlayer.SetSFXVolume(SFXSlider.Value);
             App.GameState.SaveGameState();
         }
+
+        private void Back_OnClick(object sender, RoutedEventArgs e)
+        {
+            Helpers.OpenPreviousWindow();
+        }
     }
 }
