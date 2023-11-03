@@ -6,7 +6,7 @@
         WindowStyle="None"
         WindowState="Maximized"
         mc:Ignorable="d"
-        Title="GameWindow" Height="1080" Width="1920"
+        Title="Wasmachine9000" Height="1080" Width="1920"
         RenderOptions.BitmapScalingMode="HighQuality"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True">
