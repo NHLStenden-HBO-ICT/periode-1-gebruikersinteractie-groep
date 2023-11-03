@@ -22,7 +22,7 @@ namespace Wasmachine9000.Game
 
         public void StartSFX()
         {
-            LoadAndPlaySFX("Game over.wav");
+            LoadAndPlaySFX("");
         }
 
         public void LoadAndPlayMusic(string fileName)
