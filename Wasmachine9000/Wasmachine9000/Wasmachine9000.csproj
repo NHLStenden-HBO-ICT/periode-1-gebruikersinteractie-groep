@@ -5,24 +5,33 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets/wasmachine.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\background.png" />
-    <None Remove="Assets\Font\BalooBhai2-Bold.ttf" />
-    <None Remove="Assets\Font\BalooBhai2-ExtraBold.ttf" />
-    <None Remove="Assets\Font\BalooBhai2-Medium.ttf" />
-    <None Remove="Assets\Font\BalooBhai2-Regular.ttf" />
-    <None Remove="Assets\Font\BalooBhai2-SemiBold.ttf" />
-    <None Remove="Assets\Instellingen.png" />
-    <None Remove="background.png" />
-    <None Remove="Instellingen.png" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Resource Include="Assets\Cosmetics\Anvil.png" />
+    <Resource Include="Assets\Cosmetics\Napoleon2.png" />
+    <Resource Include="Assets\Cosmetics\Rocket.png" />
+    <Resource Include="Assets\Cosmetics\TopHat.png" />
+    <Resource Include="Assets\Cosmetics\ttt.png" />
+    <Resource Include="Assets\Cosmetics\Viking.png" />
+    <Resource Include="Assets\Cosmetics\Wizard.png" />
     <Resource Include="Assets\Instellingen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Sprites\Entities\Background\background1.png" />
+    <Resource Include="Assets\Sprites\Entities\Background\backgroundPlayStore.png" />
+    <Resource Include="Assets\Sprites\Entities\Cosmetics\cosmetic5.png" />
+    <Resource Include="Assets\Sprites\Entities\Cosmetics\cosmetic3.png" />
+    <Resource Include="Assets\Sprites\Entities\Cosmetics\cosmetic6.png" />
+    <Resource Include="Assets\Sprites\Entities\Cosmetics\cosmetic1.png" />
+    <Resource Include="Assets\Sprites\Entities\Cosmetics\cosmetic2.png" />
+    <Resource Include="Assets\Sprites\Entities\Cosmetics\cosmetic4.png" />
+    <Resource Include="Assets\Sprites\Entities\Ground\groundEntity1.png" />
+    <Resource Include="Assets\Sprites\Entities\coin.png" />
+    <None Remove="Assets\Sprites\Entities\cosmetic1.png" />
+    <Resource Include="Assets\Sprites\Entities\Background\backgroundDoor.png" />
+    <Resource Include="Assets\Sprites\Entities\Background\backgroundExit.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,12 +43,27 @@
     <Resource Include="Assets\Font\BalooBhai2-Medium.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-Regular.ttf" />
     <Resource Include="Assets\Font\BalooBhai2-SemiBold.ttf" />
+    <Resource Include="Assets\Sprites\Entities\sock-purple.png" />
+    <Resource Include="Assets\Sprites\Entities\underwear-grey.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame1.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame2.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame3.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame4.png" />
+    <Resource Include="Assets\Sprites\Entities\Sparks\frame5.png" />
     <Resource Include="Instellingen.png" />
-    <Resource Include="Assets\wasmachine.png"/>
-    <Resource Include="Assets\Icons\clock.svg"/>
-    <Resource Include="Assets\Icons\coins.svg"/>
-    <Resource Include="Assets\Icons\person-walking.svg"/>
+    <Resource Include="Assets\wasmachine.png" />
+    <Resource Include="Assets\Icons\clock.svg" />
+    <Resource Include="Assets\Icons\coins.svg" />
+    <Resource Include="Assets\Icons\person-walking.svg" />
     
+    <!--  Assets  -->
+    <Resource Include="Assets\Sprites\Entities\tshirt-blue.png" />
+    <Resource Include="Assets\Sprites\Entities\tshirt-green.png" />
+    <Resource Include="Assets\Sprites\Entities\tshirt-yellow.png" />
+    <Resource Include="Assets\Sprites\Entities\rocket-pants.png" />
+    <Resource Include="Assets\Sprites\Entities\rocket-pants-alert.png" />
+
+
   </ItemGroup>
 
   <ItemGroup>
@@ -83,6 +107,10 @@
       <XamlRuntime>Wpf</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="13.7.0" />
   </ItemGroup>
 
 </Project>

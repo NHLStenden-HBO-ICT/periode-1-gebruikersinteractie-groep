@@ -1,0 +1,197 @@
+<Window x:Class="Wasmachine9000.Windows.GameOver"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStyle="None"
+        WindowState="Maximized"
+        mc:Ignorable="d"
+        Title="Wasmachine9000" Height="1080" Width="1920"
+        RenderOptions.BitmapScalingMode="HighQuality"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        KeyDown="Window_KeyDown">
+
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="100*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/background.png"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="162px" />
+                <RowDefinition Height="162px" />
+                <RowDefinition Height="162px" />
+                <RowDefinition Height="162px" />
+                <RowDefinition Height="162px"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400px" />
+                <ColumnDefinition Width="750px" />
+                <ColumnDefinition Width="311.5" />
+                <ColumnDefinition Width="88.5"/>
+            </Grid.ColumnDefinitions>
+            <!--Pincode overlay-->
+
+            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="#FF202020" Margin="0,0,0,5" CornerRadius="22.5" >
+                <Button Width="250" x:Name="BackHome" Visibility="Hidden" HorizontalAlignment="Left" Margin="80,309,0,10" Click="MainWindow_Click" Background="White">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border CornerRadius="22.5" Background="#FFFF7200" MaxHeight="120">
+                                <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Terug naar start"/></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Border>
+
+
+            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" x:Name="BackHomeDummy" Visibility="Visible" Background="#FF202020" Margin="0,0,0,5" CornerRadius="22.5" >
+                <Button Width="250" IsEnabled="False" HorizontalAlignment="Left" Margin="80,309,0,10" Background="White">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="22.5" Background="#88FF7200" MaxHeight="120">
+                                <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" TextWrapping="Wrap" TextAlignment="Center" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Terug naar start"/></TextBlock>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Border>
+
+
+            <TextBlock Grid.Column="1" FontSize="64" FontFamily="Baloo Bhai 2 SemiBold" x:Name="StartText" Foreground="White" Height="148.5" HorizontalAlignment="Center" Margin="0,3,0,10" Grid.Row="1" >Game Over</TextBlock>
+
+            <!--navigation buttons-->
+            <!-- Back button -->
+
+            <!-- Doorgaan button -->
+            <Button Grid.Column="1" x:Name="PlayAgainButton" Visibility="Hidden" Grid.Row="2" Width="250" HorizontalAlignment="Left" Margin="430,147,0,15" FontFamily="Baloo Bhai 2" Grid.RowSpan="2" Click="PlayAgain_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#00FF0F" MaxHeight="120">
+                            <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="Black" HorizontalAlignment="Center" TextAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center">Opnieuw spelen</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Column="1" x:Name="PlayAgainButtonDummy" Visibility="Visible" IsEnabled="False" Grid.Row="2" Width="250" HorizontalAlignment="Left" Margin="430,147,0,15" FontFamily="Baloo Bhai 2" Grid.RowSpan="2" Click="PlayAgain_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="22.5" Background="#7F00FF0F" MaxHeight="120">
+                            <TextBlock FontSize="40" FontFamily="Baloo Bhai 2 SemiBold" Foreground="Black" HorizontalAlignment="Center" TextAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center">Opnieuw spelen</TextBlock>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="6" Color="White" Direction="305"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Border BorderBrush="{x:Null}" Height="50" Margin="0,56,0,56"/>
+            <TextBox MaxLength="8" HorizontalAlignment="Center" Margin="0,63,0,0" TextWrapping="Wrap"  TextAlignment="Center" VerticalAlignment="Top" Width="254" Height="40" Background="#FF2B2B2B" Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="2" Name="Playername" TextChanged="Playername_IsFilled"/>
+
+
+            <Border Grid.Column="1" Grid.Row="1" Width="180" HorizontalAlignment="Right" x:Name="CoinsBorder"
+                      Background="Gray" CornerRadius="10" MaxHeight="40" Margin="0,71,418,91" Grid.RowSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="145" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" x:Name="CoinsText" Text="" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold"
+                                 Foreground="White" HorizontalAlignment="Left" Margin="6" VerticalAlignment="Center" />
+                    <Image Grid.Column="1" Margin="6">
+                        <Image.Source>
+                            <DrawingImage>
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                                        <GeometryDrawing Brush="Yellow"
+                                                           Geometry="F1 M512,512z M0,0z M512,80C512,98 497.7,114.6 473.6,128 444.5,144.1 401.1,155.5 351.3,158.9 347.6,157.1 343.9,155.4 340,153.9 300.6,137.4 248.2,128 192,128 183.7,128 175.6,128.2 167.5,128.6L166.4,128C142.3,114.6 128,98 128,80 128,35.8 214,0 320,0 426,0 512,35.8 512,80z M160.7,161.1C170.9,160.4 181.4,160 192,160 254.2,160 309.4,172.3 344.5,191.4 369.3,204.9 384,221.7 384,240 384,244 383.3,247.9 381.9,251.7 377.3,264.9 364.9,277 346.9,287.2 346.9,287.2 346.9,287.2 346.9,287.2 346.8,287.3 346.6,287.3 346.5,287.4L346.5,287.4 346.5,287.4C346.2,287.6 345.9,287.7 345.6,287.9 310.6,307.3 254.8,319.9 192,319.9 132.4,319.9 79.1,308.6 43.8,290.8 41.9,289.9 40.1,288.9 38.3,287.9 14.3,274.6 0,258 0,240 0,205.2 53.4,175.5 128,164.6 138.5,163.1 149.4,161.9 160.7,161.1z M416,240C416,218.1 405.4,200.1 391.9,186.6 420.2,182.2 446.1,175.2 468.1,166.1 484.4,159.3 499.6,150.9 512,140.6L512,176C512,195.3 495.5,213.1 468.2,226.9 453.6,234.3 435.8,240.6 415.8,245.4 415.9,243.6 416,241.9 416,240.1z M384,336C384,354 369.7,370.6 345.6,384 343.8,385 342,385.9 340.1,386.9 304.9,404.7 251.6,416 192,416 129.2,416 73.4,403.4 38.4,384 14.3,370.6 0,354 0,336L0,300.6C12.5,310.9 27.6,319.3 43.9,326.1 83.4,342.6 135.8,352 192,352 248.2,352 300.6,342.6 340.1,326.1 347.9,322.9 355.4,319.2 362.5,315.2 368.6,311.8 374.3,308 379.7,304 381.2,302.9 382.6,301.7 384,300.6L384,304 384,309.7 384,336z M416,336L416,304 416,278.1C435,273.9 452.5,268.6 468.1,262.1 484.4,255.3 499.6,246.9 512,236.6L512,272C512,282.5 507,293 497.1,302.9 480.8,319.2 452.1,332.6 415.8,341.3 415.9,339.6 416,337.8 416,336z M192,448C248.2,448 300.6,438.6 340.1,422.1 356.4,415.3 371.6,406.9 384,396.6L384,432C384,476.2 298,512 192,512 86,512 0,476.2 0,432L0,396.6C12.5,406.9 27.6,415.3 43.9,422.1 83.4,438.6 135.8,448 192,448z" />
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+
+                </Grid>
+            </Border>
+
+
+
+            <Border Grid.Column="1" Grid.Row="1" Width="180" x:Name="HighscoreBorder"
+                        Background="Gray" CornerRadius="10" MaxHeight="40" Margin="0,71,140,91" Grid.RowSpan="2" HorizontalAlignment="Right">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="145" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="" FontSize="30" FontFamily="Baloo Bhai 2 SemiBold" x:Name="ScoreTextBlock"
+                                   Foreground="White" HorizontalAlignment="Left" Margin="6" VerticalAlignment="Center" />
+                    <Image Grid.Column="1" Margin="6">
+                        <Image.Source>
+                            <DrawingImage >
+                                <DrawingImage.Drawing>
+                                    <DrawingGroup ClipGeometry="M0,0 V512 H320 V0 H0 Z">
+                                        <DrawingGroup.Transform>
+                                            <TranslateTransform X="0.074999988079071045" Y="0" />
+                                        </DrawingGroup.Transform>
+                                        <GeometryDrawing Brush="#FF000000"
+                                                             Geometry="F1 M320,512z M0,0z M160,48A48,48,0,1,1,256,48A48,48,0,1,1,160,48z M126.5,199.3C125.5,199.7,124.6,200.1,123.6,200.5L115.6,204C99.2,211.3,86.6,225.2,80.9,242.2L78.3,250C72.7,266.8 54.6,275.8 37.8,270.2 21,264.6 12,246.5 17.6,229.7L20.2,221.9C31.6,187.8,56.8,160,89.6,145.4L97.6,141.9C118.4,132.7 140.9,127.9 163.7,127.9 208.3,127.9 248.5,154.7 265.6,195.8L281,232.7 302.4,243.4C318.2,251.3 324.6,270.5 316.7,286.3 308.8,302.1 289.6,308.5 273.8,300.6L247,287.3C236.7,282.1,228.6,273.5,224.2,262.8L214.6,239.8 195.3,305.3 244.8,359.3C250.2,365.2,254,372.3,256,380.1L279,472.2C283.3,489.3 272.9,506.7 255.7,511 238.5,515.3 221.2,504.9 216.9,487.7L194.9,399.6 124.2,322.5C109.4,306.4,103.9,283.9,109.5,262.8L126.4,199.3z M68.7,398L93.7,335.6C95.8,338.6,98.2,341.4,100.7,344.2L141.4,388.6 126.9,424.8C124.5,430.8,120.9,436.3,116.3,440.9L54.6,502.6C42.1,515.1 21.8,515.1 9.3,502.6 -3.2,490.1 -3.2,469.8 9.3,457.3L68.7,398z" />
+                                    </DrawingGroup>
+                                </DrawingImage.Drawing>
+                            </DrawingImage>
+                        </Image.Source>
+                    </Image>
+
+                </Grid>
+            </Border>
+            <Label x:Name="label" Content="Coins" HorizontalAlignment="Left" Margin="159,87,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="175" HorizontalContentAlignment="Center" FontWeight="Bold" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="label_Copy" Content="Score" HorizontalAlignment="Left" Margin="430,87,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="179" HorizontalContentAlignment="Center" RenderTransformOrigin="0.594,0.862" FontWeight="Bold" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="label_Copy1" Content="Vul een spelernaam in" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="252" HorizontalContentAlignment="Center" RenderTransformOrigin="0.594,0.862" FontWeight="Bold" Grid.Column="1" Grid.Row="2"/>
+
+        </Grid>
+    </Grid>
+
+
+</Window>

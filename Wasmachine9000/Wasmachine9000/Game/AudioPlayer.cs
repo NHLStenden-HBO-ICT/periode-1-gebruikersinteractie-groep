@@ -1,67 +1,88 @@
 ﻿using System;
-using System.Media;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Policy;
-using System.Windows;
 using System.IO;
-
+using System.Windows.Media;
 
 namespace Wasmachine9000.Game
 {
     public class AudioPlayer
     {
-        private SoundPlayer _player;
+        public static MediaPlayer MusicPlayer = new MediaPlayer();
+        public static MediaPlayer SFXPlayer = new MediaPlayer();
 
         public AudioPlayer()
         {
-            
+            MusicPlayer.MediaEnded += (sender, args) => { MusicPlayer.Position = TimeSpan.Zero; };
         }
 
-        public void Start()
+        public void StartMusic()
         {
             // Load and play the default audio file during initialization
-            LoadAndPlayAudio("Menu theme.wav");
+            LoadAndPlayMusic("Menu theme.wav");
         }
 
-        public void LoadAndPlayAudio(string fileName)
+        public void StartSFX()
         {
-            // Stop the current audio playback
-            Stop();
+            LoadAndPlaySFX("Game over.wav");
+        }
 
-            // Create a new SoundPlayer instance with the specified audio file
+        public void LoadAndPlayMusic(string fileName)
+        {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
-            _player = new SoundPlayer(filePath);
 
-            // Load and play the new audio file
-            _player.Load();
-            _player.PlayLooping();
+            MusicPlayer.Stop();
+            MusicPlayer.Open(new Uri(filePath));
+            MusicPlayer.Play();
         }
 
-        public void Stop()
+        public void LoadAndPlaySFX(string fileName)
         {
-            if (_player != null)
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets\\Audio\\Music", fileName);
+
+            SFXPlayer.Stop();
+            SFXPlayer.Open(new Uri(filePath));
+            SFXPlayer.Play();
+        }
+
+        public void SetMusicVolume(double MusicVolume)
+        {
+            MusicPlayer.Volume = MusicVolume;
+        }
+
+        public void SetSFXVolume(double SFXVolume)
+        {
+            SFXPlayer.Volume = SFXVolume;
+        }
+
+        public void StopMusic()
+        {
+            if (MusicPlayer != null)
             {
-                _player.Stop();
-                _player.Dispose();
-                _player = null;
+                MusicPlayer.Stop();
+            }
+        }
+
+        public void StopSFX()
+        {
+            if (SFXPlayer != null)
+            {
+                SFXPlayer.Stop();
             }
         }
 
         public void Mute()
         {
-            Stop();
+            StopMusic();
         }
 
         public void Unmute()
         {
             // Play the loaded audio file if it exists
-            if (_player != null)
+            if (MusicPlayer != null)
             {
-                _player.PlayLooping();
+                MusicPlayer.Play();
             }
         }
+
+       
     }
 }
