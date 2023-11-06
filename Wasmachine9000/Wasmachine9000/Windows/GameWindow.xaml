@@ -38,7 +38,6 @@
                 </Border>
 
             </Canvas>
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,3" FontSize="30" Foreground="Yellow" FontWeight="Bold" x:Name="FpsTextBlock"></TextBlock>
             <Grid Grid.Column="2" HorizontalAlignment="Right" Margin="10" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
